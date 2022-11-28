@@ -28,7 +28,7 @@ struct BakingStepCard: View {
                 }
                 Image(bakingStep.type.name)
                     .resizable()
-                    .frame(width: .infinity, height: 200)
+                    .scaledToFit()
                 Text(bakingStep.description)
                     .font(.title3)
                 
@@ -42,6 +42,6 @@ struct BakingStepCard: View {
 
 struct BakingStepCard_Previews: PreviewProvider {
     static var previews: some View {
-        BakingStepCard(bakingStep: BakingStep.sampleData)
+        BakingStepCard(bakingStep: BakingStep.sampleData[0])
     }
 }

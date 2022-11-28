@@ -8,15 +8,15 @@
 import SwiftUI
 
 enum BakingStepType: String, Codable, Identifiable {
-    case feedStarter
-    case makeDough
+    case feedstarter
+    case makedough
     case proof
     case form
-    case benchRest
+    case benchrest
     case bake
     
     var name: String {
-        rawValue.capitalized
+        rawValue
     }
     var id: String {
         name

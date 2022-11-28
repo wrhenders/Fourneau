@@ -11,8 +11,9 @@ struct BakingStepList: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                BakingStepCard(bakingStep: BakingStep.sampleData)
-                BakingStepCard(bakingStep: BakingStep.sampleData)
+                BakingStepCard(bakingStep: BakingStep.sampleData[0])
+                BakingStepCard(bakingStep: BakingStep.sampleData[1])
+                BakingStepCard(bakingStep: BakingStep.sampleData[2])
             }
             .padding(16)
         }

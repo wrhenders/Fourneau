@@ -17,10 +17,10 @@ struct BakingStep: Identifiable, Codable {
     var description: String
     var type: BakingStepType
     
-    init(id: UUID = UUID(), title: String, lengthInMinutes: Double, description: String, type: BakingStepType) {
+    init(id: UUID = UUID(), title: String, startingTime: Date = Date(), lengthInMinutes: Double, description: String, type: BakingStepType) {
         self.id = id
         self.title = title
-        self.startingTime = Date()
+        self.startingTime = startingTime
         self.lengthInMinutes = lengthInMinutes
         self.endingTime = Date(timeInterval: lengthInMinutes * 60, since: startingTime)
         self.description = description
@@ -29,5 +29,10 @@ struct BakingStep: Identifiable, Codable {
 }
 
 extension BakingStep {
-    static let sampleData: BakingStep = BakingStep(title: "Proof", lengthInMinutes: 15, description: "Let mixture rise", type: .proof)
+    static let sampleData: [BakingStep] =
+    [
+        BakingStep(title: "Feed Starter", lengthInMinutes: 60, description: "Feed your starter with equal parts water and flour", type: .feedstarter),
+        BakingStep(title: "Make Dough", lengthInMinutes: 15, description: "Follow These Steps: \n (Insert Recipe)", type: .makedough),
+        BakingStep(title: "Proof", lengthInMinutes: 15, description: "Let mixture rise", type: .proof)
+    ]
 }
