@@ -10,10 +10,12 @@ import SwiftUI
 enum BakingStepType: String, Codable, Identifiable {
     case feedstarter
     case makedough
+    case autolyse
     case proof
     case form
     case benchrest
     case bake
+    case cool
     
     var name: String {
         rawValue

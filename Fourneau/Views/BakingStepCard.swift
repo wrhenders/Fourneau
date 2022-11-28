@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BakingStepCard: View {
     let bakingStep: BakingStep
+    let startTime: Date
     
     var body: some View {
             VStack {
@@ -19,12 +20,12 @@ struct BakingStepCard: View {
                 HStack{
                     Image(systemName: "clock")
                         .frame(maxWidth: .infinity, alignment: .trailing)
-                    Text("Start: \(bakingStep.startingTime.formatted(date: .omitted, time: .shortened))")
+                    Text("Start: \(startTime.formatted(date: .omitted, time: .shortened))")
                 }
                 HStack{
                     Image(systemName: "clock")
                         .frame(maxWidth: .infinity, alignment: .trailing)
-                    Text("End: \(bakingStep.endingTime.formatted(date: .omitted, time: .shortened))")
+                    Text("End: \(Date(timeInterval: bakingStep.lengthInMinutes * 60, since: startTime).formatted(date: .omitted, time: .shortened))")
                 }
                 Image(bakingStep.type.name)
                     .resizable()
@@ -42,6 +43,6 @@ struct BakingStepCard: View {
 
 struct BakingStepCard_Previews: PreviewProvider {
     static var previews: some View {
-        BakingStepCard(bakingStep: BakingStep.sampleData[0])
+        BakingStepCard(bakingStep: BakingStep.sampleData[0], startTime: Date())
     }
 }

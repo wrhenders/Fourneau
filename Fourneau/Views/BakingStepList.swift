@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct BakingStepList: View {
+    @State private var breadRecipe = BreadRecipeSteps(recipe: BreadRecipe.sampleRecipe)
+    
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                BakingStepCard(bakingStep: BakingStep.sampleData[0])
-                BakingStepCard(bakingStep: BakingStep.sampleData[1])
-                BakingStepCard(bakingStep: BakingStep.sampleData[2])
+                let starts = breadRecipe.getStarts()
+                ForEach(breadRecipe.steps.indices, id: \.self) { index in
+                    BakingStepCard(bakingStep: breadRecipe.steps[index], startTime: starts[index])
+                }
             }
             .padding(16)
         }
