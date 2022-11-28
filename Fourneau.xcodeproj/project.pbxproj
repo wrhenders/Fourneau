@@ -8,12 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		676B408229350FBE00E42FA0 /* FourneauApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B408129350FBE00E42FA0 /* FourneauApp.swift */; };
-		676B408429350FBE00E42FA0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B408329350FBE00E42FA0 /* ContentView.swift */; };
 		676B408629350FBF00E42FA0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 676B408529350FBF00E42FA0 /* Assets.xcassets */; };
 		676B408929350FBF00E42FA0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 676B408829350FBF00E42FA0 /* Preview Assets.xcassets */; };
 		676B409329350FBF00E42FA0 /* FourneauTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B409229350FBF00E42FA0 /* FourneauTests.swift */; };
 		676B409D29350FBF00E42FA0 /* FourneauUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B409C29350FBF00E42FA0 /* FourneauUITests.swift */; };
 		676B409F29350FBF00E42FA0 /* FourneauUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B409E29350FBF00E42FA0 /* FourneauUITestsLaunchTests.swift */; };
+		676B40AE2935115500E42FA0 /* BakingStepCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40AD2935115500E42FA0 /* BakingStepCard.swift */; };
+		676B40B0293511D300E42FA0 /* BakingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40AF293511D300E42FA0 /* BakingStep.swift */; };
+		676B40B229351BD500E42FA0 /* BakingStepType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40B129351BD500E42FA0 /* BakingStepType.swift */; };
+		676B40B429351EBB00E42FA0 /* BakingStepList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40B329351EBB00E42FA0 /* BakingStepList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +39,6 @@
 /* Begin PBXFileReference section */
 		676B407E29350FBE00E42FA0 /* Fourneau.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fourneau.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		676B408129350FBE00E42FA0 /* FourneauApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourneauApp.swift; sourceTree = "<group>"; };
-		676B408329350FBE00E42FA0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		676B408529350FBF00E42FA0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		676B408829350FBF00E42FA0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		676B408E29350FBF00E42FA0 /* FourneauTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FourneauTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +46,10 @@
 		676B409829350FBF00E42FA0 /* FourneauUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FourneauUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		676B409C29350FBF00E42FA0 /* FourneauUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourneauUITests.swift; sourceTree = "<group>"; };
 		676B409E29350FBF00E42FA0 /* FourneauUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourneauUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		676B40AD2935115500E42FA0 /* BakingStepCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakingStepCard.swift; sourceTree = "<group>"; };
+		676B40AF293511D300E42FA0 /* BakingStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakingStep.swift; sourceTree = "<group>"; };
+		676B40B129351BD500E42FA0 /* BakingStepType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakingStepType.swift; sourceTree = "<group>"; };
+		676B40B329351EBB00E42FA0 /* BakingStepList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakingStepList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +100,9 @@
 		676B408029350FBE00E42FA0 /* Fourneau */ = {
 			isa = PBXGroup;
 			children = (
+				676B40AC293510D200E42FA0 /* Views */,
+				676B40AB293510C900E42FA0 /* Models */,
 				676B408129350FBE00E42FA0 /* FourneauApp.swift */,
-				676B408329350FBE00E42FA0 /* ContentView.swift */,
 				676B408529350FBF00E42FA0 /* Assets.xcassets */,
 				676B408729350FBF00E42FA0 /* Preview Content */,
 			);
@@ -125,6 +132,24 @@
 				676B409E29350FBF00E42FA0 /* FourneauUITestsLaunchTests.swift */,
 			);
 			path = FourneauUITests;
+			sourceTree = "<group>";
+		};
+		676B40AB293510C900E42FA0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				676B40AF293511D300E42FA0 /* BakingStep.swift */,
+				676B40B129351BD500E42FA0 /* BakingStepType.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		676B40AC293510D200E42FA0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				676B40AD2935115500E42FA0 /* BakingStepCard.swift */,
+				676B40B329351EBB00E42FA0 /* BakingStepList.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,8 +282,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				676B408429350FBE00E42FA0 /* ContentView.swift in Sources */,
+				676B40AE2935115500E42FA0 /* BakingStepCard.swift in Sources */,
+				676B40B229351BD500E42FA0 /* BakingStepType.swift in Sources */,
 				676B408229350FBE00E42FA0 /* FourneauApp.swift in Sources */,
+				676B40B0293511D300E42FA0 /* BakingStep.swift in Sources */,
+				676B40B429351EBB00E42FA0 /* BakingStepList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
