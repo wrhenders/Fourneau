@@ -8,8 +8,17 @@
 import SwiftUI
 
 struct BakingStepCard: View {
-    let bakingStep: BakingStep
+    @Binding var bakingStep: BakingStep
     let startTime: Date
+    
+    func markNextCompleted() {
+        for i in 0..<bakingStep.methodCompleted.count {
+            if bakingStep.methodCompleted[i] == false {
+                bakingStep.methodCompleted[i].toggle()
+                return
+            }
+        }
+    }
     
     var body: some View {
             VStack {
@@ -30,9 +39,18 @@ struct BakingStepCard: View {
                 Image(bakingStep.type.name)
                     .resizable()
                     .scaledToFit()
-                Text(bakingStep.description)
-                    .font(.title3)
-                
+                Divider()
+                ForEach(bakingStep.description.indices, id: \.self) { index in
+                    Text("\u{2022} " + bakingStep.description[index])
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .strikethrough(bakingStep.methodCompleted[index])
+                    Divider()
+                }
+                HStack{
+                    Button(action: {
+                        self.markNextCompleted()
+                    }) {Text("Mark Next")}
+                }
             }
             .padding(16)
             .background(Color.white)
@@ -43,6 +61,6 @@ struct BakingStepCard: View {
 
 struct BakingStepCard_Previews: PreviewProvider {
     static var previews: some View {
-        BakingStepCard(bakingStep: BakingStep.sampleData[0], startTime: Date())
+        BakingStepCard(bakingStep: .constant(BakingStep.sampleData[0]), startTime: Date())
     }
 }

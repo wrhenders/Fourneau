@@ -15,7 +15,7 @@ struct BakingStepList: View {
             VStack(spacing: 20) {
                 let starts = breadRecipe.getStarts()
                 ForEach(breadRecipe.steps.indices, id: \.self) { index in
-                    BakingStepCard(bakingStep: breadRecipe.steps[index], startTime: starts[index])
+                    BakingStepCard(bakingStep: $breadRecipe.steps[index], startTime: starts[index])
                 }
             }
             .padding(16)
