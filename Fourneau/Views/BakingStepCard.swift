@@ -30,11 +30,9 @@ struct BakingStepCard: View {
                     Image(systemName: "clock")
                         .frame(maxWidth: .infinity, alignment: .trailing)
                     Text("Start: \(startTime.formatted(date: .omitted, time: .shortened))")
-                }
+                }.padding(.bottom)
                 HStack{
-                    Image(systemName: "clock")
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                    Text("End: \(Date(timeInterval: bakingStep.lengthInMinutes * 60, since: startTime).formatted(date: .omitted, time: .shortened))")
+
                 }
                 Image(bakingStep.type.name)
                     .resizable()
@@ -49,7 +47,10 @@ struct BakingStepCard: View {
                 HStack{
                     Button(action: {
                         self.markNextCompleted()
-                    }) {Text("Mark Next")}
+                    }) {Label("Next Step", systemImage: "checkmark.circle")}
+                    Image(systemName: "clock")
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                    Text("End: \(Date(timeInterval: bakingStep.lengthInMinutes * 60, since: startTime).formatted(date: .omitted, time: .shortened))")
                 }
             }
             .padding(16)
