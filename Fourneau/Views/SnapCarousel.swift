@@ -9,14 +9,14 @@ import SwiftUI
 
 struct SnapCarousel<Content: View>: View {
     var content: Content
-    var list: [BakingStep]
+    var length: Int
     
     var spacing: CGFloat
     var trailingSpace: CGFloat
     @Binding var index: Int
     
-    init(spacing: CGFloat = 20, trailingSpace: CGFloat = 60, index: Binding<Int>, items: [BakingStep], @ViewBuilder content: ()-> Content) {
-        self.list = items
+    init(spacing: CGFloat = 20, trailingSpace: CGFloat = 60, index: Binding<Int>, length: Int, @ViewBuilder content: @escaping ()-> Content) {
+        self.length = length
         self.spacing = spacing
         self.trailingSpace = trailingSpace
         self._index = index
@@ -35,33 +35,28 @@ struct SnapCarousel<Content: View>: View {
             HStack(spacing:spacing) {
                 content
                     .frame(width: proxy.size.width - trailingSpace)
+                
             }
             .padding(.horizontal, spacing)
-            .offset(x: (CGFloat(currentIndex) * -width) + (currentIndex != 0 ? adjustmentWidth : 0) + offset)
+            .offset(x: (CGFloat(index) * -width) + (index != 0 ? adjustmentWidth : 0) + offset )
             .gesture(
                 DragGesture()
                     .updating($offset, body: {value, out, _ in
                         out = value.translation.width
                     })
-                    .onEnded( {value in
-                        let offsetX = value.translation.width
-                        // convert translation into progress (0-1)
-                        let progress = -offsetX / width
-                        let roundIndex = progress.rounded()
-                        currentIndex = max(min(currentIndex + Int(roundIndex), list.count - 1), 0)
-                        
-                        currentIndex = index
+                    .onEnded({ value in
+                        index = currentIndex
                     })
                     .onChanged({value in
                         let offsetX = value.translation.width
                         // convert translation into progress (0-1)
                         let progress = -offsetX / width
                         let roundIndex = progress.rounded()
-                        index = max(min(currentIndex + Int(roundIndex), list.count - 1), 0)
+                        currentIndex = max(min(index + Int(roundIndex), length - 1), 0)
                     })
             )
+            .animation(.easeInOut, value: index)
         }
-        .animation(.easeInOut, value: offset == 0)
     }
 }
 

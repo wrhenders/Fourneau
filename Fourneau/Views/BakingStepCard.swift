@@ -10,15 +10,7 @@ import SwiftUI
 struct BakingStepCard: View {
     @Binding var bakingStep: BakingStep
     let startTime: Date
-    
-    func markNextCompleted() {
-        for i in 0..<bakingStep.methodCompleted.count {
-            if bakingStep.methodCompleted[i] == false {
-                bakingStep.methodCompleted[i].toggle()
-                return
-            }
-        }
-    }
+    let nextAction: () -> Void
     
     var body: some View {
             VStack {
@@ -42,11 +34,14 @@ struct BakingStepCard: View {
                     Text("\u{2022} " + bakingStep.description[index])
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .strikethrough(bakingStep.methodCompleted[index])
+                        .onTapGesture {
+                            bakingStep.methodCompleted[index].toggle()
+                        }
                     Divider()
                 }
                 HStack{
                     Button(action: {
-                        self.markNextCompleted()
+                        nextAction()
                     }) {Label("Next Step", systemImage: "checkmark.circle")}
                     Image(systemName: "clock")
                         .frame(maxWidth: .infinity, alignment: .trailing)
@@ -62,6 +57,6 @@ struct BakingStepCard: View {
 
 struct BakingStepCard_Previews: PreviewProvider {
     static var previews: some View {
-        BakingStepCard(bakingStep: .constant(BakingStep.sampleData[0]), startTime: Date())
+        BakingStepCard(bakingStep: .constant(BakingStep.sampleData[0]), startTime: Date(), nextAction: {})
     }
 }
