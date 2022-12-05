@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BreadRecipeSteps: Codable, Identifiable {
+struct BreadRecipeMethod: Codable, Identifiable {
     let id: UUID
     var title: String
     var steps: [BakingStep]
@@ -53,7 +53,7 @@ struct BreadRecipeSteps: Codable, Identifiable {
     }
 }
 
-extension BreadRecipeSteps {
+extension BreadRecipeMethod {
     init(title: String = "Standard Recipe", recipe: BreadRecipe, startTime: Date = Date()) {
         self.id = UUID()
         self.title = title

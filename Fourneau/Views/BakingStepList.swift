@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BakingStepList: View {
-    @State private var breadRecipe = BreadRecipeSteps(recipe: BreadRecipe.sampleRecipe)
+    @State private var breadRecipe = BreadRecipeMethod(recipe: BreadRecipe.sampleRecipe)
     @State var visibleIndex: Int = 0
     
     func nextStep(currentIndex index: Int) {
@@ -24,29 +24,12 @@ struct BakingStepList: View {
                 .font(.title)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
-            HStack {
-                Text("Start Time:")
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(.green)
-                    .frame(width: 120, height: 40)
-                    .overlay {
-                        Text("\(breadRecipe.startTime.formatted(date: .omitted, time: .shortened))")
-                            .font(.title2)
-                    }
-            }
+            TimeCard(text: "Start Time:", time: "\(breadRecipe.startTime.formatted(date: .omitted, time: .shortened))", color: .green)
             .frame(maxWidth: .infinity, alignment: .trailing)
             .padding(.trailing)
             
-            HStack {
-                Text("Next Action:")
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(.cyan)
-                    .frame(width: 120, height: 40)
-                    .overlay {
-                        Text("\(breadRecipe.nextAction.formatted(date: .omitted, time: .shortened))")
-                            .font(.title2)
-                    }
-            }
+            TimeCard(text: "Next Action:", time: "\(breadRecipe.nextAction.formatted(date: .omitted, time: .shortened))", color: .cyan)
+
             .frame(maxWidth: .infinity, alignment: .trailing)
             .padding(.trailing)
             
@@ -56,23 +39,7 @@ struct BakingStepList: View {
                     }
                 }
             
-//            if timer?.startDate == nil {
-//                Button(action: {self.startRecipe()}) {
-//                    Text("Begin!")
-//                        .font(.title)
-//                }
-//            }
-            
-            HStack {
-                Text("End:")
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(.red)
-                    .frame(width: 120, height: 40)
-                    .overlay {
-                        Text("\(breadRecipe.endTime.formatted(date: .omitted, time: .shortened))")
-                            .font(.title2)
-                    }
-            }
+            TimeCard(text: "Out of the Oven:", time: "\(breadRecipe.endTime.formatted(date: .omitted, time: .shortened))", color: .red)
             .frame(maxWidth: .infinity, alignment: .trailing)
             .padding(.trailing)
             

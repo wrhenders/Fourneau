@@ -24,6 +24,17 @@ struct BakingStepCard: View {
         }
     }
     
+    func timeDisplay(_ length: Double ) -> String {
+        let minutes = Int(length) % 60
+        switch length {
+        case 0...1: return "\(Int(length)) Minute"
+        case 2...59: return "\(Int(length)) Minutes"
+        case 60...119: return minutes > 0 ? "\(Int(length / 60)) Hour \(minutes) Minutes" : "\(Int(length / 60)) Hour"
+        case 120...: return minutes > 0 ? "\(Int(length / 60)) Hours \(minutes) Minutes" : "\(Int(length / 60)) Hours"
+        default: return ""
+        }
+    }
+    
     var body: some View {
         VStack(spacing:8) {
                 Text(bakingStep.title)
@@ -51,7 +62,7 @@ struct BakingStepCard: View {
                     Divider()
                 }
                 HStack{
-                    Label("End: \(Date(timeInterval: bakingStep.lengthInMinutes * 60, since: startTime).formatted(date: .omitted, time: .shortened))", systemImage: "clock")
+                    Text("Length: \(timeDisplay(bakingStep.lengthInMinutes))")
                     Button(action: {
                         nextAction()
                     }) {
