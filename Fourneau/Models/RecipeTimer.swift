@@ -6,16 +6,11 @@
 //
 
 import Foundation
+import SwiftUI
 
-class RecipeTimer: ObservableObject {
-    @Published private var startTimes: [Date] = []
-    
-    private(set) var recipe: BreadRecipeSteps
-    private(set) var startTime: Date
-    
-    init(recipe: BreadRecipeSteps, startTime: Date = Date()) {
-        self.recipe = recipe
-        self.startTime = startTime
-    }
-
+struct RecipeTimer {
+        @State var nextAction: Date? = nil
+        @Binding var currentIndex: Int
+        
+        
 }

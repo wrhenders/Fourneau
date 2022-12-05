@@ -14,6 +14,12 @@ struct BreadRecipeSteps: Codable, Identifiable {
     var stepCompleted: [Bool]
     var recipe: BreadRecipe
     var startTime: Date
+    var startArray: [Date] = []
+    var nextAction: Date
+    var currentStep: Int = 0
+    var endTime: Date {
+        Date(timeInterval: TimeInterval(steps[steps.count - 1].lengthInMinutes * 60), since: startArray[startArray.count - 1])
+    }
     
     init(id: UUID = UUID(), title: String, steps: [BakingStep], recipe: BreadRecipe, startTime: Date = Date()) {
         self.id = id
@@ -22,16 +28,28 @@ struct BreadRecipeSteps: Codable, Identifiable {
         self.recipe = recipe
         self.startTime = startTime
         self.stepCompleted = [Bool](repeating: false, count: steps.count)
+        self.nextAction = Date(timeInterval: TimeInterval(steps[0].lengthInMinutes * 60), since: startTime)
+        self.updateStarts()
     }
     
-    func getStarts() -> [Date] {
-        var startTimes: [Date] = []
-        var currentStart = startTime
-        for step in steps {
-            startTimes.append(currentStart)
+    mutating func updateStarts() {
+        var currentStart = startArray.count > 0 ? Date() : startTime
+        for (index, step) in steps.enumerated() {
+            if stepCompleted[index] {
+                continue
+            }
+            startArray.append(currentStart)
             currentStart = Date(timeInterval: TimeInterval(step.lengthInMinutes * 60), since: currentStart)
         }
-        return startTimes
+    }
+    
+    mutating func nextStep() {
+        if currentStep + 1 < steps.count {
+            stepCompleted[currentStep] = true
+            updateStarts()
+            currentStep += 1
+            nextAction = Date(timeInterval: TimeInterval(steps[currentStep].lengthInMinutes * 60), since: Date())
+        }
     }
 }
 
@@ -52,5 +70,7 @@ extension BreadRecipeSteps {
         ]
         self.startTime = startTime
         self.stepCompleted = [Bool](repeating: false, count: steps.count)
+        self.nextAction = Date(timeInterval: TimeInterval(steps[0].lengthInMinutes * 60), since: startTime)
+        self.updateStarts()
     }
 }

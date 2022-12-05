@@ -9,20 +9,31 @@ import SwiftUI
 
 struct BakingStepCard: View {
     @Binding var bakingStep: BakingStep
+    let completed: Bool
+    let current: Bool
     let startTime: Date
     let nextAction: () -> Void
     
+    func getShadowColor() -> Color {
+        if current {
+            return Color.red
+        } else if completed {
+            return Color.green
+        } else {
+            return Color.black
+        }
+    }
+    
     var body: some View {
-            VStack {
+        VStack(spacing:8) {
                 Text(bakingStep.title)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .font(.largeTitle)
                     .foregroundColor(.black)
-                HStack{
-                    Image(systemName: "clock")
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                    Text("Start: \(startTime.formatted(date: .omitted, time: .shortened))")
-                }.padding(.bottom)
+                Divider()
+                Label("Started: \(startTime.formatted(date: .omitted, time: .shortened))", systemImage: "clock")
+                
+                .frame(maxWidth: .infinity, alignment: .leading)
                 HStack{
 
                 }
@@ -40,23 +51,27 @@ struct BakingStepCard: View {
                     Divider()
                 }
                 HStack{
+                    Label("End: \(Date(timeInterval: bakingStep.lengthInMinutes * 60, since: startTime).formatted(date: .omitted, time: .shortened))", systemImage: "clock")
                     Button(action: {
                         nextAction()
-                    }) {Label("Next Step", systemImage: "checkmark.circle")}
-                    Image(systemName: "clock")
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                    Text("End: \(Date(timeInterval: bakingStep.lengthInMinutes * 60, since: startTime).formatted(date: .omitted, time: .shortened))")
+                    }) {
+                        Text("Next")
+                        Image(systemName: "chevron.right")
+                    }
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .disabled(!current)
                 }
             }
             .padding(16)
             .background(Color.white)
             .clipShape(RoundedRectangle(cornerRadius: 24))
-            .shadow(radius: 8)
+            .shadow(color: getShadowColor(), radius: 8)
+        
     }
 }
 
 struct BakingStepCard_Previews: PreviewProvider {
     static var previews: some View {
-        BakingStepCard(bakingStep: .constant(BakingStep.sampleData[0]), startTime: Date(), nextAction: {})
+        BakingStepCard(bakingStep: .constant(BakingStep.sampleData[0]),completed: false, current: true, startTime: Date(), nextAction: {})
     }
 }

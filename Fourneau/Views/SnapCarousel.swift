@@ -44,15 +44,15 @@ struct SnapCarousel<Content: View>: View {
                     .updating($offset, body: {value, out, _ in
                         out = value.translation.width
                     })
-                    .onEnded({ value in
-                        index = currentIndex
-                    })
                     .onChanged({value in
                         let offsetX = value.translation.width
                         // convert translation into progress (0-1)
                         let progress = -offsetX / width
                         let roundIndex = progress.rounded()
                         currentIndex = max(min(index + Int(roundIndex), length - 1), 0)
+                    })
+                    .onEnded({ _ in
+                        index = currentIndex
                     })
             )
             .animation(.easeInOut, value: index)
