@@ -37,46 +37,45 @@ struct BakingStepCard: View {
     
     var body: some View {
         VStack(spacing:8) {
-                Text(bakingStep.title)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .font(.largeTitle)
-                    .foregroundColor(.black)
-                Divider()
-                Label("Started: \(startTime.formatted(date: .omitted, time: .shortened))", systemImage: "clock")
-                
+            Text(bakingStep.title)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                HStack{
-
-                }
-                Image(bakingStep.type.name)
-                    .resizable()
-                    .scaledToFit()
-                Divider()
-                ForEach(bakingStep.description.indices, id: \.self) { index in
-                    Text("\u{2022} " + bakingStep.description[index])
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .strikethrough(bakingStep.methodCompleted[index])
-                        .onTapGesture {
-                            bakingStep.methodCompleted[index].toggle()
-                        }
-                    Divider()
-                }
-                HStack{
-                    Text("Length: \(timeDisplay(bakingStep.lengthInMinutes))")
-                    Button(action: {
-                        nextAction()
-                    }) {
-                        Text("Next")
-                        Image(systemName: "chevron.right")
+                .font(.largeTitle)
+                .foregroundColor(.black)
+            Divider()
+            Label("Started: \(startTime.formatted(date: .omitted, time: .shortened))", systemImage: "clock")
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Spacer()
+            Image(bakingStep.type.name)
+                .resizable()
+                .scaledToFit()
+            Spacer()
+            Divider()
+            ForEach(bakingStep.description.indices, id: \.self) { index in
+                Text("\u{2022} " + bakingStep.description[index])
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .strikethrough(bakingStep.methodCompleted[index])
+                    .onTapGesture {
+                        bakingStep.methodCompleted[index].toggle()
                     }
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                    .disabled(!current)
-                }
+                Divider()
             }
-            .padding(16)
-            .background(Color.white)
-            .clipShape(RoundedRectangle(cornerRadius: 24))
-            .shadow(color: getShadowColor(), radius: 8)
+            Spacer()
+            HStack{
+                Text("Length: \(timeDisplay(bakingStep.lengthInMinutes))")
+                Button(action: {
+                    nextAction()
+                }) {
+                    Text("Next")
+                    Image(systemName: "chevron.right")
+                }
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .disabled(!current)
+            }
+        }
+        .padding(16)
+        .background(Color.white)
+        .clipShape(RoundedRectangle(cornerRadius: 24))
+        .shadow(color: getShadowColor(), radius: 8)
         
     }
 }

@@ -24,14 +24,10 @@ struct BakingStepList: View {
                 .font(.title)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
-            TimeCard(text: "Start Time:", time: "\(breadRecipe.startTime.formatted(date: .omitted, time: .shortened))", color: .green)
-            .frame(maxWidth: .infinity, alignment: .trailing)
-            .padding(.trailing)
-            
-            TimeCard(text: "Next Action:", time: "\(breadRecipe.nextAction.formatted(date: .omitted, time: .shortened))", color: .cyan)
-
-            .frame(maxWidth: .infinity, alignment: .trailing)
-            .padding(.trailing)
+            HStack {
+                TimeCard(text: "Start Time:", time: "\(breadRecipe.startTime.formatted(date: .omitted, time: .shortened))", color: .green)
+                TimeCard(text: "Next Action:", time: "\(breadRecipe.nextAction.formatted(date: .omitted, time: .shortened))", color: .cyan)
+            }
             
             SnapCarousel(index: $visibleIndex, length: breadRecipe.steps.count) {
                     ForEach(breadRecipe.steps.indices, id: \.self) { index in
