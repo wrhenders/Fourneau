@@ -33,12 +33,12 @@ struct BreadRecipeSteps: Codable, Identifiable {
     }
     
     mutating func updateStarts() {
-        var currentStart = startArray.count > 0 ? Date() : startTime
+        var currentStart = Date()
         for (index, step) in steps.enumerated() {
             if stepCompleted[index] {
                 continue
             }
-            startArray.append(currentStart)
+            startArray.indices.contains(index) ? startArray[index] = currentStart : startArray.append(currentStart)
             currentStart = Date(timeInterval: TimeInterval(step.lengthInMinutes * 60), since: currentStart)
         }
     }
