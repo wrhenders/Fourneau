@@ -10,29 +10,44 @@ import SwiftUI
 struct BakingMethodView: View {
     @Binding var breadMethod : BreadRecipeMethod
     
+    @State private var isPresentingEditView = false
+    @State private var data = BakingStep.Data()
+    @State private var updateIndex = 0
+    
     var body: some View {
         List {
-            Section(header: Text("Baking Steps (Hold to reorder)")){
-                ForEach(breadMethod.steps) { step in
-                    VStack {
-                        Text(step.title)
-                            .font(.title3)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+            Section(header: Text("Baking Steps")){
+                ForEach(Array(breadMethod.steps.enumerated()), id: \.element) { index, step in
+                        VStack {
+                            Button(action:{
+                                data = step.data
+                                updateIndex = index
+                                isPresentingEditView = true
+                            }) {
+                                Text(step.title)
+                                    .font(.title3)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            }
                         HStack {
                             Text("Minutes: \(Int(step.lengthInMinutes))")
                             Spacer()
                             Text("Type: \(step.type.title)")
                         }
                     }
-                    .onDrag {
-                        return NSItemProvider()
-                    }
                 }
                 .onMove(perform: move)
+                .onDelete { indicies in
+                    breadMethod.removeStep(atOffset: indicies)
+                }
                 HStack {
                     Spacer()
                     Text("Add Step")
-                    Button(action: {}) {
+                    Button(action: {
+                        breadMethod.addStep(from: data)
+                        updateIndex = breadMethod.steps.count - 1
+                        isPresentingEditView = true
+                        
+                    }) {
                         Image(systemName: "plus.circle.fill")
                     }
                 }
@@ -40,8 +55,31 @@ struct BakingMethodView: View {
         }
         .navigationBarTitle(breadMethod.title)
         .toolbar {
-            NavigationLink(destination: BakingStepListView(breadMethod: $breadMethod)){
-                Image(systemName: "chevron.right")
+            ToolbarItem(placement: .confirmationAction) {
+                NavigationLink(destination: BakingStepListView(breadMethod: $breadMethod)){
+                    Image(systemName: "chevron.right")
+                }
+            }
+        }
+        .sheet(isPresented: $isPresentingEditView) {
+            NavigationView {
+                EditStepView(step: $data)
+                    .navigationTitle(data.title)
+                    .toolbar {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Cancel") {
+                                isPresentingEditView = false
+                            }
+                        }
+                        ToolbarItem(placement: .confirmationAction) {
+                            Button("Done") {
+                                isPresentingEditView = false
+                                breadMethod.updateStep(from: data, at: updateIndex)
+                                data = BakingStep.Data()
+                                updateIndex = 0
+                            }
+                        }
+                    }
             }
         }
         
@@ -54,9 +92,15 @@ struct BakingMethodView: View {
 
 
 struct BakingMethodView_Previews: PreviewProvider {
+    struct BindingTestHolder: View {
+        @State var breadMethod = BreadRecipeMethod(recipe: BreadRecipe.sampleRecipe)
+        var body: some View {
+            BakingMethodView(breadMethod: $breadMethod)
+        }
+    }
     static var previews: some View {
         NavigationStack{
-            BakingMethodView(breadMethod: .constant(BreadRecipeMethod(recipe: BreadRecipe.sampleRecipe)) )
+            BindingTestHolder()
         }
     }
 }

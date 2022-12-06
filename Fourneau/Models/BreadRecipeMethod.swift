@@ -11,7 +11,7 @@ struct BreadRecipeMethod: Codable, Identifiable {
     let id: UUID
     var title: String
     var steps: [BakingStep]
-    var stepCompleted: [Bool]
+    var stepCompleted: [Bool] = []
     var recipe: BreadRecipe
     var startTime: Date
     var startArray: [Date] = []
@@ -27,9 +27,13 @@ struct BreadRecipeMethod: Codable, Identifiable {
         self.steps = steps
         self.recipe = recipe
         self.startTime = startTime
-        self.stepCompleted = [Bool](repeating: false, count: steps.count)
         self.nextAction = Date(timeInterval: TimeInterval(steps[0].lengthInMinutes * 60), since: startTime)
         self.updateStarts()
+        self.setCompletedArray()
+    }
+    
+    mutating func setCompletedArray() {
+        stepCompleted = [Bool](repeating: false, count: steps.count)
     }
     
     mutating func updateStarts() {
@@ -49,6 +53,26 @@ struct BreadRecipeMethod: Codable, Identifiable {
             updateStarts()
             currentStep += 1
             nextAction = Date(timeInterval: TimeInterval(steps[currentStep].lengthInMinutes * 60), since: Date())
+        }
+    }
+    
+    mutating func removeStep(atOffset offsets: IndexSet) {
+        steps.remove(atOffsets: offsets)
+        setCompletedArray()
+        updateStarts()
+    }
+    
+    mutating func addStep(from data: BakingStep.Data) {
+        steps.append(BakingStep(data: data))
+        setCompletedArray()
+        updateStarts()
+    }
+    
+    mutating func updateStep(from data: BakingStep.Data, at index: Int) {
+        if steps.indices.contains(index) {
+            steps[index] = BakingStep(data: data)
+            setCompletedArray()
+            updateStarts()
         }
     }
 }

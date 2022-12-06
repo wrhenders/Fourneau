@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct BakingStep: Identifiable, Codable {
+struct BakingStep: Identifiable, Codable, Hashable {
     let id: UUID
     var title: String
     var lengthInMinutes: Double
@@ -23,6 +23,38 @@ struct BakingStep: Identifiable, Codable {
         self.description = description.count > 0 ? description : type.description
         self.type = type
         self.methodCompleted = [Bool](repeating: false, count: self.description.count)
+    }
+    
+    mutating func updateDescription(description array: [String]) {
+        description = array
+        methodCompleted = [Bool](repeating: false, count: self.description.count)
+    }
+    
+    struct Data {
+        var title: String = ""
+        var lengthInMinutes: Double = 0
+        var description: [String] = []
+        var type: BakingStepType = .proof
+    }
+    
+    var data: Data {
+        Data(title: title, lengthInMinutes: lengthInMinutes, description: description, type: type)
+    }
+    
+    init(data: Data) {
+        id = UUID()
+        title = data.title
+        lengthInMinutes = data.lengthInMinutes
+        description = data.description
+        type = data.type
+        methodCompleted = [Bool](repeating: false, count: self.description.count)
+    }
+    
+    mutating func update(from data: Data) {
+        title = data.title
+        lengthInMinutes = data.lengthInMinutes
+        description = data.description
+        type = data.type
     }
 }
 

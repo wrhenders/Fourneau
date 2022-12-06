@@ -8,49 +8,44 @@
 import SwiftUI
 
 struct EditStepView: View {
-    @Binding var step: BakingStep
+    @Binding var step: BakingStep.Data
+    @State private var newDescription = ""
     
     var body: some View {
-        VStack (spacing: 8) {
-            TextField("Step Title", text: $step.title)
-                .font(.title3)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Divider()
-            HStack {
-                Text("Minutes:")
-                TextField("Min", value: $step.lengthInMinutes, format:.number)
-                    .keyboardType(.numberPad)
-            }
-            Divider()
-            HStack {
-                Text("Step Type:")
-                Spacer()
-                StepTypePicker(type: $step.type)
-            }
-            Divider()
-            Text("Description:")
-                .frame(maxWidth: .infinity, alignment: .leading)
-            ForEach($step.description, id: \.self) {$line in
-                HStack{
-                    Text("\u{2022}")
-                    TextField("Description", text: $line, axis: .vertical)
+        Form {
+            Section(header: Text("Step Data")){
+                TextField("Step Title", text: $step.title)
+                    .font(.title2)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                HStack {
+                    Text("Minutes:")
+                    TextField("Min", value: $step.lengthInMinutes, format:.number)
                 }
-            }.onDelete {indicies in
-                step.description.remove(atOffsets: indicies)
+                HStack {
+                    Text("Step Type:")
+                    Spacer()
+                    StepTypePicker(type: $step.type)
+                }
             }
-            Button(action: {step.description.append(" ")}) {
-                Label("Add Description line", systemImage: "plus.circle.fill")
+            Section(header: Text("Description")) {
+                ForEach($step.description, id: \.self) { $line in
+                    HStack{
+                        Text("\u{2022}")
+                        TextField("Description", text: $line, axis: .vertical)
+                    }
+                }
+                Button(action: {
+                    step.description.append("")
+                }) {
+                    Label("Add Description line", systemImage: "plus.circle.fill")
+                }
             }
         }
-        .padding(16)
-        .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 24))
-        .shadow(radius: 2)
     }
 }
 
 struct EditStepView_Previews: PreviewProvider {
     static var previews: some View {
-        EditStepView(step: .constant(BakingStep.sampleData[0]))
+        EditStepView(step: .constant(BakingStep.sampleData[0].data))
     }
 }

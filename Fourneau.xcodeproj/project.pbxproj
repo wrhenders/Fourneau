@@ -24,7 +24,6 @@
 		676B40BE293E8DFE00E42FA0 /* TimeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40BD293E8DFE00E42FA0 /* TimeCard.swift */; };
 		676B40C0293F9B6F00E42FA0 /* BakingMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40BF293F9B6F00E42FA0 /* BakingMethodView.swift */; };
 		676B40C2293F9DB300E42FA0 /* StepTypePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40C1293F9DB300E42FA0 /* StepTypePicker.swift */; };
-		676B40C4293FB8BA00E42FA0 /* BakingMethodEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40C3293FB8BA00E42FA0 /* BakingMethodEditView.swift */; };
 		676B40C6293FBDE000E42FA0 /* EditStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40C5293FBDE000E42FA0 /* EditStepView.swift */; };
 /* End PBXBuildFile section */
 
@@ -66,7 +65,6 @@
 		676B40BD293E8DFE00E42FA0 /* TimeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCard.swift; sourceTree = "<group>"; };
 		676B40BF293F9B6F00E42FA0 /* BakingMethodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakingMethodView.swift; sourceTree = "<group>"; };
 		676B40C1293F9DB300E42FA0 /* StepTypePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTypePicker.swift; sourceTree = "<group>"; };
-		676B40C3293FB8BA00E42FA0 /* BakingMethodEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakingMethodEditView.swift; sourceTree = "<group>"; };
 		676B40C5293FBDE000E42FA0 /* EditStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStepView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -173,7 +171,6 @@
 				676B40BD293E8DFE00E42FA0 /* TimeCard.swift */,
 				676B40BF293F9B6F00E42FA0 /* BakingMethodView.swift */,
 				676B40C1293F9DB300E42FA0 /* StepTypePicker.swift */,
-				676B40C3293FB8BA00E42FA0 /* BakingMethodEditView.swift */,
 				676B40C5293FBDE000E42FA0 /* EditStepView.swift */,
 			);
 			path = Views;
@@ -316,7 +313,6 @@
 				676B408229350FBE00E42FA0 /* FourneauApp.swift in Sources */,
 				676B40B0293511D300E42FA0 /* BakingStep.swift in Sources */,
 				676B40B829352FD200E42FA0 /* BreadRecipe.swift in Sources */,
-				676B40C4293FB8BA00E42FA0 /* BakingMethodEditView.swift in Sources */,
 				676B40C2293F9DB300E42FA0 /* StepTypePicker.swift in Sources */,
 				676B40BA29353A5900E42FA0 /* RecipeTimer.swift in Sources */,
 				676B40B6293528AD00E42FA0 /* BreadRecipeMethod.swift in Sources */,

@@ -25,7 +25,16 @@ enum BakingStepType: String, Codable, Identifiable, CaseIterable {
     }
     
     var title: String {
-        rawValue.capitalized
+        switch self {
+        case .feedstarter:
+            return "Feed Starter"
+        case .benchrest:
+            return "Bench Rest"
+        case .makedough:
+            return "Make Dough"
+        default:
+            return rawValue.capitalized
+        }
     }
     
     var description: [String] {
