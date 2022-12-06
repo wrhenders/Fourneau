@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct FourneauApp: App {
+    @State var breadMethod = BreadRecipeMethod(recipe: BreadRecipe.sampleRecipe)
+    
     var body: some Scene {
+        
         WindowGroup {
-            BakingStepList()
+            NavigationView{
+                BakingMethodView(breadMethod: $breadMethod)
+            }
         }
     }
 }

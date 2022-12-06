@@ -60,8 +60,8 @@ struct SnapCarousel<Content: View>: View {
     }
 }
 
-struct SnapCarousel_Previews: PreviewProvider {
-    static var previews: some View {
-        BakingStepList()
-    }
-}
+//struct SnapCarousel_Previews: PreviewProvider {
+//    static var previews: some View {
+//        BakingMethodView()
+//    }
+//}
