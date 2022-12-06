@@ -9,8 +9,6 @@ import SwiftUI
 
 struct EditStepView: View {
     @Binding var step: BakingStep.Data
-    @FocusState private var isFocused: Bool
-    @State private var newText = ""
     
     var body: some View {
         Form {

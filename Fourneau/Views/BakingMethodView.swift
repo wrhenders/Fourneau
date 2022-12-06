@@ -39,16 +39,12 @@ struct BakingMethodView: View {
                 .onDelete { indicies in
                     breadMethod.removeStep(atOffset: indicies)
                 }
-                HStack {
-                    Spacer()
-                    Text("Add Step")
-                    Button(action: {
-                        updateIndex = breadMethod.steps.count - 1
-                        isPresentingEditView = true
-                        
-                    }) {
-                        Image(systemName: "plus.circle.fill")
-                    }
+                Button(action: {
+                    updateIndex = breadMethod.steps.count - 1
+                    isPresentingEditView = true
+                    
+                }) {
+                    Label("Add Step", systemImage: "plus.circle.fill")
                 }
             }
         }
