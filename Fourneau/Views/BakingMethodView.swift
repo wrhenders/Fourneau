@@ -43,7 +43,6 @@ struct BakingMethodView: View {
                     Spacer()
                     Text("Add Step")
                     Button(action: {
-                        breadMethod.addStep(from: data)
                         updateIndex = breadMethod.steps.count - 1
                         isPresentingEditView = true
                         

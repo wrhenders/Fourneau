@@ -9,7 +9,8 @@ import SwiftUI
 
 struct EditStepView: View {
     @Binding var step: BakingStep.Data
-    @State private var newDescription = ""
+    @FocusState private var isFocused: Bool
+    @State private var newText = ""
     
     var body: some View {
         Form {
@@ -28,11 +29,14 @@ struct EditStepView: View {
                 }
             }
             Section(header: Text("Description")) {
-                ForEach($step.description, id: \.self) { $line in
+                ForEach(0..<step.description.count, id: \.self) { index in
                     HStack{
                         Text("\u{2022}")
-                        TextField("Description", text: $line, axis: .vertical)
+                        TextField("Description", text: $step.description[index, default: ""])
                     }
+                }
+                .onDelete { indicies in
+                    step.description.remove(atOffsets: indicies)
                 }
                 Button(action: {
                     step.description.append("")
@@ -43,6 +47,32 @@ struct EditStepView: View {
         }
     }
 }
+
+extension Binding where
+    Value: MutableCollection,
+    Value: RangeReplaceableCollection
+{
+    subscript(_ index: Value.Index,default defaultValue: Value.Element)
+    -> Binding<Value.Element> {
+        Binding<Value.Element> {
+            guard index < self.wrappedValue.endIndex else {
+                return defaultValue
+            }
+            return self.wrappedValue[index]
+        } set: { newValue in
+            // It is possible that the index we are updating
+            // is beyond the end of our array so we first
+            // need to append items to the array to ensure
+            // we are within range.
+            while index >= self.wrappedValue.endIndex {
+                self.wrappedValue.append(defaultValue)
+            }
+            
+            self.wrappedValue[index] = newValue
+        }
+    }
+}
+
 
 struct EditStepView_Previews: PreviewProvider {
     static var previews: some View {
