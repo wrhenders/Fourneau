@@ -25,6 +25,11 @@
 		676B40C0293F9B6F00E42FA0 /* BakingMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40BF293F9B6F00E42FA0 /* BakingMethodView.swift */; };
 		676B40C2293F9DB300E42FA0 /* StepTypePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40C1293F9DB300E42FA0 /* StepTypePicker.swift */; };
 		676B40C6293FBDE000E42FA0 /* EditStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40C5293FBDE000E42FA0 /* EditStepView.swift */; };
+		676B40C82940E66F00E42FA0 /* BreadRecipeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40C72940E66F00E42FA0 /* BreadRecipeListView.swift */; };
+		676B40CA2940E71F00E42FA0 /* RecipeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40C92940E71F00E42FA0 /* RecipeRow.swift */; };
+		676B40CC2940F4ED00E42FA0 /* EditRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40CB2940F4ED00E42FA0 /* EditRecipeView.swift */; };
+		676B40CE294100C500E42FA0 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40CD294100C500E42FA0 /* RecipeDetailView.swift */; };
+		676B40D02941119000E42FA0 /* BindingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40CF2941119000E42FA0 /* BindingExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +71,11 @@
 		676B40BF293F9B6F00E42FA0 /* BakingMethodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakingMethodView.swift; sourceTree = "<group>"; };
 		676B40C1293F9DB300E42FA0 /* StepTypePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTypePicker.swift; sourceTree = "<group>"; };
 		676B40C5293FBDE000E42FA0 /* EditStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStepView.swift; sourceTree = "<group>"; };
+		676B40C72940E66F00E42FA0 /* BreadRecipeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadRecipeListView.swift; sourceTree = "<group>"; };
+		676B40C92940E71F00E42FA0 /* RecipeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeRow.swift; sourceTree = "<group>"; };
+		676B40CB2940F4ED00E42FA0 /* EditRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRecipeView.swift; sourceTree = "<group>"; };
+		676B40CD294100C500E42FA0 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
+		676B40CF2941119000E42FA0 /* BindingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +168,7 @@
 				676B40B5293528AC00E42FA0 /* BreadRecipeMethod.swift */,
 				676B40B729352FD200E42FA0 /* BreadRecipe.swift */,
 				676B40B929353A5900E42FA0 /* RecipeTimer.swift */,
+				676B40CF2941119000E42FA0 /* BindingExtension.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -172,6 +183,10 @@
 				676B40BF293F9B6F00E42FA0 /* BakingMethodView.swift */,
 				676B40C1293F9DB300E42FA0 /* StepTypePicker.swift */,
 				676B40C5293FBDE000E42FA0 /* EditStepView.swift */,
+				676B40C72940E66F00E42FA0 /* BreadRecipeListView.swift */,
+				676B40C92940E71F00E42FA0 /* RecipeRow.swift */,
+				676B40CB2940F4ED00E42FA0 /* EditRecipeView.swift */,
+				676B40CD294100C500E42FA0 /* RecipeDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -314,11 +329,16 @@
 				676B40B0293511D300E42FA0 /* BakingStep.swift in Sources */,
 				676B40B829352FD200E42FA0 /* BreadRecipe.swift in Sources */,
 				676B40C2293F9DB300E42FA0 /* StepTypePicker.swift in Sources */,
+				676B40CC2940F4ED00E42FA0 /* EditRecipeView.swift in Sources */,
 				676B40BA29353A5900E42FA0 /* RecipeTimer.swift in Sources */,
 				676B40B6293528AD00E42FA0 /* BreadRecipeMethod.swift in Sources */,
 				676B40BE293E8DFE00E42FA0 /* TimeCard.swift in Sources */,
+				676B40C82940E66F00E42FA0 /* BreadRecipeListView.swift in Sources */,
 				676B40C6293FBDE000E42FA0 /* EditStepView.swift in Sources */,
 				676B40B429351EBB00E42FA0 /* BakingStepListView.swift in Sources */,
+				676B40D02941119000E42FA0 /* BindingExtension.swift in Sources */,
+				676B40CA2940E71F00E42FA0 /* RecipeRow.swift in Sources */,
+				676B40CE294100C500E42FA0 /* RecipeDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

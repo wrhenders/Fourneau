@@ -85,11 +85,11 @@ extension BreadRecipeMethod {
         self.steps = [
             BakingStep(title: "Feed Starter", lengthInMinutes: 360, type: .feedstarter),
             BakingStep(title: "Feed Starter Again", lengthInMinutes: 240, type: .feedstarter),
-            BakingStep(title: "Mix Dough", lengthInMinutes: 5, description: [recipe.method], type: .makedough),
+            BakingStep(title: "Mix Dough", lengthInMinutes: 5, description: recipe.method, type: .makedough),
             BakingStep(title: "Proof/Rest Dough", lengthInMinutes: 600, type: .proof),
             BakingStep(title: "Bench Rest", lengthInMinutes: 15, type: .benchrest),
             BakingStep(title: "Form", lengthInMinutes: 5, type: .form),
-            BakingStep(title: "Bake", lengthInMinutes: recipe.bakeTimeInMinutes, description: ["With oven at \(recipe.bakeTempF)F, slide tray into oven.","Pour 50g water into trough, close Forneau and oven.","Once \(Int(recipe.bakeTimeInMinutes / 2)) minutes have passed, remove door and continue baking"], type: .bake),
+            BakingStep(title: "Bake", lengthInMinutes: recipe.bakeTimeInMinutes, description: ["With oven at \(recipe.bakeTempF)F, slide tray into oven.","Pour 50g water into trough, close Forneau and oven.","Once half the time has passed, remove door and continue baking"], type: .bake),
             BakingStep(title: "Cool", lengthInMinutes: 20, type: .cool)
         ]
         self.startTime = startTime

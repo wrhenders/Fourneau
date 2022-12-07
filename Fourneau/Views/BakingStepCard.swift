@@ -24,13 +24,13 @@ struct BakingStepCard: View {
         }
     }
     
-    func timeDisplay(_ length: Double ) -> String {
-        let minutes = Int(length) % 60
+    func timeDisplay(_ length: Int ) -> String {
+        let minutes = length % 60
         switch length {
-        case 0...1: return "\(Int(length)) Minute"
-        case 2...59: return "\(Int(length)) Minutes"
-        case 60...119: return minutes > 0 ? "\(Int(length / 60)) Hour \(minutes) Minutes" : "\(Int(length / 60)) Hour"
-        case 120...: return minutes > 0 ? "\(Int(length / 60)) Hours \(minutes) Minutes" : "\(Int(length / 60)) Hours"
+        case 0...1: return "\(length) Minute"
+        case 2...59: return "\(length) Minutes"
+        case 60...119: return minutes > 0 ? "\(length / 60) Hour \(minutes) Minutes" : "\(length / 60) Hour"
+        case 120...: return minutes > 0 ? "\(length / 60) Hours \(minutes) Minutes" : "\(length / 60) Hours"
         default: return ""
         }
     }

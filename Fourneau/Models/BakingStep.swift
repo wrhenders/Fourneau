@@ -11,12 +11,12 @@ import SwiftUI
 struct BakingStep: Identifiable, Codable, Hashable {
     let id: UUID
     var title: String
-    var lengthInMinutes: Double
+    var lengthInMinutes: Int
     var description: [String]
     var methodCompleted: [Bool]
     var type: BakingStepType
     
-    init(id: UUID = UUID(), title: String, startingTime: Date = Date(), lengthInMinutes: Double, description: [String] = [], type: BakingStepType) {
+    init(id: UUID = UUID(), title: String, startingTime: Date = Date(), lengthInMinutes: Int, description: [String] = [], type: BakingStepType) {
         self.id = id
         self.title = title
         self.lengthInMinutes = lengthInMinutes
@@ -32,7 +32,7 @@ struct BakingStep: Identifiable, Codable, Hashable {
     
     struct Data {
         var title: String = ""
-        var lengthInMinutes: Double = 0
+        var lengthInMinutes: Int = 0
         var description: [String] = []
         var type: BakingStepType = .proof
     }
