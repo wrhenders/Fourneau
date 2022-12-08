@@ -27,7 +27,7 @@ struct BakingSummaryView: View {
                     }
                 }
                 Section {
-                    NavigationLink(destination: {BakingStepListView(breadMethod: $store.chosenMethod)}) {
+                    NavigationLink(destination: {BakingStepListView(completedRecipe: store.completedRecipe)}) {
                         Text("Bake")
                             .font(.title2)
                             .foregroundColor(Color.blue)

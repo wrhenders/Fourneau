@@ -12,6 +12,10 @@ class BakingStore: ObservableObject {
     @Published var recipeList: [BreadRecipe] = BreadRecipe.sampleRecipeList
     @Published var chosenRecipe: BreadRecipe = BreadRecipe.sampleRecipe
     
-    @Published var methodList: [BreadRecipeMethod] = [BreadRecipeMethod(recipe: BreadRecipe.sampleRecipe)]
-    @Published var chosenMethod: BreadRecipeMethod = BreadRecipeMethod(recipe: BreadRecipe.sampleRecipe)
+    @Published var methodList: [BreadRecipeMethod] = [BreadRecipeMethod()]
+    @Published var chosenMethod: BreadRecipeMethod = BreadRecipeMethod()
+    
+    var completedRecipe: CompletedRecipe {
+        CompletedRecipe(title: chosenMethod.title, steps: chosenMethod.steps, recipe: chosenRecipe)
+    }
 }

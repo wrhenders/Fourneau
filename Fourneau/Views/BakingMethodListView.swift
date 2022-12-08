@@ -13,7 +13,7 @@ struct BakingMethodListView: View {
     let recipe: BreadRecipe
     
     var body: some View {
-        let emptyMethod = BreadRecipeMethod(title: "Edit", steps: [], recipe: recipe)
+        let emptyMethod = BreadRecipeMethod(title: "Edit", steps: [])
         
         List {
             ForEach($bakingMethodList) {$methodRow in
@@ -42,8 +42,8 @@ struct BakingMethodListView: View {
 
 struct BakingMethodListView_Previews: PreviewProvider {
     struct BindingTestHolder: View {
-        @State var breadMethod = BreadRecipeMethod(recipe: BreadRecipe.sampleRecipe)
-        @State var methodList = [BreadRecipeMethod(recipe: BreadRecipe.sampleRecipe)]
+        @State var breadMethod = BreadRecipeMethod()
+        @State var methodList = [BreadRecipeMethod()]
         var body: some View {
             BakingMethodListView(chosenMethod: $breadMethod, bakingMethodList: $methodList, recipe: BreadRecipe.sampleRecipe)
         }

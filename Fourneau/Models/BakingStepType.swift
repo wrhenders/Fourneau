@@ -42,7 +42,7 @@ enum BakingStepType: String, Codable, Identifiable, CaseIterable {
         case .feedstarter:
             return ["Mix Equal Parts Flour and Water"]
         case .makedough:
-            return []
+            return ["(Based on Recipe)"]
         case .autolyse:
             return ["Let rest 15 minutes before adding salt", "Add Salt and mix to combine"]
         case .proof:

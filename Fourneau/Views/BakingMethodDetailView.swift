@@ -85,7 +85,7 @@ struct BakingMethodDetailView: View {
 
 struct BakingMethodDetailView_Previews: PreviewProvider {
     struct BindingTestHolder: View {
-        @State var breadMethod = BreadRecipeMethod(recipe: BreadRecipe.sampleRecipe)
+        @State var breadMethod = BreadRecipeMethod()
         var body: some View {
             BakingMethodDetailView(breadMethod: $breadMethod)
         }
