@@ -9,13 +9,13 @@ import SwiftUI
 
 @main
 struct FourneauApp: App {
-    @State var breadMethod = BreadRecipeMethod(recipe: BreadRecipe.sampleRecipe)
+    @StateObject private var store = BakingStore()
     
     var body: some Scene {
         WindowGroup {
             TabView {
                 NavigationView{
-                    BreadRecipeListView()
+                    BakingSummaryView(store: store)
                 }
                 .tabItem {
                     Image(systemName: "list.bullet")

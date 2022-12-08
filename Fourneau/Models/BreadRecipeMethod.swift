@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BreadRecipeMethod: Codable, Identifiable {
+struct BreadRecipeMethod: Codable, Identifiable, Equatable {
     let id: UUID
     var title: String
     var recipe: BreadRecipe

@@ -8,25 +8,26 @@
 import SwiftUI
 
 struct BreadRecipeListView: View {
-    @State var breadRecipeList: [BreadRecipe] = BreadRecipe.sampleRecipeList
-    @State var chosenRecipe: BreadRecipe?
+    @Binding var recipe: BreadRecipe
+    @Binding var recipeList: [BreadRecipe]
+    
     @State var addingRecipe = false
     @State private var data = BreadRecipe.Data()
     
     var body: some View {
         List {
             Section{
-                ForEach($breadRecipeList) { $recipe in
-                    NavigationLink(destination: RecipeDetailView(recipe: $recipe)) {
-                        RecipeRow(recipe: recipe)
+                ForEach($recipeList) { $recipeRow in
+                    NavigationLink(destination: RecipeDetailView(recipe: $recipeRow)) {
+                        RecipeRow(recipe: recipeRow)
                     }
                     .onTapGesture {
-                        self.chosenRecipe = recipe
+                        recipe = recipeRow
                     }
-                    .listRowBackground(self.chosenRecipe == recipe ? Color(red: 237/255, green: 213/255, blue: 140/255) : Color.white)
+                    .listRowBackground(recipe == recipeRow ? Color(red: 237/255, green: 213/255, blue: 140/255) : Color.white)
                 }
                 .onDelete { indicies in
-                    breadRecipeList.remove(atOffsets: indicies)
+                    recipeList.remove(atOffsets: indicies)
                 }
                 Button(action: {
                     addingRecipe = true
@@ -34,13 +35,6 @@ struct BreadRecipeListView: View {
                     Label("Add New Recipe", systemImage: "plus.circle.fill")
                         .foregroundColor(.gray)
                 }
-            }
-            Section {
-                NavigationLink(destination: {BakingMethodListView(recipe: $chosenRecipe)}) {
-                    Text("Choose Baking Steps")
-                        .font(.title2)
-                        .foregroundColor(Color.blue)
-                }.disabled((chosenRecipe == nil))
             }
         }
         .navigationTitle("Recipe List")
@@ -57,7 +51,7 @@ struct BreadRecipeListView: View {
                         ToolbarItem(placement: .confirmationAction) {
                             Button("Done") {
                                 addingRecipe = false
-                                breadRecipeList.append(BreadRecipe(data: data))
+                                recipeList.append(BreadRecipe(data: data))
                                 data = BreadRecipe.Data()
                             }
                         }
@@ -68,9 +62,17 @@ struct BreadRecipeListView: View {
 }
 
 struct BreadRecipeListView_Previews: PreviewProvider {
+    struct BindingTestHolder: View {
+        @State var recipe = BreadRecipe.sampleRecipe
+        @State var recipeList = BreadRecipe.sampleRecipeList
+        
+        var body: some View {
+            BreadRecipeListView(recipe: $recipe, recipeList: $recipeList)
+        }
+    }
     static var previews: some View {
         NavigationView{
-            BreadRecipeListView()
+            BindingTestHolder()
         }
     }
 }

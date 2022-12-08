@@ -16,6 +16,10 @@ struct BakingMethodDetailView: View {
     
     var body: some View {
         List {
+            Section(header: Text("Title")) {
+                TextField("Title", text: $breadMethod.title)
+                    .font(.headline)
+            }
             Section(header: Text("Baking Steps")){
                 ForEach(Array(breadMethod.steps.enumerated()), id: \.element) { index, step in
                         VStack {
@@ -49,13 +53,6 @@ struct BakingMethodDetailView: View {
             }
         }
         .navigationBarTitle(breadMethod.title)
-        .toolbar {
-            ToolbarItem(placement: .confirmationAction) {
-                NavigationLink(destination: BakingStepListView(breadMethod: $breadMethod)){
-                    Image(systemName: "chevron.right")
-                }
-            }
-        }
         .sheet(isPresented: $isPresentingEditView) {
             NavigationView {
                 EditStepView(step: $data)

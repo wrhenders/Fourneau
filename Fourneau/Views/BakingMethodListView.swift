@@ -8,20 +8,23 @@
 import SwiftUI
 
 struct BakingMethodListView: View {
-    @Binding var recipe: BreadRecipe?
-    @State var bakingMethodList : [BreadRecipeMethod] = []
-    
+    @Binding var chosenMethod: BreadRecipeMethod
+    @Binding var bakingMethodList: [BreadRecipeMethod]
+    let recipe: BreadRecipe
     
     var body: some View {
-        let checkedRecipe = recipe ?? BreadRecipe(data: BreadRecipe.Data())
-        let emptyMethod = BreadRecipeMethod(title: "Edit", steps: [], recipe: checkedRecipe)
+        let emptyMethod = BreadRecipeMethod(title: "Edit", steps: [], recipe: recipe)
         
         List {
-            ForEach($bakingMethodList) {$method in
-                NavigationLink(destination: BakingMethodDetailView(breadMethod: $method)) {
-                    Text(method.title)
+            ForEach($bakingMethodList) {$methodRow in
+                NavigationLink(destination: BakingMethodDetailView(breadMethod: $methodRow)) {
+                    Text(methodRow.title)
                         .font(.title2)
                 }
+                .onTapGesture {
+                    chosenMethod = methodRow
+                }
+                .listRowBackground(chosenMethod == methodRow ? Color(red: 237/255, green: 213/255, blue: 140/255) : Color.white)
             }
             .onDelete { indicies in
                 bakingMethodList.remove(atOffsets: indicies)
@@ -34,16 +37,20 @@ struct BakingMethodListView: View {
             }
         }
         .navigationTitle("Method")
-        .onAppear {
-            bakingMethodList.append(BreadRecipeMethod(recipe: checkedRecipe))
-        }
     }
 }
 
 struct BakingMethodListView_Previews: PreviewProvider {
+    struct BindingTestHolder: View {
+        @State var breadMethod = BreadRecipeMethod(recipe: BreadRecipe.sampleRecipe)
+        @State var methodList = [BreadRecipeMethod(recipe: BreadRecipe.sampleRecipe)]
+        var body: some View {
+            BakingMethodListView(chosenMethod: $breadMethod, bakingMethodList: $methodList, recipe: BreadRecipe.sampleRecipe)
+        }
+    }
     static var previews: some View {
         NavigationView{
-            BakingMethodListView(recipe: .constant(BreadRecipe.sampleRecipe))
+            BindingTestHolder()
         }
     }
 }
