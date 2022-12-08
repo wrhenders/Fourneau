@@ -15,18 +15,17 @@ struct FourneauApp: App {
         WindowGroup {
             TabView {
                 NavigationView{
-                    BakingMethodDetailView(breadMethod: $breadMethod)
-                }
-                .tabItem {
-                    Image(systemName: "list.clipboard")
-                    Text("Baking Method")
-                }
-                NavigationView{
                     BreadRecipeListView()
                 }
                 .tabItem {
                     Image(systemName: "list.bullet")
                     Text("Bread Recipes")
+                }
+                NavigationView{
+                }
+                .tabItem {
+                    Image(systemName: "mountain.2")
+                    Text("Recipe Calculator")
                 }
             }
         }

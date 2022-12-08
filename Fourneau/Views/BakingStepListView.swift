@@ -22,7 +22,7 @@ struct BakingStepListView: View {
         VStack {
             HStack {
                 TimeCard(text: "Start Time:", time: "\(breadMethod.startTime.formatted(date: .omitted, time: .shortened))", color: .green)
-                TimeCard(text: "Next Action:", time: "\(breadMethod.nextAction.formatted(date: .omitted, time: .shortened))", color: .cyan)
+                TimeCard(text: "Next Action:", time: "\(breadMethod.nextAction?.formatted(date: .omitted, time: .shortened) ?? "TBD")", color: .cyan)
             }
             
             SnapCarousel(index: $visibleIndex, length: breadMethod.steps.count) {

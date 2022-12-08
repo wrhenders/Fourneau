@@ -36,11 +36,11 @@ struct BreadRecipeListView: View {
                 }
             }
             Section {
-                NavigationLink(destination: {}) {
+                NavigationLink(destination: {BakingMethodListView(recipe: $chosenRecipe)}) {
                     Text("Choose Baking Steps")
                         .font(.title2)
                         .foregroundColor(Color.blue)
-                }
+                }.disabled((chosenRecipe == nil))
             }
         }
         .navigationTitle("Recipe List")
