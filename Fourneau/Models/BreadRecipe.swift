@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BreadRecipe: Codable, Identifiable {
+struct BreadRecipe: Codable, Identifiable, Equatable {
     let id: UUID
     var title: String
     var bakeTempF: Int

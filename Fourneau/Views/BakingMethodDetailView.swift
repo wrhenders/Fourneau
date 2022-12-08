@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BakingMethodView: View {
+struct BakingMethodDetailView: View {
     @Binding var breadMethod : BreadRecipeMethod
     
     @State private var isPresentingEditView = false
@@ -86,11 +86,11 @@ struct BakingMethodView: View {
 }
 
 
-struct BakingMethodView_Previews: PreviewProvider {
+struct BakingMethodDetailView_Previews: PreviewProvider {
     struct BindingTestHolder: View {
         @State var breadMethod = BreadRecipeMethod(recipe: BreadRecipe.sampleRecipe)
         var body: some View {
-            BakingMethodView(breadMethod: $breadMethod)
+            BakingMethodDetailView(breadMethod: $breadMethod)
         }
     }
     static var previews: some View {

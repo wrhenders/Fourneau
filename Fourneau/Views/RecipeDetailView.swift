@@ -62,7 +62,7 @@ struct RecipeDetailView: View {
                                 recipe.update(from: data)
                             }
                         }
-                    }
+                }
             }
         }
     }

@@ -15,7 +15,7 @@ struct FourneauApp: App {
         WindowGroup {
             TabView {
                 NavigationView{
-                    BakingMethodView(breadMethod: $breadMethod)
+                    BakingMethodDetailView(breadMethod: $breadMethod)
                 }
                 .tabItem {
                     Image(systemName: "list.clipboard")
