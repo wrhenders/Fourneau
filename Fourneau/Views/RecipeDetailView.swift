@@ -49,7 +49,6 @@ struct RecipeDetailView: View {
         .sheet(isPresented: $isRecipeEditViewShown) {
             NavigationView {
                 EditRecipeView(recipe: $data)
-                    .navigationTitle(data.title)
                     .toolbar {
                         ToolbarItem(placement: .bottomBar) {
                             Button("Cancel") {

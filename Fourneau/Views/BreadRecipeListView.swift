@@ -24,7 +24,7 @@ struct BreadRecipeListView: View {
                                 recipe = recipeRow
                             }
                         NavigationLink(destination: RecipeDetailView(recipe: $recipeRow)) {
-                            Text("")
+                            EmptyView()
                         }
                     }
                     .listRowBackground(recipe == recipeRow ? Color(red: 237/255, green: 213/255, blue: 140/255) : Color.white)
@@ -44,7 +44,6 @@ struct BreadRecipeListView: View {
         .sheet(isPresented: $addingRecipe) {
             NavigationView {
                 EditRecipeView(recipe: $data)
-                    .navigationTitle(data.title)
                     .toolbar {
                         ToolbarItem(placement: .bottomBar) {
                             Button("Cancel") {

@@ -10,6 +10,9 @@ import SwiftUI
 struct BakingSummaryView: View {
     @ObservedObject var store: BakingStore
     
+    @Environment(\.scenePhase) private var scenePhase
+    let saveAction: ()->Void
+    
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
             Image("bread")
@@ -17,13 +20,13 @@ struct BakingSummaryView: View {
                 .scaledToFit()
             List {
                 Section(header: Text("Recipe")) {
-                    NavigationLink(destination: BreadRecipeListView(recipe: $store.chosenRecipe, recipeList: $store.recipeList)){
-                        Text(store.chosenRecipe.title)
+                    NavigationLink(destination: BreadRecipeListView(recipe: $store.storeData.chosenRecipe, recipeList: $store.storeData.recipeList)){
+                        Text(store.storeData.chosenRecipe.title)
                     }
                 }
                 Section(header: Text("Method")) {
-                    NavigationLink(destination: BakingMethodListView(chosenMethod: $store.chosenMethod, bakingMethodList: $store.methodList)) {
-                        Text(store.chosenMethod.title)
+                    NavigationLink(destination: BakingMethodListView(chosenMethod: $store.storeData.chosenMethod, bakingMethodList: $store.storeData.methodList)) {
+                        Text(store.storeData.chosenMethod.title)
                     }
                 }
                 Section {
@@ -36,6 +39,10 @@ struct BakingSummaryView: View {
             }
         }
         .navigationTitle("Baking Summary")
+        .onDisappear(perform: {saveAction()})
+        .onChange(of: scenePhase) { phase in
+            if phase == .inactive {saveAction()}
+        }
     }
 }
 
@@ -43,7 +50,7 @@ struct BakingSummaryView_Previews: PreviewProvider {
     struct BindingTestHolder: View {
         @StateObject var store = BakingStore()
         var body: some View {
-            BakingSummaryView(store: store)
+            BakingSummaryView(store: store, saveAction: {})
         }
     }
     static var previews: some View {

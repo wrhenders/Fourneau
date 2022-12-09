@@ -15,7 +15,14 @@ struct FourneauApp: App {
         WindowGroup {
             TabView {
                 NavigationView{
-                    BakingSummaryView(store: store)
+                    BakingSummaryView(store: store) {
+                        Task {
+                            do {
+                                print("Save!")
+                                try await BakingStore.save(store: store.storeData)
+                            } catch {}
+                        }
+                    }
                 }
                 .tabItem {
                     Image(systemName: "list.bullet")
@@ -26,6 +33,13 @@ struct FourneauApp: App {
                 .tabItem {
                     Image(systemName: "mountain.2")
                     Text("Recipe Calculator")
+                }
+            }
+            .task {
+                do {
+                    print("Load")
+                    store.storeData = try await BakingStore.load()
+                } catch {
                 }
             }
         }

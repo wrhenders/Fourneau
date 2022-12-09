@@ -35,7 +35,7 @@ struct BreadRecipeMethod: Codable, Identifiable, Equatable, Hashable {
 }
 
 extension BreadRecipeMethod {
-    init(title: String = "Standard Method", startTime: Date = Date()) {
+    init(title: String = "Standard Method") {
         self.id = UUID()
         self.title = title
         self.steps = [

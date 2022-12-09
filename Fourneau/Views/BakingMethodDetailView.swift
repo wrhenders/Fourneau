@@ -53,12 +53,10 @@ struct BakingMethodDetailView: View {
                 }
             }
         }
-        .navigationBarTitle(breadMethodData.title)
         .toolbar{ EditButton() }
         .sheet(isPresented: $isPresentingEditView) {
             NavigationView {
                 EditStepView(step: $data)
-                    .navigationTitle(data.title)
                     .toolbar {
                         ToolbarItem(placement: .bottomBar) {
                             Button("Cancel") {

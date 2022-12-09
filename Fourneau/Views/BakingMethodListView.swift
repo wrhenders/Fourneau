@@ -53,7 +53,6 @@ struct BakingMethodListView: View {
         .sheet(isPresented: $isPresentingDetailView) {
             NavigationView {
                 BakingMethodDetailView(breadMethodData: $data)
-                    .navigationTitle(data.title)
                     .toolbar {
                         ToolbarItem(placement: .bottomBar) {
                             Button("Cancel") {
