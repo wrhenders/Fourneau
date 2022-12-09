@@ -7,75 +7,30 @@
 
 import Foundation
 
-struct BreadRecipeMethod: Codable, Identifiable, Equatable {
+struct BreadRecipeMethod: Codable, Identifiable, Equatable, Hashable {
     let id: UUID
     var title: String
-    var startTime: Date
     var steps: [BakingStep] = []
     
-    var stepCompleted: [Bool] = []
-    var startArray: [Date] = []
-    var nextAction: Date?
-    var currentStep: Int = 0
-    var endTime: Date {
-        steps.count > 0 ?
-        Date(timeInterval: TimeInterval(steps[steps.count - 1].lengthInMinutes * 60), since: startArray[startArray.count - 1]) :
-        Date()
-    }
-    
-    init(title: String, steps: [BakingStep], startTime: Date = Date()) {
+    init(title: String, steps: [BakingStep]) {
         self.id = UUID()
         self.title = title
         self.steps = steps
-        self.startTime = startTime
-        self.setupMethod()
     }
     
-    mutating func setupMethod() {
-        if steps.count > 0 {
-            stepCompleted = [Bool](repeating: false, count: steps.count)
-            nextAction = Date(timeInterval: TimeInterval(steps[0].lengthInMinutes * 60), since: startTime)
-            updateStarts()
-        }
+    struct Data {
+        var title: String = "Edit"
+        var steps: [BakingStep] = []
     }
     
-    mutating func updateStarts() {
-        var currentStart = Date()
-        if steps.count > 0 {
-            for (index, step) in steps.enumerated() {
-                if stepCompleted[index] {
-                    continue
-                }
-                startArray.indices.contains(index) ? startArray[index] = currentStart : startArray.append(currentStart)
-                currentStart = Date(timeInterval: TimeInterval(step.lengthInMinutes * 60), since: currentStart)
-            }
-        }
+    var data: Data {
+        Data(title: title, steps: steps)
     }
     
-    mutating func nextStep() {
-        if currentStep + 1 < steps.count {
-            stepCompleted[currentStep] = true
-            updateStarts()
-            currentStep += 1
-            nextAction = Date(timeInterval: TimeInterval(steps[currentStep].lengthInMinutes * 60), since: Date())
-        }
-    }
-    
-    mutating func removeStep(atOffset offsets: IndexSet) {
-        steps.remove(atOffsets: offsets)
-        setupMethod()
-    }
-    
-    mutating func addStep(from data: BakingStep.Data) {
-        steps.append(BakingStep(data: data))
-        setupMethod()
-    }
-    
-    mutating func updateStep(from data: BakingStep.Data, at index: Int) {
-        if steps.indices.contains(index) {
-            steps[index] = BakingStep(data: data)
-            setupMethod()
-        }
+    init(data: Data) {
+        id = UUID()
+        title = data.title
+        steps = data.steps
     }
 }
 
@@ -93,7 +48,5 @@ extension BreadRecipeMethod {
             BakingStep(title: "Bake", lengthInMinutes: 50, description: ["With oven at temp, slide tray into oven.","Pour 50g water into trough, close Forneau and oven.","Once half the time has passed, remove door and continue baking"], type: .bake),
             BakingStep(title: "Cool", lengthInMinutes: 20, type: .cool)
         ]
-        self.startTime = startTime
-        self.setupMethod()
     }
 }

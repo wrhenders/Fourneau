@@ -18,11 +18,14 @@ struct BreadRecipeListView: View {
         List {
             Section{
                 ForEach($recipeList) { $recipeRow in
-                    NavigationLink(destination: RecipeDetailView(recipe: $recipeRow)) {
+                    ZStack(alignment: .leading) {
                         RecipeRow(recipe: recipeRow)
-                    }
-                    .onTapGesture {
-                        recipe = recipeRow
+                            .onTapGesture {
+                                recipe = recipeRow
+                            }
+                        NavigationLink(destination: RecipeDetailView(recipe: $recipeRow)) {
+                            Text("")
+                        }
                     }
                     .listRowBackground(recipe == recipeRow ? Color(red: 237/255, green: 213/255, blue: 140/255) : Color.white)
                 }
@@ -43,12 +46,12 @@ struct BreadRecipeListView: View {
                 EditRecipeView(recipe: $data)
                     .navigationTitle(data.title)
                     .toolbar {
-                        ToolbarItem(placement: .cancellationAction) {
+                        ToolbarItem(placement: .bottomBar) {
                             Button("Cancel") {
                                 addingRecipe = false
                             }
                         }
-                        ToolbarItem(placement: .confirmationAction) {
+                        ToolbarItem(placement: .bottomBar) {
                             Button("Done") {
                                 addingRecipe = false
                                 recipeList.append(BreadRecipe(data: data))

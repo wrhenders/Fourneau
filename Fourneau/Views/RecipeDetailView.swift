@@ -51,12 +51,12 @@ struct RecipeDetailView: View {
                 EditRecipeView(recipe: $data)
                     .navigationTitle(data.title)
                     .toolbar {
-                        ToolbarItem(placement: .cancellationAction) {
+                        ToolbarItem(placement: .bottomBar) {
                             Button("Cancel") {
                                 isRecipeEditViewShown = false
                             }
                         }
-                        ToolbarItem(placement: .confirmationAction) {
+                        ToolbarItem(placement: .bottomBar) {
                             Button("Done") {
                                 isRecipeEditViewShown = false
                                 recipe.update(from: data)

@@ -22,7 +22,7 @@ struct BakingSummaryView: View {
                     }
                 }
                 Section(header: Text("Method")) {
-                    NavigationLink(destination: BakingMethodListView(chosenMethod: $store.chosenMethod, bakingMethodList: $store.methodList, recipe: BreadRecipe.sampleRecipe)) {
+                    NavigationLink(destination: BakingMethodListView(chosenMethod: $store.chosenMethod, bakingMethodList: $store.methodList)) {
                         Text(store.chosenMethod.title)
                     }
                 }

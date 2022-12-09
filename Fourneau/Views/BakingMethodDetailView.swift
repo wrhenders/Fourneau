@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BakingMethodDetailView: View {
-    @Binding var breadMethod : BreadRecipeMethod
+    @Binding var breadMethodData : BreadRecipeMethod.Data
     
     @State private var isPresentingEditView = false
     @State private var data = BakingStep.Data()
@@ -17,11 +17,11 @@ struct BakingMethodDetailView: View {
     var body: some View {
         List {
             Section(header: Text("Title")) {
-                TextField("Title", text: $breadMethod.title)
+                TextField("Title", text: $breadMethodData.title)
                     .font(.headline)
             }
             Section(header: Text("Baking Steps")){
-                ForEach(Array(breadMethod.steps.enumerated()), id: \.element) { index, step in
+                ForEach(Array(breadMethodData.steps.enumerated()), id: \.element) { index, step in
                         VStack {
                             Button(action:{
                                 data = step.data
@@ -41,10 +41,11 @@ struct BakingMethodDetailView: View {
                 }
                 .onMove(perform: move)
                 .onDelete { indicies in
-                    breadMethod.removeStep(atOffset: indicies)
+                    breadMethodData.steps.remove(atOffsets: indicies)
                 }
                 Button(action: {
-                    updateIndex = breadMethod.steps.count - 1
+                    breadMethodData.steps.append(BakingStep(data: data))
+                    updateIndex = breadMethodData.steps.count - 1
                     isPresentingEditView = true
                     
                 }) {
@@ -52,21 +53,25 @@ struct BakingMethodDetailView: View {
                 }
             }
         }
-        .navigationBarTitle(breadMethod.title)
+        .navigationBarTitle(breadMethodData.title)
+        .toolbar{ EditButton() }
         .sheet(isPresented: $isPresentingEditView) {
             NavigationView {
                 EditStepView(step: $data)
                     .navigationTitle(data.title)
                     .toolbar {
-                        ToolbarItem(placement: .cancellationAction) {
+                        ToolbarItem(placement: .bottomBar) {
                             Button("Cancel") {
                                 isPresentingEditView = false
+                                data = BakingStep.Data()
                             }
                         }
-                        ToolbarItem(placement: .confirmationAction) {
+                        ToolbarItem(placement: .bottomBar) {
                             Button("Done") {
                                 isPresentingEditView = false
-                                breadMethod.updateStep(from: data, at: updateIndex)
+                                if breadMethodData.steps.indices.contains(updateIndex) {
+                                    breadMethodData.steps[updateIndex] = BakingStep(data: data)
+                                }
                                 data = BakingStep.Data()
                                 updateIndex = 0
                             }
@@ -78,16 +83,16 @@ struct BakingMethodDetailView: View {
     }
     
     func move(from source: IndexSet, to destination: Int){
-        breadMethod.steps.move(fromOffsets: source, toOffset: destination)
+        breadMethodData.steps.move(fromOffsets: source, toOffset: destination)
     }
 }
 
 
 struct BakingMethodDetailView_Previews: PreviewProvider {
     struct BindingTestHolder: View {
-        @State var breadMethod = BreadRecipeMethod()
+        @State var breadMethod = BreadRecipeMethod().data
         var body: some View {
-            BakingMethodDetailView(breadMethod: $breadMethod)
+            BakingMethodDetailView(breadMethodData: $breadMethod)
         }
     }
     static var previews: some View {
