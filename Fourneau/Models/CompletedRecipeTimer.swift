@@ -7,12 +7,11 @@
 
 import Foundation
 
-struct CompletedRecipe: Codable, Identifiable {
+struct CompletedRecipeTimer: Codable, Identifiable {
     let id: UUID
-    var title: String
-    var startTime: Date
-    var steps: [BakingStep] = []
-    var recipe: BreadRecipe
+    var startTime: Date = Date()
+    var steps: [BakingStep] = BreadRecipeMethod().steps
+    var recipe: BreadRecipe = BreadRecipe.sampleRecipe
     
     var stepCompleted: [Bool] = []
     var startArray: [Date] = []
@@ -24,13 +23,24 @@ struct CompletedRecipe: Codable, Identifiable {
         Date()
     }
     
-    init(title: String, steps: [BakingStep], recipe: BreadRecipe, startTime: Date = Date()) {
+    init(steps: [BakingStep], recipe: BreadRecipe) {
         self.id = UUID()
-        self.title = title
         self.steps = steps
         self.recipe = recipe
-        self.startTime = startTime
         self.setupMethod()
+    }
+    
+    init(steps: [BakingStep], recipe: BreadRecipe, finishTime: Date) {
+        self.id = UUID()
+        self.steps = steps
+        self.recipe = recipe
+        self.setupMethod()
+        self.futureStart(finishTime: finishTime)
+    }
+    
+    mutating func futureStart(finishTime: Date) {
+        let totalMinutes = steps.map({$0.lengthInMinutes}).reduce(0, +)
+        startTime = Date(timeInterval: Double(-totalMinutes * 60), since: finishTime)
     }
     
     mutating func setupMethod() {

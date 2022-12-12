@@ -11,7 +11,14 @@ struct BakingSummaryView: View {
     @ObservedObject var store: BakingStore
     
     @Environment(\.scenePhase) private var scenePhase
+    @State private var startNow = BakeTime.now
+    @State private var finishBread = Date()
+    
     let saveAction: ()->Void
+    
+    enum BakeTime {
+        case now, future
+    }
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
@@ -29,16 +36,34 @@ struct BakingSummaryView: View {
                         Text(store.storeData.chosenMethod.title)
                     }
                 }
+                Section(header: Text("Start Time")) {
+                    Picker("Bake Time", selection: $startNow) {
+                        Text("Now").tag(BakeTime.now)
+                        Text("Future").tag(BakeTime.future)
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    
+                    if startNow == .future {
+                        DatePicker("Finish:", selection: $finishBread, in:Date.now...)
+                            .onChange(of: finishBread, perform: { _ in store.futureRecipeTimer(finishTime: finishBread)
+                            })
+                    }
+                }
                 Section {
-                    NavigationLink(destination: {BakingStepListView(completedRecipe: store.completedRecipe)}) {
-                        Text("Bake")
-                            .font(.title2)
-                            .foregroundColor(Color.blue)
+                    if let binding = Binding($store.activeRecipeTimer) {
+                        NavigationLink(destination: {BakingStepListView(recipeTimer: binding)}) {
+                            Text("Bake")
+                                .font(.title2)
+                                .foregroundColor(Color.blue)
+                        }
                     }
                 }
             }
         }
         .navigationTitle("Baking Summary")
+        .onAppear(perform: {if startNow == .now {
+            store.newRecipeTimer()
+        }})
         .onDisappear(perform: {saveAction()})
         .onChange(of: scenePhase) { phase in
             if phase == .inactive {saveAction()}

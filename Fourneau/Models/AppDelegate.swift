@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// Allows local notifications to pop up even when app is active
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         UNUserNotificationCenter.current().delegate = self

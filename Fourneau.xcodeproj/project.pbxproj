@@ -33,7 +33,7 @@
 		676B40D229423D8600E42FA0 /* BakingMethodListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40D129423D8600E42FA0 /* BakingMethodListView.swift */; };
 		676B40D42942714700E42FA0 /* BakingSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40D32942714700E42FA0 /* BakingSummaryView.swift */; };
 		676B40D629427E4F00E42FA0 /* BakingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40D529427E4F00E42FA0 /* BakingStore.swift */; };
-		676B40D829428C1A00E42FA0 /* CompletedRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40D729428C1A00E42FA0 /* CompletedRecipe.swift */; };
+		676B40D829428C1A00E42FA0 /* CompletedRecipeTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40D729428C1A00E42FA0 /* CompletedRecipeTimer.swift */; };
 		67F32CFC294788090043A4FF /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F32CFB294788090043A4FF /* LocalNotificationManager.swift */; };
 		67F32CFE29478E680043A4FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F32CFD29478E680043A4FF /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
@@ -85,7 +85,7 @@
 		676B40D129423D8600E42FA0 /* BakingMethodListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakingMethodListView.swift; sourceTree = "<group>"; };
 		676B40D32942714700E42FA0 /* BakingSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakingSummaryView.swift; sourceTree = "<group>"; };
 		676B40D529427E4F00E42FA0 /* BakingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakingStore.swift; sourceTree = "<group>"; };
-		676B40D729428C1A00E42FA0 /* CompletedRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedRecipe.swift; sourceTree = "<group>"; };
+		676B40D729428C1A00E42FA0 /* CompletedRecipeTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedRecipeTimer.swift; sourceTree = "<group>"; };
 		67F32CFB294788090043A4FF /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		67F32CFD29478E680043A4FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -182,7 +182,7 @@
 				676B40B929353A5900E42FA0 /* RecipeTimer.swift */,
 				676B40CF2941119000E42FA0 /* BindingExtension.swift */,
 				676B40D529427E4F00E42FA0 /* BakingStore.swift */,
-				676B40D729428C1A00E42FA0 /* CompletedRecipe.swift */,
+				676B40D729428C1A00E42FA0 /* CompletedRecipeTimer.swift */,
 				67F32CFB294788090043A4FF /* LocalNotificationManager.swift */,
 				67F32CFD29478E680043A4FF /* AppDelegate.swift */,
 			);
@@ -352,7 +352,7 @@
 				676B40D42942714700E42FA0 /* BakingSummaryView.swift in Sources */,
 				676B40B829352FD200E42FA0 /* BreadRecipe.swift in Sources */,
 				676B40C2293F9DB300E42FA0 /* StepTypePicker.swift in Sources */,
-				676B40D829428C1A00E42FA0 /* CompletedRecipe.swift in Sources */,
+				676B40D829428C1A00E42FA0 /* CompletedRecipeTimer.swift in Sources */,
 				676B40CC2940F4ED00E42FA0 /* EditRecipeView.swift in Sources */,
 				676B40BA29353A5900E42FA0 /* RecipeTimer.swift in Sources */,
 				676B40B6293528AD00E42FA0 /* BreadRecipeMethod.swift in Sources */,
