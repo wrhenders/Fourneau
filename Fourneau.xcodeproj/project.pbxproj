@@ -34,6 +34,8 @@
 		676B40D42942714700E42FA0 /* BakingSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40D32942714700E42FA0 /* BakingSummaryView.swift */; };
 		676B40D629427E4F00E42FA0 /* BakingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40D529427E4F00E42FA0 /* BakingStore.swift */; };
 		676B40D829428C1A00E42FA0 /* CompletedRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40D729428C1A00E42FA0 /* CompletedRecipe.swift */; };
+		67F32CFC294788090043A4FF /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F32CFB294788090043A4FF /* LocalNotificationManager.swift */; };
+		67F32CFE29478E680043A4FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F32CFD29478E680043A4FF /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +86,8 @@
 		676B40D32942714700E42FA0 /* BakingSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakingSummaryView.swift; sourceTree = "<group>"; };
 		676B40D529427E4F00E42FA0 /* BakingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakingStore.swift; sourceTree = "<group>"; };
 		676B40D729428C1A00E42FA0 /* CompletedRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedRecipe.swift; sourceTree = "<group>"; };
+		67F32CFB294788090043A4FF /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
+		67F32CFD29478E680043A4FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +183,8 @@
 				676B40CF2941119000E42FA0 /* BindingExtension.swift */,
 				676B40D529427E4F00E42FA0 /* BakingStore.swift */,
 				676B40D729428C1A00E42FA0 /* CompletedRecipe.swift */,
+				67F32CFB294788090043A4FF /* LocalNotificationManager.swift */,
+				67F32CFD29478E680043A4FF /* AppDelegate.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -333,8 +339,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67F32CFE29478E680043A4FF /* AppDelegate.swift in Sources */,
 				676B40BC2938FF7200E42FA0 /* SnapCarousel.swift in Sources */,
 				676B40D229423D8600E42FA0 /* BakingMethodListView.swift in Sources */,
+				67F32CFC294788090043A4FF /* LocalNotificationManager.swift in Sources */,
 				676B40C0293F9B6F00E42FA0 /* BakingMethodDetailView.swift in Sources */,
 				676B40AE2935115500E42FA0 /* BakingStepCard.swift in Sources */,
 				676B40B229351BD500E42FA0 /* BakingStepType.swift in Sources */,
@@ -510,6 +518,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Fourneau/Preview Content\"";
@@ -527,6 +536,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fourneau.Fourneau;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -538,6 +550,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Fourneau/Preview Content\"";
@@ -555,6 +568,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fourneau.Fourneau;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

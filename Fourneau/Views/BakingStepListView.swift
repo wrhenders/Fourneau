@@ -10,6 +10,7 @@ import SwiftUI
 struct BakingStepListView: View {
     @State var completedRecipe: CompletedRecipe
     @State var visibleIndex: Int = 0
+    @EnvironmentObject var notificationManager: LocalNotificationManager
     
     func nextStep(currentIndex index: Int) {
         if index + 1 < completedRecipe.steps.count {
@@ -47,6 +48,9 @@ struct BakingStepListView: View {
         }
         .navigationTitle("Recipe Steps")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            self.notificationManager.sendNotification(title: "Test", body: "Body Test", launchIn: 3)
+        }
     }
 }
 

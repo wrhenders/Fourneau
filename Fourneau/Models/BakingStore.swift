@@ -10,11 +10,12 @@ import SwiftUI
 
 struct LocalStore: Identifiable, Codable {
     var id: UUID = UUID()
-    var recipeList: [BreadRecipe] = []
+    var recipeList: [BreadRecipe] = BreadRecipe.sampleRecipeList
     var chosenRecipe: BreadRecipe = BreadRecipe.sampleRecipe
     
     var methodList: [BreadRecipeMethod] = [BreadRecipeMethod()]
     var chosenMethod: BreadRecipeMethod = BreadRecipeMethod()
+    
 }
 
 class BakingStore: ObservableObject {

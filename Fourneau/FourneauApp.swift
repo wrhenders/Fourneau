@@ -9,6 +9,9 @@ import SwiftUI
 
 @main
 struct FourneauApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
+    @StateObject var localNotificationCenter = LocalNotificationManager()
     @StateObject private var store = BakingStore()
     
     var body: some Scene {
@@ -18,12 +21,12 @@ struct FourneauApp: App {
                     BakingSummaryView(store: store) {
                         Task {
                             do {
-                                print("Save!")
                                 try await BakingStore.save(store: store.storeData)
                             } catch {}
                         }
                     }
                 }
+                .environmentObject(localNotificationCenter)
                 .tabItem {
                     Image(systemName: "list.bullet")
                     Text("Bread Recipes")
@@ -37,7 +40,6 @@ struct FourneauApp: App {
             }
             .task {
                 do {
-                    print("Load")
                     store.storeData = try await BakingStore.load()
                 } catch {
                 }
