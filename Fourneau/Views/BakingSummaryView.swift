@@ -11,7 +11,7 @@ struct BakingSummaryView: View {
     @ObservedObject var store: BakingStore
     
     @Environment(\.scenePhase) private var scenePhase
-    @State private var startNow = BakeTime.now
+    @State private var startNow: BakeTime?
     @State private var finishBread = Date()
     
     let saveAction: ()->Void
@@ -38,30 +38,30 @@ struct BakingSummaryView: View {
                 }
                 Section(header: Text("Start Time")) {
                     Picker("Bake Time", selection: $startNow) {
-                        Text("Now").tag(BakeTime.now)
-                        Text("Future").tag(BakeTime.future)
+                        Text("Now").tag(BakeTime.now as BakeTime?)
+                        Text("Future").tag(BakeTime.future as BakeTime?)
                     }
                     .pickerStyle(SegmentedPickerStyle())
                     
                     if startNow == .future {
                         DatePicker("Finish:", selection: $finishBread, in:Date.now...)
-                            .onChange(of: finishBread, perform: { _ in store.futureRecipeTimer(finishTime: finishBread)
+                            .onChange(of: finishBread, perform: { value in store.futureRecipeTimer(finishTime: value)
                             })
                     }
                 }
-                Section {
-                    if let binding = Binding($store.activeRecipeTimer) {
-                        NavigationLink(destination: {BakingStepListView(recipeTimer: binding)}) {
-                            Text("Bake")
-                                .font(.title2)
-                                .foregroundColor(Color.blue)
-                        }
+                if let binding = Binding($store.activeRecipeTimer) {
+                    NavigationLink(destination: {BakingStepListView(recipeTimer: binding)}) {
+                        Text("Bake")
+                            .font(.title2)
+                            .foregroundColor(Color.blue)
                     }
                 }
+            
             }
         }
         .navigationTitle("Baking Summary")
-        .onAppear(perform: {if startNow == .now {
+        .onChange(of: startNow, perform: {value in
+            if value == .now {
             store.newRecipeTimer()
         }})
         .onDisappear(perform: {saveAction()})

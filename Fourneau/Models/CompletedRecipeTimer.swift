@@ -10,37 +10,42 @@ import Foundation
 struct CompletedRecipeTimer: Codable, Identifiable {
     let id: UUID
     var startTime: Date = Date()
-    var steps: [BakingStep] = BreadRecipeMethod().steps
-    var recipe: BreadRecipe = BreadRecipe.sampleRecipe
+    var steps: [BakingStep]
+    var recipe: BreadRecipe
     
     var stepCompleted: [Bool] = []
     var startArray: [Date] = []
     var nextAction: Date?
     var currentStep: Int = 0
-    var endTime: Date {
+    var endTime: Date = Date()
+    var totalMinutes: Int {
         steps.count > 0 ?
-        Date(timeInterval: TimeInterval(steps[steps.count - 1].lengthInMinutes * 60), since: startArray[startArray.count - 1]) :
-        Date()
+            steps.map({$0.lengthInMinutes}).reduce(0, +) :
+            0
     }
     
     init(steps: [BakingStep], recipe: BreadRecipe) {
         self.id = UUID()
         self.steps = steps
         self.recipe = recipe
+        self.endTime = Date(timeInterval: (Double(self.totalMinutes) * 60), since: self.startTime)
         self.setupMethod()
+        print("Total Min: \(totalMinutes)")
+        print("Now Start Time: \(startTime)")
+        print("Now End Time: \(endTime)")
+        print("Diff: \(endTime.timeIntervalSince(startTime) / 60)")
     }
     
     init(steps: [BakingStep], recipe: BreadRecipe, finishTime: Date) {
         self.id = UUID()
         self.steps = steps
         self.recipe = recipe
+        self.endTime = finishTime
         self.setupMethod()
-        self.futureStart(finishTime: finishTime)
-    }
-    
-    mutating func futureStart(finishTime: Date) {
-        let totalMinutes = steps.map({$0.lengthInMinutes}).reduce(0, +)
-        startTime = Date(timeInterval: Double(-totalMinutes * 60), since: finishTime)
+        print("Total Min: \(totalMinutes)")
+        print("Future Start Time: \(startTime)")
+        print("Future End Time: \(endTime)")
+        print("Diff: \(endTime.timeIntervalSince(startTime) / 60)")
     }
     
     mutating func setupMethod() {
