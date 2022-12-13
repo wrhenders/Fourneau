@@ -16,6 +16,7 @@ enum BakingStepType: String, Codable, Identifiable, CaseIterable {
     case benchrest
     case bake
     case cool
+    case wait
     
     var name: String {
         rawValue
@@ -55,6 +56,8 @@ enum BakingStepType: String, Codable, Identifiable, CaseIterable {
             return ["With oven at baking temp, slide tray into oven.","Pour 50g water into trough, close Forneau and oven.","Once half the baking time has passed, remove door and continue baking"]
         case .cool:
             return ["Let cool on wire rack to finish cooking"]
+        case .wait:
+            return ["Just relax, you've got time before beginning to bake"]
         }
     }
 }

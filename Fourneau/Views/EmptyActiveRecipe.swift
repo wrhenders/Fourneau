@@ -14,7 +14,7 @@ struct EmptyActiveRecipe: View {
             Text("No Recipe Yet...")
             Button("Choose Recipe") {
                 self.tabSelection = 1
-            }
+            }.buttonStyle(.borderedProminent)
         }
     }
 }
