@@ -54,13 +54,13 @@ struct BakingMethodListView: View {
             NavigationView {
                 BakingMethodDetailView(breadMethodData: $data)
                     .toolbar {
-                        ToolbarItem(placement: .bottomBar) {
+                        ToolbarItem(placement: .cancellationAction) {
                             Button("Cancel") {
                                 isPresentingDetailView = false
                                 data = BreadRecipeMethod.Data()
                             }
                         }
-                        ToolbarItem(placement: .bottomBar) {
+                        ToolbarItem(placement: .confirmationAction) {
                             Button("Done") {
                                 isPresentingDetailView = false
                                 if bakingMethodList.indices.contains(updateIndex) {

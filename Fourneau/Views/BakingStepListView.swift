@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BakingStepListView: View {
     @Binding var recipeTimer: CompletedRecipeTimer
+    @Binding var tabSelection: Int
     
     @State var visibleIndex: Int = 0
     @EnvironmentObject var notificationManager: LocalNotificationManager
@@ -17,6 +18,21 @@ struct BakingStepListView: View {
         if index + 1 < recipeTimer.steps.count {
             visibleIndex = index + 1
             recipeTimer.nextStep()
+            addNotification(fromStepIndex: visibleIndex)
+        }
+        if index + 1 == recipeTimer.steps.count {
+            tabSelection = 1
+            visibleIndex = 0
+        }
+    }
+    
+    func addNotification(fromStepIndex index: Int) {
+        if recipeTimer.steps.indices.contains(index + 1) {
+            if recipeTimer.steps[index].lengthInMinutes > 0 {
+                notificationManager.sendNotification(title: "Bread Action Time!", body: "Next Step: \(recipeTimer.steps[index + 1].title)", launchIn: Double(recipeTimer.steps[index].lengthInMinutes) * 60)
+            } else {
+                notificationManager.sendNotification(title: "Bread Action Time!", body: "Next Step: \(recipeTimer.steps[index + 1].title)", launchIn: 1)
+            }
         }
     }
     
@@ -47,11 +63,13 @@ struct BakingStepListView: View {
                 }
             }
         }
+        .onAppear {
+            if notificationManager.notifications.isEmpty {
+                addNotification(fromStepIndex: visibleIndex)
+            }
+        }
         .navigationTitle("Recipe Steps")
         .navigationBarTitleDisplayMode(.inline)
-//        .onAppear {
-//            self.notificationManager.sendNotification(title: "Test", body: "Body Test", launchIn: 3)
-//        }
     }
 }
 
@@ -60,12 +78,13 @@ struct BakingStepList_Previews: PreviewProvider {
         @State var completeMethod = CompletedRecipeTimer(steps: BreadRecipeMethod().steps, recipe: BreadRecipe.sampleRecipe)
 
         var body: some View {
-            BakingStepListView(recipeTimer: $completeMethod)
+            BakingStepListView(recipeTimer: $completeMethod, tabSelection: .constant(1))
         }
     }
     static var previews: some View {
         NavigationView{
             BindingTestHolder()
+                .environmentObject(LocalNotificationManager())
         }
     }
 }

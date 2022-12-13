@@ -25,7 +25,7 @@ class LocalNotificationManager: ObservableObject {
         let content = UNMutableNotificationContent()
         content.title = title
         content.body = body
-        //content.sound = .default
+        content.sound = .default
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: launchIn, repeats: false)
         let request = UNNotificationRequest(identifier: "bakeNotification", content: content, trigger: trigger)

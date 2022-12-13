@@ -19,7 +19,7 @@ struct BakingStep: Identifiable, Codable, Hashable {
     init(id: UUID = UUID(), title: String, startingTime: Date = Date(), lengthInMinutes: Int, description: [String] = [], type: BakingStepType) {
         self.id = id
         self.title = title
-        self.lengthInMinutes = lengthInMinutes
+        self.lengthInMinutes = lengthInMinutes < 0 ? 0 : lengthInMinutes
         self.description = description.count > 0 ? description : type.description
         self.type = type
         self.methodCompleted = [Bool](repeating: false, count: self.description.count)
@@ -44,8 +44,8 @@ struct BakingStep: Identifiable, Codable, Hashable {
     init(data: Data) {
         id = UUID()
         title = data.title
-        lengthInMinutes = data.lengthInMinutes
-        description = data.description
+        lengthInMinutes = data.lengthInMinutes < 0 ? 0 : data.lengthInMinutes
+        description = data.description.count > 0 ? data.description : data.type.description
         type = data.type
         methodCompleted = [Bool](repeating: false, count: self.description.count)
     }

@@ -17,6 +17,9 @@ enum BakingStepType: String, Codable, Identifiable, CaseIterable {
     case bake
     case cool
     case wait
+    case done
+    
+    static let pickerChoices: [BakingStepType] = [.feedstarter, .makedough, .autolyse, .proof, .form, .benchrest, .bake, .cool]
     
     var name: String {
         rawValue
@@ -58,6 +61,8 @@ enum BakingStepType: String, Codable, Identifiable, CaseIterable {
             return ["Let cool on wire rack to finish cooking"]
         case .wait:
             return ["Just relax, you've got time before beginning to bake"]
+        case .done:
+            return ["Enjoy your bread!"]
         }
     }
 }

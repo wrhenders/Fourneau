@@ -59,6 +59,7 @@ struct CompletedRecipeTimer: Codable, Identifiable {
                 let waitStep = BakingStep(title: "Wait", lengthInMinutes: waitTime, type: .wait)
                 steps.insert(waitStep, at: 0)
             }
+            steps.append(BakingStep(title: "Finished", lengthInMinutes: 0, type: .done))
             stepCompleted = [Bool](repeating: false, count: steps.count)
             nextAction = Date(timeInterval: TimeInterval(steps[0].lengthInMinutes * 60), since: startTime)
             updateStarts()

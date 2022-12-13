@@ -53,18 +53,17 @@ struct BakingMethodDetailView: View {
                 }
             }
         }
-        .toolbar{ EditButton() }
         .sheet(isPresented: $isPresentingEditView) {
             NavigationView {
                 EditStepView(step: $data)
                     .toolbar {
-                        ToolbarItem(placement: .bottomBar) {
+                        ToolbarItem(placement: .cancellationAction) {
                             Button("Cancel") {
                                 isPresentingEditView = false
                                 data = BakingStep.Data()
                             }
                         }
-                        ToolbarItem(placement: .bottomBar) {
+                        ToolbarItem(placement: .confirmationAction) {
                             Button("Done") {
                                 isPresentingEditView = false
                                 if breadMethodData.steps.indices.contains(updateIndex) {

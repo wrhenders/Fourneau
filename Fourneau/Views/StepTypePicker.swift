@@ -12,7 +12,7 @@ struct StepTypePicker: View {
     
     var body: some View {
         Picker("", selection: $type) {
-            ForEach(BakingStepType.allCases) {type in
+            ForEach(BakingStepType.pickerChoices) {type in
                 Text(type.title)
                     .tag(type)
             }

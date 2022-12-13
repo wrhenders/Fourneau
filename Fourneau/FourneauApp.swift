@@ -36,12 +36,14 @@ struct FourneauApp: App {
                 
                 NavigationView{
                     if let binding = Binding($store.activeRecipeTimer) {
-                        BakingStepListView(recipeTimer: binding)
-                            .environmentObject(localNotificationCenter)
+                        BakingStepListView(recipeTimer: binding, tabSelection: $tabSelection)
+
                     } else {
                         EmptyActiveRecipe(tabSelection: $tabSelection)
                     }
-                }.tabItem {
+                }
+                .environmentObject(localNotificationCenter)
+                .tabItem {
                     Image(systemName: "stove")
                     Text("Active Recipe")
                 }.tag(2)
