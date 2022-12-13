@@ -42,28 +42,37 @@ struct BakingSummaryView: View {
                         Text("Future").tag(BakeTime.future as BakeTime?)
                     }
                     .pickerStyle(SegmentedPickerStyle())
+                    .onChange(of: startNow, perform: {value in
+                        if value == .now {
+                            store.newRecipeTimer()
+                        }
+                    })
                     
                     if startNow == .future {
                         DatePicker("Finish:", selection: $finishBread, in:Date.now...)
-                            .onChange(of: finishBread, perform: { value in store.futureRecipeTimer(finishTime: value)
+                            .onChange(of: finishBread, perform: { value in store.futureRecipeTimer(finishTime: finishBread)
                             })
                     }
                 }
-                if let binding = Binding($store.activeRecipeTimer) {
-                    NavigationLink(destination: {BakingStepListView(recipeTimer: binding)}) {
-                        Text("Bake")
-                            .font(.title2)
-                            .foregroundColor(Color.blue)
+                if startNow != nil {
+                    ZStack {
+                        Button(action: {
+                            startNow == .future ? store.futureRecipeTimer(finishTime: finishBread) :
+                            store.newRecipeTimer()
+                        }) {
+                            Text("Bake")
+                                .font(.title2)
+                                .foregroundColor(Color.blue)
+                        }
+                        if let binding = Binding($store.activeRecipeTimer) {
+                            NavigationLink(destination: BakingStepListView(recipeTimer: binding)) { EmptyView()}
+                        }
                     }
                 }
             
             }
         }
         .navigationTitle("Baking Summary")
-        .onChange(of: startNow, perform: {value in
-            if value == .now {
-            store.newRecipeTimer()
-        }})
         .onDisappear(perform: {saveAction()})
         .onChange(of: scenePhase) { phase in
             if phase == .inactive {saveAction()}
