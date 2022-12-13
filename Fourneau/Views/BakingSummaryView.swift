@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BakingSummaryView: View {
     @ObservedObject var store: BakingStore
+    @Binding var tabSelection: Int
     
     @Environment(\.scenePhase) private var scenePhase
     @State private var startNow: BakeTime?
@@ -42,34 +43,22 @@ struct BakingSummaryView: View {
                         Text("Future").tag(BakeTime.future as BakeTime?)
                     }
                     .pickerStyle(SegmentedPickerStyle())
-                    .onChange(of: startNow, perform: {value in
-                        if value == .now {
-                            store.newRecipeTimer()
-                        }
-                    })
                     
                     if startNow == .future {
                         DatePicker("Finish:", selection: $finishBread, in:Date.now...)
-                            .onChange(of: finishBread, perform: { value in store.futureRecipeTimer(finishTime: finishBread)
-                            })
                     }
                 }
                 if startNow != nil {
-                    ZStack {
-                        Button(action: {
-                            startNow == .future ? store.futureRecipeTimer(finishTime: finishBread) :
-                            store.newRecipeTimer()
-                        }) {
-                            Text("Bake")
-                                .font(.title2)
-                                .foregroundColor(Color.blue)
-                        }
-                        if let binding = Binding($store.activeRecipeTimer) {
-                            NavigationLink(destination: BakingStepListView(recipeTimer: binding)) { EmptyView()}
-                        }
+                    Button(action: {
+                        startNow == .future ? store.futureRecipeTimer(finishTime: finishBread) :
+                        store.newRecipeTimer()
+                        self.tabSelection = 2
+                    }) {
+                        Text("Bake")
+                            .font(.title2)
+                            .foregroundColor(Color.blue)
                     }
                 }
-            
             }
         }
         .navigationTitle("Baking Summary")
@@ -84,7 +73,7 @@ struct BakingSummaryView_Previews: PreviewProvider {
     struct BindingTestHolder: View {
         @StateObject var store = BakingStore()
         var body: some View {
-            BakingSummaryView(store: store, saveAction: {})
+            BakingSummaryView(store: store, tabSelection: .constant(1), saveAction: {})
         }
     }
     static var previews: some View {

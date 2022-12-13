@@ -14,11 +14,13 @@ struct FourneauApp: App {
     @StateObject var localNotificationCenter = LocalNotificationManager()
     @StateObject private var store = BakingStore()
     
+    @State private var tabSelection = 1
+    
     var body: some Scene {
         WindowGroup {
-            TabView {
+            TabView(selection: $tabSelection) {
                 NavigationView{
-                    BakingSummaryView(store: store) {
+                    BakingSummaryView(store: store, tabSelection: $tabSelection) {
                         Task {
                             do {
                                 try await BakingStore.save(store: store.storeData)
@@ -31,6 +33,18 @@ struct FourneauApp: App {
                     Image(systemName: "list.bullet")
                     Text("Bread Recipes")
                 }
+                .tag(1)
+                NavigationView{
+                    if let binding = Binding($store.activeRecipeTimer) {
+                        BakingStepListView(recipeTimer: binding)
+                    } else {
+                        EmptyActiveRecipe(tabSelection: $tabSelection)
+                    }
+                    
+                }.tabItem {
+                    Image(systemName: "stove")
+                    Text("Active Recipe")
+                }.tag(2)
                 NavigationView{
                 }
                 .tabItem {

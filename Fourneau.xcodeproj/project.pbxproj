@@ -36,6 +36,7 @@
 		676B40D829428C1A00E42FA0 /* CompletedRecipeTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40D729428C1A00E42FA0 /* CompletedRecipeTimer.swift */; };
 		67F32CFC294788090043A4FF /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F32CFB294788090043A4FF /* LocalNotificationManager.swift */; };
 		67F32CFE29478E680043A4FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F32CFD29478E680043A4FF /* AppDelegate.swift */; };
+		67F32D002948945E0043A4FF /* EmptyActiveRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F32CFF2948945E0043A4FF /* EmptyActiveRecipe.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,7 @@
 		676B40D729428C1A00E42FA0 /* CompletedRecipeTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedRecipeTimer.swift; sourceTree = "<group>"; };
 		67F32CFB294788090043A4FF /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		67F32CFD29478E680043A4FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		67F32CFF2948945E0043A4FF /* EmptyActiveRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyActiveRecipe.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +207,7 @@
 				676B40CB2940F4ED00E42FA0 /* EditRecipeView.swift */,
 				676B40CD294100C500E42FA0 /* RecipeDetailView.swift */,
 				676B40D32942714700E42FA0 /* BakingSummaryView.swift */,
+				67F32CFF2948945E0043A4FF /* EmptyActiveRecipe.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 				676B40BA29353A5900E42FA0 /* RecipeTimer.swift in Sources */,
 				676B40B6293528AD00E42FA0 /* BreadRecipeMethod.swift in Sources */,
 				676B40BE293E8DFE00E42FA0 /* TimeCard.swift in Sources */,
+				67F32D002948945E0043A4FF /* EmptyActiveRecipe.swift in Sources */,
 				676B40C82940E66F00E42FA0 /* BreadRecipeListView.swift in Sources */,
 				676B40C6293FBDE000E42FA0 /* EditStepView.swift in Sources */,
 				676B40B429351EBB00E42FA0 /* BakingStepListView.swift in Sources */,
