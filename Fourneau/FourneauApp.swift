@@ -28,29 +28,38 @@ struct FourneauApp: App {
                         }
                     }
                 }
-                .environmentObject(localNotificationCenter)
                 .tabItem {
                     Image(systemName: "list.bullet")
                     Text("Bread Recipes")
                 }
                 .tag(1)
+                
                 NavigationView{
                     if let binding = Binding($store.activeRecipeTimer) {
                         BakingStepListView(recipeTimer: binding)
+                            .environmentObject(localNotificationCenter)
                     } else {
                         EmptyActiveRecipe(tabSelection: $tabSelection)
                     }
-                    
                 }.tabItem {
                     Image(systemName: "stove")
                     Text("Active Recipe")
                 }.tag(2)
+                
                 NavigationView{
                 }
                 .tabItem {
                     Image(systemName: "mountain.2")
                     Text("Recipe Calculator")
-                }
+                }.tag(3)
+                
+                NavigationView{
+                    Link("Shop Forneau", destination: URL(string:"https://www.fourneauoven.com/")!)
+                        .font(.title)
+                }.tabItem {
+                    Image(systemName: "frying.pan")
+                    Text("Shop")
+                }.tag(4)
             }
             .task {
                 do {
