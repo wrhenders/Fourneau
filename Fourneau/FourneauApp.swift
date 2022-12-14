@@ -35,7 +35,7 @@ struct FourneauApp: App {
                 .tag(1)
                 
                 NavigationView{
-                    if let binding = Binding($store.activeRecipeTimer) {
+                    if let binding = Binding($store.storeData.activeRecipeTimer) {
                         BakingStepListView(recipeTimer: binding, tabSelection: $tabSelection)
 
                     } else {

@@ -16,19 +16,19 @@ struct LocalStore: Identifiable, Codable {
     var methodList: [BreadRecipeMethod] = [BreadRecipeMethod()]
     var chosenMethod: BreadRecipeMethod = BreadRecipeMethod()
     
+    var activeRecipeTimer: CompletedRecipeTimer?
 }
 
 class BakingStore: ObservableObject {
     @Published var storeData: LocalStore = LocalStore()
-    
-    @Published var activeRecipeTimer: CompletedRecipeTimer?
+
     
     func newRecipeTimer() {
-        activeRecipeTimer = CompletedRecipeTimer(steps: storeData.chosenMethod.steps, recipe: storeData.chosenRecipe)
+        storeData.activeRecipeTimer = CompletedRecipeTimer(steps: storeData.chosenMethod.steps, recipe: storeData.chosenRecipe)
     }
     
     func futureRecipeTimer(finishTime: Date) {
-        activeRecipeTimer = CompletedRecipeTimer(steps: storeData.chosenMethod.steps, recipe: storeData.chosenRecipe, finishTime: finishTime)
+        storeData.activeRecipeTimer = CompletedRecipeTimer(steps: storeData.chosenMethod.steps, recipe: storeData.chosenRecipe, finishTime: finishTime)
     }
     
     private static func fileURL() throws -> URL {

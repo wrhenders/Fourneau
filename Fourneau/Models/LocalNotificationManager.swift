@@ -14,9 +14,9 @@ class LocalNotificationManager: ObservableObject {
     init() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
             if granted == true && error == nil {
-                print("Notifications permitted")
+                //print("Notifications permitted")
             } else {
-                print("Notifications not permitted")
+                //print("Notifications not permitted")
             }
         }
     }

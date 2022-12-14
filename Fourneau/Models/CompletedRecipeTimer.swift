@@ -30,10 +30,6 @@ struct CompletedRecipeTimer: Codable, Identifiable {
         self.recipe = recipe
         self.endTime = Date(timeInterval: (Double(self.totalMinutes) * 60), since: self.startTime)
         self.setupMethod(futureTime: nil)
-        print("Total Min: \(totalMinutes)")
-        print("Now Start Time: \(startTime)")
-        print("Now End Time: \(endTime)")
-        print("Diff: \(endTime.timeIntervalSince(startTime) / 60)")
     }
     
     init(steps: [BakingStep], recipe: BreadRecipe, finishTime: Date) {
@@ -42,10 +38,6 @@ struct CompletedRecipeTimer: Codable, Identifiable {
         self.recipe = recipe
         self.endTime = finishTime
         self.setupMethod(futureTime: finishTime)
-        print("Total Min: \(totalMinutes)")
-        print("Future Start Time: \(startTime)")
-        print("Future End Time: \(endTime)")
-        print("Diff: \(endTime.timeIntervalSince(startTime) / 60)")
     }
     
     mutating func setupMethod(futureTime: Date?) {
