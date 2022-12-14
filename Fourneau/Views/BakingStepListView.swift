@@ -64,7 +64,8 @@ struct BakingStepListView: View {
             }
         }
         .onAppear {
-            if notificationManager.notifications.isEmpty {
+            visibleIndex = recipeTimer.currentStep
+            if notificationManager.notifications.isEmpty && recipeTimer.currentStep != recipeTimer.steps.count - 1 {
                 addNotification(fromStepIndex: visibleIndex)
             }
         }

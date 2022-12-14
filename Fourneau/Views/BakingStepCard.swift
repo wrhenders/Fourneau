@@ -44,7 +44,13 @@ struct BakingStepCard: View {
             Divider()
             Label("Started: \(startTime.formatted(date: .omitted, time: .shortened))", systemImage: "clock")
                 .frame(maxWidth: .infinity, alignment: .leading)
-            Spacer()
+            if bakingStep.temp != nil {
+                Label("Temp: \(bakingStep.temp!) F", systemImage: "thermometer.medium")
+                    .fontWeight(.bold)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+            } else {
+                Spacer()
+            }
             Image(bakingStep.type.name)
                 .resizable()
                 .scaledToFit()
@@ -82,6 +88,6 @@ struct BakingStepCard: View {
 
 struct BakingStepCard_Previews: PreviewProvider {
     static var previews: some View {
-        BakingStepCard(bakingStep: .constant(BakingStep.sampleData[0]),completed: false, current: true, startTime: Date(), nextAction: {})
+        BakingStepCard(bakingStep: .constant(BreadRecipeMethod().steps[0]),completed: false, current: true, startTime: Date(), nextAction: {})
     }
 }

@@ -14,13 +14,15 @@ struct BakingStep: Identifiable, Codable, Hashable {
     var lengthInMinutes: Int
     var description: [String]
     var methodCompleted: [Bool]
+    var temp: Int?
     var type: BakingStepType
     
-    init(id: UUID = UUID(), title: String, startingTime: Date = Date(), lengthInMinutes: Int, description: [String] = [], type: BakingStepType) {
+    init(id: UUID = UUID(), title: String, startingTime: Date = Date(), lengthInMinutes: Int, description: [String] = [], temp: Int? = nil, type: BakingStepType) {
         self.id = id
         self.title = title
         self.lengthInMinutes = lengthInMinutes < 0 ? 0 : lengthInMinutes
         self.description = description.count > 0 ? description : type.description
+        self.temp = temp
         self.type = type
         self.methodCompleted = [Bool](repeating: false, count: self.description.count)
     }
@@ -34,11 +36,12 @@ struct BakingStep: Identifiable, Codable, Hashable {
         var title: String = ""
         var lengthInMinutes: Int = 0
         var description: [String] = []
+        var temp: Int? = nil
         var type: BakingStepType = .proof
     }
     
     var data: Data {
-        Data(title: title, lengthInMinutes: lengthInMinutes, description: description, type: type)
+        Data(title: title, lengthInMinutes: lengthInMinutes, description: description, temp: temp, type: type)
     }
     
     init(data: Data) {
@@ -46,6 +49,7 @@ struct BakingStep: Identifiable, Codable, Hashable {
         title = data.title
         lengthInMinutes = data.lengthInMinutes < 0 ? 0 : data.lengthInMinutes
         description = data.description.count > 0 ? data.description : data.type.description
+        temp = data.temp
         type = data.type
         methodCompleted = [Bool](repeating: false, count: self.description.count)
     }
@@ -54,6 +58,7 @@ struct BakingStep: Identifiable, Codable, Hashable {
         title = data.title
         lengthInMinutes = data.lengthInMinutes
         description = data.description
+        temp = data.temp
         type = data.type
     }
 }
@@ -63,6 +68,6 @@ extension BakingStep {
     [
         BakingStep(title: "Feed Starter", lengthInMinutes: 60, type: .feedstarter),
         BakingStep(title: "Make Dough", lengthInMinutes: 15, description: ["Follow These Steps: \n","(Insert Recipe)"], type: .makedough),
-        BakingStep(title: "Proof", lengthInMinutes: 15, description: ["Let mixture rise", "Fold", "Let rise again"], type: .proof)
+        BakingStep(title: "Proof", lengthInMinutes: 15, description: ["Let mixture rise", "Fold", "Let rise again"], temp: 90, type: .proof)
     ]
 }

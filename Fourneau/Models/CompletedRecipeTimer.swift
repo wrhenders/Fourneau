@@ -51,8 +51,14 @@ struct CompletedRecipeTimer: Codable, Identifiable {
     mutating func setupMethod(futureTime: Date?) {
         if steps.count > 0 {
             if let makeOffset = steps.firstIndex(where: {$0.type == .makedough}) {
-                let oldData = steps[makeOffset].data
-                steps[makeOffset] = BakingStep(title: oldData.title, lengthInMinutes: oldData.lengthInMinutes, description: recipe.method, type: .makedough)
+                var data = steps[makeOffset].data
+                data.description = recipe.method
+                steps[makeOffset] = BakingStep(data: data)
+            }
+            if let bakeOffset = steps.firstIndex(where: {$0.type == .bake}) {
+                var data = steps[bakeOffset].data
+                data.temp = recipe.bakeTempF
+                steps[bakeOffset] = BakingStep(data: data)
             }
             if futureTime != nil {
                 let waitTime = Int(endTime.timeIntervalSince(startTime) / 60) - totalMinutes

@@ -39,8 +39,8 @@ extension BreadRecipeMethod {
         self.id = UUID()
         self.title = title
         self.steps = [
-            BakingStep(title: "Feed Starter", lengthInMinutes: 360, type: .feedstarter),
-            BakingStep(title: "Feed Starter Again", lengthInMinutes: 240, type: .feedstarter),
+            BakingStep(title: "Feed Starter", lengthInMinutes: 360, temp: 90, type: .feedstarter),
+            BakingStep(title: "Feed Starter Again", lengthInMinutes: 240, temp: 90, type: .feedstarter),
             BakingStep(title: "Mix Dough", lengthInMinutes: 5, type: .makedough),
             BakingStep(title: "Proof/Rest Dough", lengthInMinutes: 600, type: .proof),
             BakingStep(title: "Bench Rest", lengthInMinutes: 15, type: .benchrest),

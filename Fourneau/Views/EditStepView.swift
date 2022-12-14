@@ -21,6 +21,10 @@ struct EditStepView: View {
                     TextField("Min", value: $step.lengthInMinutes, format:.number)
                 }
                 HStack {
+                    Text("Temp?:")
+                    TextField("Temp", value: $step.temp, format:.number)
+                }
+                HStack {
                     Text("Step Type:")
                     Spacer()
                     StepTypePicker(type: $step.type)
