@@ -22,21 +22,26 @@ struct BakingMethodDetailView: View {
             }
             Section(header: Text("Baking Steps")){
                 ForEach(breadMethodData.steps, id: \.self.id) { step in
+                    HStack {
                         VStack {
-                            Button(action:{
-                                data = step.data
-                                updateId = step.id
-                                isPresentingEditView = true
-                            }) {
-                                Text(step.title)
-                                    .font(.title3)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                            }
+                                Button(action:{
+                                    data = step.data
+                                    updateId = step.id
+                                    isPresentingEditView = true
+                                }) {
+                                    Text(step.title)
+                                        .font(.title3)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                }
+
                         HStack {
                             Text("Minutes: \(Int(step.lengthInMinutes))")
                             Spacer()
                             Text("Type: \(step.type.title)")
                         }
+                    }
+                        Image(systemName: "line.3.horizontal")
+                            .padding(.trailing, -6)
                     }
                 }
                 .onMove(perform: move)
