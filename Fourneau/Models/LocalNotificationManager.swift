@@ -21,6 +21,10 @@ class LocalNotificationManager: ObservableObject {
         }
     }
     
+    func removeNotifications() {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+    }
+    
     func sendNotification(title: String, body: String, launchIn: Double) {
         let content = UNMutableNotificationContent()
         content.title = title

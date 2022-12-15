@@ -18,6 +18,7 @@ struct CompletedRecipeTimer: Codable, Identifiable {
     var nextAction: Date?
     var currentStep: Int = 0
     var endTime: Date = Date()
+    var recipeCompleted: Bool = false
     var totalMinutes: Int {
         steps.count > 0 ?
             steps.map({$0.lengthInMinutes}).reduce(0, +) :
@@ -85,5 +86,36 @@ struct CompletedRecipeTimer: Codable, Identifiable {
             currentStep += 1
             nextAction = Date(timeInterval: TimeInterval(steps[currentStep].lengthInMinutes * 60), since: Date())
         }
+    }
+    
+    func getStepArray() -> [BakingStep] {
+        var cleanSteps: [BakingStep] = []
+        
+        for (index, step) in steps.enumerated() {
+            let stepLength = startArray.indices.contains(index + 1) ?
+                Int(startArray[index + 1].timeIntervalSince(startArray[index]) / 60) :
+                0
+            
+            switch step.type {
+            case .wait, .done:
+                continue
+            case .makedough:
+                var data = steps[index].data
+                data.description = []
+                data.lengthInMinutes = stepLength
+                cleanSteps.append(BakingStep(data: data))
+            case .bake:
+                var data = steps[index].data
+                data.temp = nil
+                data.lengthInMinutes = stepLength
+                cleanSteps.append(BakingStep(data: data))
+            default:
+                var data = steps[index].data
+                data.lengthInMinutes = stepLength
+                cleanSteps.append(BakingStep(data: data))
+            }
+        }
+        
+        return cleanSteps
     }
 }

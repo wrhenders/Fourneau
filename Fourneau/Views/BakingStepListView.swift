@@ -9,10 +9,18 @@ import SwiftUI
 
 struct BakingStepListView: View {
     @Binding var recipeTimer: CompletedRecipeTimer
+    @ObservedObject var store: BakingStore
     @Binding var tabSelection: Int
     
     @State var visibleIndex: Int = 0
+    
+    @State private var showingAlert = false
+    
+    @State private var isPresentingDetailView = false
+    @State private var data = BreadRecipeMethod.Data()
+    
     @EnvironmentObject var notificationManager: LocalNotificationManager
+    @Environment(\.dismiss) var dismiss
     
     func nextStep(currentIndex index: Int) {
         if index + 1 < recipeTimer.steps.count {
@@ -21,9 +29,15 @@ struct BakingStepListView: View {
             addNotification(fromStepIndex: visibleIndex)
         }
         if index + 1 == recipeTimer.steps.count {
-            tabSelection = 1
-            visibleIndex = 0
+            showingAlert = true
         }
+    }
+    
+    func done() {
+        notificationManager.removeNotifications()
+        recipeTimer.recipeCompleted = true
+        tabSelection = 1
+        dismiss()
     }
     
     func addNotification(fromStepIndex index: Int) {
@@ -38,14 +52,13 @@ struct BakingStepListView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                TimeCard(text: "Start Time:", time: "\(recipeTimer.startTime.formatted(date: .omitted, time: .shortened))", color: .green)
-                TimeCard(text: "Next Action:", time: "\(recipeTimer.nextAction?.formatted(date: .omitted, time: .shortened) ?? "TBD")", color: .cyan)
-            }
+            TimeCard(text: "Next Action:", time: "\(recipeTimer.nextAction?.formatted(date: .omitted, time: .shortened) ?? "TBD")", color: .cyan)
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .padding(.trailing)
             
             SnapCarousel(index: $visibleIndex, length: recipeTimer.steps.count) {
                     ForEach(recipeTimer.steps.indices, id: \.self) { index in
-                        BakingStepCard(bakingStep: $recipeTimer.steps[index], completed: recipeTimer.stepCompleted[index], current: index == recipeTimer.currentStep, startTime: recipeTimer.startArray[index]) {self.nextStep(currentIndex: index)}
+                        BakingStepCard(bakingStep: $recipeTimer.steps[index], completed: recipeTimer.stepCompleted[index], current: index == recipeTimer.currentStep, last: index == recipeTimer.steps.count - 1, startTime: recipeTimer.startArray[index]) {self.nextStep(currentIndex: index)}
                     }
                 }
             
@@ -71,15 +84,49 @@ struct BakingStepListView: View {
         }
         .navigationTitle("Recipe Steps")
         .navigationBarTitleDisplayMode(.inline)
+        .alert(isPresented: $showingAlert){
+            Alert(
+                title: Text("Save the method and times of this bake?"),
+                message: Text("Wouldja?"),
+                primaryButton: .destructive(Text("Nah")) {
+                    done()
+                },
+                secondaryButton: .default(Text("Yes!")) {
+                    data = BreadRecipeMethod(title: "", steps: recipeTimer.getStepArray()).data
+                    isPresentingDetailView = true
+                }
+            )
+        }
+        .sheet(isPresented: $isPresentingDetailView) {
+            NavigationView {
+                BakingMethodDetailView(breadMethodData: $data)
+                    .toolbar {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Cancel") {
+                                isPresentingDetailView = false
+                                done()
+                            }
+                        }
+                        ToolbarItem(placement: .confirmationAction) {
+                            Button("Done") {
+                                let newMethod = BreadRecipeMethod(data: data)
+                                store.storeData.methodList.append(newMethod)
+                                isPresentingDetailView = false
+                                done()
+                            }
+                        }
+                    }
+            }
+        }
     }
 }
 
 struct BakingStepList_Previews: PreviewProvider {
     struct BindingTestHolder: View {
         @State var completeMethod = CompletedRecipeTimer(steps: BreadRecipeMethod().steps, recipe: BreadRecipe.sampleRecipe)
-
+        @StateObject var store = BakingStore()
         var body: some View {
-            BakingStepListView(recipeTimer: $completeMethod, tabSelection: .constant(1))
+            BakingStepListView(recipeTimer: $completeMethod, store: store, tabSelection: .constant(1))
         }
     }
     static var previews: some View {

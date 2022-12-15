@@ -11,6 +11,7 @@ struct BakingStepCard: View {
     @Binding var bakingStep: BakingStep
     let completed: Bool
     let current: Bool
+    let last: Bool
     let startTime: Date
     let nextAction: () -> Void
     
@@ -75,7 +76,9 @@ struct BakingStepCard: View {
                         Button(action: {
                             nextAction()
                         }) {
-                            Text("Next")
+                            self.last ?
+                                Text("Done") :
+                                Text("Next")
                             Image(systemName: "chevron.right")
                         }
                         .frame(maxWidth: .infinity, alignment: .trailing)
@@ -94,6 +97,6 @@ struct BakingStepCard: View {
 
 struct BakingStepCard_Previews: PreviewProvider {
     static var previews: some View {
-        BakingStepCard(bakingStep: .constant(BreadRecipeMethod().steps[0]),completed: false, current: true, startTime: Date(), nextAction: {})
+        BakingStepCard(bakingStep: .constant(BreadRecipeMethod().steps[0]),completed: false, current: true, last: true, startTime: Date(), nextAction: {})
     }
 }
