@@ -21,8 +21,9 @@ struct EditStepView: View {
                     TextField("Min", value: $step.lengthInMinutes, format:.number)
                 }
                 HStack {
-                    Text("Temp?:")
+                    Text("Temp Needed?:")
                     TextField("Temp", value: $step.temp, format:.number)
+                    Text("\u{00BA} F")
                 }
                 HStack {
                     Text("Step Type:")

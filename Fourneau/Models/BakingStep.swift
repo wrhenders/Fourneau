@@ -37,7 +37,7 @@ struct BakingStep: Identifiable, Codable, Hashable {
         var lengthInMinutes: Int = 0
         var description: [String] = []
         var temp: Int? = nil
-        var type: BakingStepType = .proof
+        var type: BakingStepType = .feedstarter
     }
     
     var data: Data {

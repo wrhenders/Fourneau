@@ -36,53 +36,59 @@ struct BakingStepCard: View {
     }
     
     var body: some View {
-        VStack(spacing:8) {
-            Text(bakingStep.title)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .font(.largeTitle)
-                .foregroundColor(.black)
-            Divider()
-            Label("Started: \(startTime.formatted(date: .omitted, time: .shortened))", systemImage: "clock")
-                .frame(maxWidth: .infinity, alignment: .leading)
-            if bakingStep.temp != nil {
-                Label("Temp: \(bakingStep.temp!) F", systemImage: "thermometer.medium")
-                    .fontWeight(.bold)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-            } else {
-                Spacer()
-            }
-            Image(bakingStep.type.name)
-                .resizable()
-                .scaledToFit()
-            Spacer()
-            Divider()
-            ForEach(bakingStep.description.indices, id: \.self) { index in
-                Text("\u{2022} " + bakingStep.description[index])
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .strikethrough(bakingStep.methodCompleted[index])
-                    .onTapGesture {
-                        bakingStep.methodCompleted[index].toggle()
-                    }
-                Divider()
-            }
-            Spacer()
-            HStack{
-                Text("Length: \(timeDisplay(bakingStep.lengthInMinutes))")
-                Button(action: {
-                    nextAction()
-                }) {
-                    Text("Next")
-                    Image(systemName: "chevron.right")
+        GeometryReader { proxy in
+            VStack {
+                ZStack(alignment: .topTrailing){
+                    Image(bakingStep.type.name)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                    Text(bakingStep.title)
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .padding(16)
                 }
-                .frame(maxWidth: .infinity, alignment: .trailing)
-                .disabled(!current)
+                VStack(spacing: 8) {
+                    HStack {
+                        Label("Started: \(startTime.formatted(date: .omitted, time: .shortened))", systemImage: "clock")
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        if bakingStep.temp != nil {
+                            Label("Temp: \(bakingStep.temp!) F", systemImage: "thermometer.medium")
+                                .fontWeight(.bold)
+                                .frame(maxWidth: .infinity, alignment: .trailing)
+                        }
+                    }
+                    Divider()
+                    Spacer()
+                    ForEach(bakingStep.description.indices, id: \.self) { index in
+                        Text("\u{2022} " + bakingStep.description[index])
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .strikethrough(bakingStep.methodCompleted[index])
+                            .onTapGesture {
+                                bakingStep.methodCompleted[index].toggle()
+                            }
+                    }
+                    Spacer()
+                    Divider()
+                    HStack{
+                        Text("Length: \(timeDisplay(bakingStep.lengthInMinutes))")
+                        Button(action: {
+                            nextAction()
+                        }) {
+                            Text("Next")
+                            Image(systemName: "chevron.right")
+                        }
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .disabled(!current)
+                    }
+                    .padding(.bottom)
+                }
+                .padding(.horizontal, 16)
             }
+            .background(Color.white)
+            .clipShape(RoundedRectangle(cornerRadius: 24))
+            .shadow(color: getShadowColor(), radius: 8)
         }
-        .padding(16)
-        .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 24))
-        .shadow(color: getShadowColor(), radius: 8)
-        
     }
 }
 

@@ -55,7 +55,7 @@ struct SnapCarousel<Content: View>: View {
                         index = currentIndex
                     })
             )
-            .animation(.easeInOut, value: index)
+            .animation(.easeInOut(duration: 0.6), value: index)
         }
     }
 }

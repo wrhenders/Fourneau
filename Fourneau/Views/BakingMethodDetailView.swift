@@ -12,7 +12,7 @@ struct BakingMethodDetailView: View {
     
     @State private var isPresentingEditView = false
     @State private var data = BakingStep.Data()
-    @State private var updateIndex = 0
+    @State private var updateId: UUID?
     
     var body: some View {
         List {
@@ -21,11 +21,11 @@ struct BakingMethodDetailView: View {
                     .font(.headline)
             }
             Section(header: Text("Baking Steps")){
-                ForEach(Array(breadMethodData.steps.enumerated()), id: \.element) { index, step in
+                ForEach(breadMethodData.steps, id: \.self.id) { step in
                         VStack {
                             Button(action:{
                                 data = step.data
-                                updateIndex = index
+                                updateId = step.id
                                 isPresentingEditView = true
                             }) {
                                 Text(step.title)
@@ -44,8 +44,9 @@ struct BakingMethodDetailView: View {
                     breadMethodData.steps.remove(atOffsets: indicies)
                 }
                 Button(action: {
-                    breadMethodData.steps.append(BakingStep(data: data))
-                    updateIndex = breadMethodData.steps.count - 1
+                    let newStep = BakingStep(data: data)
+                    updateId = newStep.id
+                    breadMethodData.steps.append(newStep)
                     isPresentingEditView = true
                     
                 }) {
@@ -65,12 +66,11 @@ struct BakingMethodDetailView: View {
                         }
                         ToolbarItem(placement: .confirmationAction) {
                             Button("Done") {
+                                let newStep = BakingStep(data: data)
+                                breadMethodData.steps = breadMethodData.steps.map { $0.id == updateId ? newStep : $0 }
                                 isPresentingEditView = false
-                                if breadMethodData.steps.indices.contains(updateIndex) {
-                                    breadMethodData.steps[updateIndex] = BakingStep(data: data)
-                                }
                                 data = BakingStep.Data()
-                                updateIndex = 0
+                                updateId = nil
                             }
                         }
                     }

@@ -19,7 +19,7 @@ struct BreadRecipeMethod: Codable, Identifiable, Equatable, Hashable {
     }
     
     struct Data {
-        var title: String = "Edit"
+        var title: String = ""
         var steps: [BakingStep] = []
     }
     

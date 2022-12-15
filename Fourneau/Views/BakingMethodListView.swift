@@ -13,36 +13,37 @@ struct BakingMethodListView: View {
     
     @State var isPresentingDetailView = false
     @State var data = BreadRecipeMethod.Data()
-    @State private var updateIndex = 0
+    @State private var updateId: UUID?
     
     var body: some View {
         
         List {
-            ForEach(Array(bakingMethodList.enumerated()), id:\.element) {index, methodRow in
+            ForEach(bakingMethodList, id:\.self.id) { row in
                 HStack{
                     HStack{
-                        Text(methodRow.title)
+                        Text(row.title)
                             .font(.title2)
                         Spacer()
                     }
                     .contentShape(Rectangle())
                     .onTapGesture {
-                        chosenMethod = methodRow
+                        chosenMethod = row
                     }
                     Button("Details") {
-                        updateIndex = index
-                        data = methodRow.data
+                        updateId = row.id
+                        data = row.data
                         isPresentingDetailView = true
                     }
                 }
-                .listRowBackground(chosenMethod == methodRow ? Color(red: 237/255, green: 213/255, blue: 140/255) : Color.white)
+                .listRowBackground(chosenMethod == row ? Color(red: 237/255, green: 213/255, blue: 140/255) : Color.white)
             }
             .onDelete { indicies in
                 bakingMethodList.remove(atOffsets: indicies)
             }
             Button(action: {
-                bakingMethodList.append(BreadRecipeMethod(data:data))
-                updateIndex = bakingMethodList.count - 1
+                let newMethod = BreadRecipeMethod(data: data)
+                updateId = newMethod.id
+                bakingMethodList.append(newMethod)
                 isPresentingDetailView = true
             }) {
                 Label("Add New Method", systemImage: "plus.circle.fill")
@@ -62,12 +63,11 @@ struct BakingMethodListView: View {
                         }
                         ToolbarItem(placement: .confirmationAction) {
                             Button("Done") {
+                                let newMethod = BreadRecipeMethod(data: data)
+                                bakingMethodList = bakingMethodList.map { $0.id == updateId ? newMethod : $0 }
                                 isPresentingDetailView = false
-                                if bakingMethodList.indices.contains(updateIndex) {
-                                    bakingMethodList[updateIndex] = BreadRecipeMethod(data: data)
-                                }
                                 data = BreadRecipeMethod.Data()
-                                updateIndex = 0
+                                updateId = nil
                             }
                         }
                     }
