@@ -9,6 +9,10 @@ import SwiftUI
 
 struct RecipeDetailView: View {
     @Binding var recipe: BreadRecipe
+    
+    @EnvironmentObject var appState: AppState
+    @EnvironmentObject var store: BakingStore
+    
     @State private var isRecipeEditViewShown = false
     @State private var data = BreadRecipe.Data()
     
@@ -32,6 +36,14 @@ struct RecipeDetailView: View {
                         ForEach(recipe.method, id: \.self) {line in
                             Text(line)
                         }
+                    }
+                    HStack{
+                        Button("Choose") {
+                            store.storeData.chosenRecipe = recipe
+                            appState.rootViewId = UUID()
+                        }
+                        Spacer()
+                        Image(systemName: "chevron.right")
                     }
                 }
                 .padding(.horizontal, 20)
@@ -70,8 +82,13 @@ struct RecipeDetailView: View {
 struct RecipeDetailView_Previews: PreviewProvider {
     struct BindingTestHolder: View {
         @State var breadRecipe = BreadRecipe.sampleRecipe
+        @StateObject var store = BakingStore()
+        @StateObject var appState = AppState()
+        
         var body: some View {
             RecipeDetailView(recipe: $breadRecipe)
+                .environmentObject(appState)
+                .environmentObject(store)
         }
     }
     static var previews: some View {

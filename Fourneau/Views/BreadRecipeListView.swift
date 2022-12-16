@@ -19,12 +19,8 @@ struct BreadRecipeListView: View {
             Section{
                 ForEach($recipeList) { $recipeRow in
                     ZStack(alignment: .leading) {
-                        RecipeRow(recipe: recipeRow)
-                            .onTapGesture {
-                                recipe = recipeRow
-                            }
                         NavigationLink(destination: RecipeDetailView(recipe: $recipeRow)) {
-                            EmptyView()
+                            RecipeRow(recipe: recipeRow)
                         }
                     }
                     .listRowBackground(recipe == recipeRow ? Color(red: 237/255, green: 213/255, blue: 140/255) : Color.white)

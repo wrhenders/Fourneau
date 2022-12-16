@@ -11,7 +11,6 @@ struct BakingMethodListView: View {
     @Binding var chosenMethod: BreadRecipeMethod
     @Binding var bakingMethodList: [BreadRecipeMethod]
     
-    
     @State private var addingMethod = false
     @State var data = BreadRecipeMethod.Data()
     

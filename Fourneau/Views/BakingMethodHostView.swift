@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BakingMethodHostView: View {
     @Binding var method: BreadRecipeMethod
+    
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var store: BakingStore
     
