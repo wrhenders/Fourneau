@@ -18,6 +18,10 @@ struct BreadRecipeMethod: Codable, Identifiable, Equatable, Hashable {
         self.steps = steps
     }
     
+    var totalTime: Int {
+        return steps.map{$0.lengthInMinutes}.reduce(0,+)
+    }
+    
     struct Data {
         var title: String = ""
         var steps: [BakingStep] = []

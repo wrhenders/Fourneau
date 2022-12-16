@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct BakingSummaryView: View {
-    @ObservedObject var store: BakingStore
-    @Binding var tabSelection: Int
+    @EnvironmentObject var store: BakingStore
+    @EnvironmentObject var appState: AppState
     
     @Environment(\.scenePhase) private var scenePhase
     @State private var startNow: BakeTime?
@@ -55,7 +55,7 @@ struct BakingSummaryView: View {
                     Button(action: {
                         startNow == .future ? store.futureRecipeTimer(finishTime: finishBread) :
                         store.newRecipeTimer()
-                        self.tabSelection = 2
+                        appState.tabSelection = 2
                     }) {
                         Text("Bake")
                             .font(.title2)
@@ -78,8 +78,12 @@ struct BakingSummaryView: View {
 struct BakingSummaryView_Previews: PreviewProvider {
     struct BindingTestHolder: View {
         @StateObject var store = BakingStore()
+        @StateObject var appState = AppState()
+        
         var body: some View {
-            BakingSummaryView(store: store, tabSelection: .constant(1), saveAction: {})
+            BakingSummaryView(saveAction: {})
+                .environmentObject(store)
+                .environmentObject(appState)
         }
     }
     static var previews: some View {

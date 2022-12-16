@@ -21,7 +21,7 @@
 		676B40B829352FD200E42FA0 /* BreadRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40B729352FD200E42FA0 /* BreadRecipe.swift */; };
 		676B40BC2938FF7200E42FA0 /* SnapCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40BB2938FF7200E42FA0 /* SnapCarousel.swift */; };
 		676B40BE293E8DFE00E42FA0 /* TimeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40BD293E8DFE00E42FA0 /* TimeCard.swift */; };
-		676B40C0293F9B6F00E42FA0 /* BakingMethodDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40BF293F9B6F00E42FA0 /* BakingMethodDetailView.swift */; };
+		676B40C0293F9B6F00E42FA0 /* BakingMethodEditDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40BF293F9B6F00E42FA0 /* BakingMethodEditDetailView.swift */; };
 		676B40C2293F9DB300E42FA0 /* StepTypePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40C1293F9DB300E42FA0 /* StepTypePicker.swift */; };
 		676B40C6293FBDE000E42FA0 /* EditStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40C5293FBDE000E42FA0 /* EditStepView.swift */; };
 		676B40C82940E66F00E42FA0 /* BreadRecipeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40C72940E66F00E42FA0 /* BreadRecipeListView.swift */; };
@@ -35,6 +35,9 @@
 		676B40D829428C1A00E42FA0 /* CompletedRecipeTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40D729428C1A00E42FA0 /* CompletedRecipeTimer.swift */; };
 		6793CAA8294CC19100CB395F /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793CAA7294CC19100CB395F /* Color.swift */; };
 		6793CAAA294CC58A00CB395F /* NavigationBarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793CAA9294CC58A00CB395F /* NavigationBarExtensions.swift */; };
+		6793CAAC294CE63700CB395F /* BakingMethodHostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793CAAB294CE63700CB395F /* BakingMethodHostView.swift */; };
+		6793CAAE294CFFB600CB395F /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793CAAD294CFFB600CB395F /* AppState.swift */; };
+		6793CAB0294D0CFF00CB395F /* MinToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793CAAF294D0CFF00CB395F /* MinToString.swift */; };
 		67F32CFC294788090043A4FF /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F32CFB294788090043A4FF /* LocalNotificationManager.swift */; };
 		67F32CFE29478E680043A4FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F32CFD29478E680043A4FF /* AppDelegate.swift */; };
 		67F32D002948945E0043A4FF /* EmptyActiveRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F32CFF2948945E0043A4FF /* EmptyActiveRecipe.swift */; };
@@ -75,7 +78,7 @@
 		676B40B729352FD200E42FA0 /* BreadRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadRecipe.swift; sourceTree = "<group>"; };
 		676B40BB2938FF7200E42FA0 /* SnapCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapCarousel.swift; sourceTree = "<group>"; };
 		676B40BD293E8DFE00E42FA0 /* TimeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCard.swift; sourceTree = "<group>"; };
-		676B40BF293F9B6F00E42FA0 /* BakingMethodDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakingMethodDetailView.swift; sourceTree = "<group>"; };
+		676B40BF293F9B6F00E42FA0 /* BakingMethodEditDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakingMethodEditDetailView.swift; sourceTree = "<group>"; };
 		676B40C1293F9DB300E42FA0 /* StepTypePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTypePicker.swift; sourceTree = "<group>"; };
 		676B40C5293FBDE000E42FA0 /* EditStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStepView.swift; sourceTree = "<group>"; };
 		676B40C72940E66F00E42FA0 /* BreadRecipeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadRecipeListView.swift; sourceTree = "<group>"; };
@@ -89,6 +92,9 @@
 		676B40D729428C1A00E42FA0 /* CompletedRecipeTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedRecipeTimer.swift; sourceTree = "<group>"; };
 		6793CAA7294CC19100CB395F /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		6793CAA9294CC58A00CB395F /* NavigationBarExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarExtensions.swift; sourceTree = "<group>"; };
+		6793CAAB294CE63700CB395F /* BakingMethodHostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakingMethodHostView.swift; sourceTree = "<group>"; };
+		6793CAAD294CFFB600CB395F /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		6793CAAF294D0CFF00CB395F /* MinToString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinToString.swift; sourceTree = "<group>"; };
 		67F32CFB294788090043A4FF /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		67F32CFD29478E680043A4FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		67F32CFF2948945E0043A4FF /* EmptyActiveRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyActiveRecipe.swift; sourceTree = "<group>"; };
@@ -192,6 +198,8 @@
 				67F32CFD29478E680043A4FF /* AppDelegate.swift */,
 				6793CAA7294CC19100CB395F /* Color.swift */,
 				6793CAA9294CC58A00CB395F /* NavigationBarExtensions.swift */,
+				6793CAAD294CFFB600CB395F /* AppState.swift */,
+				6793CAAF294D0CFF00CB395F /* MinToString.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -203,7 +211,7 @@
 				676B40B329351EBB00E42FA0 /* BakingStepListView.swift */,
 				676B40BB2938FF7200E42FA0 /* SnapCarousel.swift */,
 				676B40BD293E8DFE00E42FA0 /* TimeCard.swift */,
-				676B40BF293F9B6F00E42FA0 /* BakingMethodDetailView.swift */,
+				676B40BF293F9B6F00E42FA0 /* BakingMethodEditDetailView.swift */,
 				676B40D129423D8600E42FA0 /* BakingMethodListView.swift */,
 				676B40C1293F9DB300E42FA0 /* StepTypePicker.swift */,
 				676B40C5293FBDE000E42FA0 /* EditStepView.swift */,
@@ -213,6 +221,7 @@
 				676B40CD294100C500E42FA0 /* RecipeDetailView.swift */,
 				676B40D32942714700E42FA0 /* BakingSummaryView.swift */,
 				67F32CFF2948945E0043A4FF /* EmptyActiveRecipe.swift */,
+				6793CAAB294CE63700CB395F /* BakingMethodHostView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -351,13 +360,14 @@
 				676B40BC2938FF7200E42FA0 /* SnapCarousel.swift in Sources */,
 				676B40D229423D8600E42FA0 /* BakingMethodListView.swift in Sources */,
 				67F32CFC294788090043A4FF /* LocalNotificationManager.swift in Sources */,
-				676B40C0293F9B6F00E42FA0 /* BakingMethodDetailView.swift in Sources */,
+				676B40C0293F9B6F00E42FA0 /* BakingMethodEditDetailView.swift in Sources */,
 				676B40AE2935115500E42FA0 /* BakingStepCard.swift in Sources */,
 				676B40B229351BD500E42FA0 /* BakingStepType.swift in Sources */,
 				676B40D629427E4F00E42FA0 /* BakingStore.swift in Sources */,
 				676B408229350FBE00E42FA0 /* FourneauApp.swift in Sources */,
 				676B40B0293511D300E42FA0 /* BakingStep.swift in Sources */,
 				676B40D42942714700E42FA0 /* BakingSummaryView.swift in Sources */,
+				6793CAB0294D0CFF00CB395F /* MinToString.swift in Sources */,
 				676B40B829352FD200E42FA0 /* BreadRecipe.swift in Sources */,
 				676B40C2293F9DB300E42FA0 /* StepTypePicker.swift in Sources */,
 				676B40D829428C1A00E42FA0 /* CompletedRecipeTimer.swift in Sources */,
@@ -366,9 +376,11 @@
 				676B40BE293E8DFE00E42FA0 /* TimeCard.swift in Sources */,
 				67F32D002948945E0043A4FF /* EmptyActiveRecipe.swift in Sources */,
 				6793CAA8294CC19100CB395F /* Color.swift in Sources */,
+				6793CAAC294CE63700CB395F /* BakingMethodHostView.swift in Sources */,
 				676B40C82940E66F00E42FA0 /* BreadRecipeListView.swift in Sources */,
 				676B40C6293FBDE000E42FA0 /* EditStepView.swift in Sources */,
 				676B40B429351EBB00E42FA0 /* BakingStepListView.swift in Sources */,
+				6793CAAE294CFFB600CB395F /* AppState.swift in Sources */,
 				676B40D02941119000E42FA0 /* BindingExtension.swift in Sources */,
 				6793CAAA294CC58A00CB395F /* NavigationBarExtensions.swift in Sources */,
 				676B40CA2940E71F00E42FA0 /* RecipeRow.swift in Sources */,

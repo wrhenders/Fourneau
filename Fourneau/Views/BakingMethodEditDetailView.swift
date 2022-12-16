@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BakingMethodDetailView: View {
+struct BakingMethodEditDetailView: View {
     @Binding var breadMethodData : BreadRecipeMethod.Data
     
     @State private var isPresentingEditView = false
@@ -22,26 +22,22 @@ struct BakingMethodDetailView: View {
             }
             Section(header: Text("Baking Steps")){
                 ForEach(breadMethodData.steps, id: \.self.id) { step in
-                    HStack {
-                        VStack {
-                                Button(action:{
-                                    data = step.data
-                                    updateId = step.id
-                                    isPresentingEditView = true
-                                }) {
-                                    Text(step.title)
-                                        .font(.title3)
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                }
+                    VStack {
+                            Button(action:{
+                                data = step.data
+                                updateId = step.id
+                                isPresentingEditView = true
+                            }) {
+                                Text(step.title)
+                                    .font(.title3)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            }
 
                         HStack {
                             Text("Minutes: \(Int(step.lengthInMinutes))")
                             Spacer()
                             Text("Type: \(step.type.title)")
                         }
-                    }
-                        Image(systemName: "line.3.horizontal")
-                            .padding(.trailing, -6)
                     }
                 }
                 .onMove(perform: move)
@@ -90,11 +86,11 @@ struct BakingMethodDetailView: View {
 }
 
 
-struct BakingMethodDetailView_Previews: PreviewProvider {
+struct BakingMethodEditDetailView_Previews: PreviewProvider {
     struct BindingTestHolder: View {
         @State var breadMethod = BreadRecipeMethod().data
         var body: some View {
-            BakingMethodDetailView(breadMethodData: $breadMethod)
+            BakingMethodEditDetailView(breadMethodData: $breadMethod)
         }
     }
     static var previews: some View {

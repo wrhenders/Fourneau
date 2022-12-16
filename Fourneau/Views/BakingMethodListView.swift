@@ -11,29 +11,16 @@ struct BakingMethodListView: View {
     @Binding var chosenMethod: BreadRecipeMethod
     @Binding var bakingMethodList: [BreadRecipeMethod]
     
-    @State var isPresentingDetailView = false
+    
+    @State private var addingMethod = false
     @State var data = BreadRecipeMethod.Data()
-    @State private var updateId: UUID?
     
     var body: some View {
-        
         List {
-            ForEach(bakingMethodList, id:\.self.id) { row in
-                HStack{
-                    HStack{
-                        Text(row.title)
-                            .font(.title2)
-                        Spacer()
-                    }
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        chosenMethod = row
-                    }
-                    Button("Details") {
-                        updateId = row.id
-                        data = row.data
-                        isPresentingDetailView = true
-                    }
+            ForEach($bakingMethodList, id:\.self.id) { $row in
+                NavigationLink(destination: BakingMethodHostView(method: $row)) {
+                    Text(row.title)
+                        .font(.title2)
                 }
                 .listRowBackground(chosenMethod == row ? Color(red: 237/255, green: 213/255, blue: 140/255) : Color.white)
             }
@@ -41,36 +28,30 @@ struct BakingMethodListView: View {
                 bakingMethodList.remove(atOffsets: indicies)
             }
             Button(action: {
-                let newMethod = BreadRecipeMethod(data: data)
-                updateId = newMethod.id
-                bakingMethodList.append(newMethod)
-                isPresentingDetailView = true
+                addingMethod = true
             }) {
                 Label("Add New Method", systemImage: "plus.circle.fill")
                     .foregroundColor(.gray)
             }
         }
-        .navigationTitle("Method")
-        .sheet(isPresented: $isPresentingDetailView) {
+        .navigationTitle("Method List")
+        .sheet(isPresented: $addingMethod) {
             NavigationView {
-                BakingMethodDetailView(breadMethodData: $data)
+                BakingMethodEditDetailView(breadMethodData: $data)
                     .toolbar {
-                        ToolbarItem(placement: .cancellationAction) {
+                        ToolbarItem(placement: .bottomBar) {
                             Button("Cancel") {
-                                isPresentingDetailView = false
-                                data = BreadRecipeMethod.Data()
+                                addingMethod = false
                             }
                         }
-                        ToolbarItem(placement: .confirmationAction) {
+                        ToolbarItem(placement: .bottomBar) {
                             Button("Done") {
-                                let newMethod = BreadRecipeMethod(data: data)
-                                bakingMethodList = bakingMethodList.map { $0.id == updateId ? newMethod : $0 }
-                                isPresentingDetailView = false
+                                addingMethod = false
+                                bakingMethodList.append(BreadRecipeMethod(data: data))
                                 data = BreadRecipeMethod.Data()
-                                updateId = nil
                             }
                         }
-                    }
+                }
             }
         }
     }
@@ -80,6 +61,7 @@ struct BakingMethodListView_Previews: PreviewProvider {
     struct BindingTestHolder: View {
         @State var breadMethod = BreadRecipeMethod()
         @State var methodList = [BreadRecipeMethod()]
+        
         var body: some View {
             BakingMethodListView(chosenMethod: $breadMethod, bakingMethodList: $methodList)
         }

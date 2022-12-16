@@ -9,8 +9,8 @@ import SwiftUI
 
 struct BakingStepListView: View {
     @Binding var recipeTimer: CompletedRecipeTimer
-    @ObservedObject var store: BakingStore
-    @Binding var tabSelection: Int
+    @EnvironmentObject var store: BakingStore
+    @EnvironmentObject var appState: AppState
     
     @State var visibleIndex: Int = 0
     
@@ -36,7 +36,7 @@ struct BakingStepListView: View {
     func done() {
         notificationManager.removeNotifications()
         recipeTimer.recipeCompleted = true
-        tabSelection = 1
+        appState.tabSelection = 1
         dismiss()
     }
     
@@ -101,7 +101,7 @@ struct BakingStepListView: View {
         }
         .sheet(isPresented: $isPresentingDetailView) {
             NavigationView {
-                BakingMethodDetailView(breadMethodData: $data)
+                BakingMethodEditDetailView(breadMethodData: $data)
                     .toolbar {
                         ToolbarItem(placement: .cancellationAction) {
                             Button("Cancel") {
@@ -126,9 +126,9 @@ struct BakingStepListView: View {
 struct BakingStepList_Previews: PreviewProvider {
     struct BindingTestHolder: View {
         @State var completeMethod = CompletedRecipeTimer(steps: BreadRecipeMethod().steps, recipe: BreadRecipe.sampleRecipe)
-        @StateObject var store = BakingStore()
+
         var body: some View {
-            BakingStepListView(recipeTimer: $completeMethod, store: store, tabSelection: .constant(1))
+            BakingStepListView(recipeTimer: $completeMethod)
         }
     }
     static var previews: some View {

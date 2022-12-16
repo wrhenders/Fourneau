@@ -25,17 +25,6 @@ struct BakingStepCard: View {
         }
     }
     
-    func timeDisplay(_ length: Int ) -> String {
-        let minutes = length % 60
-        switch length {
-        case 0...1: return "\(length) Minute"
-        case 2...59: return "\(length) Minutes"
-        case 60...119: return minutes > 0 ? "\(length / 60) Hour \(minutes) Minutes" : "\(length / 60) Hour"
-        case 120...: return minutes > 0 ? "\(length / 60) Hours \(minutes) Minutes" : "\(length / 60) Hours"
-        default: return ""
-        }
-    }
-    
     var body: some View {
         GeometryReader { proxy in
             VStack {
@@ -72,7 +61,7 @@ struct BakingStepCard: View {
                     Spacer()
                     Divider()
                     HStack{
-                        Text("Length: \(timeDisplay(bakingStep.lengthInMinutes))")
+                        Text("Length: \(bakingStep.lengthInMinutes.minToString())")
                         Button(action: {
                             nextAction()
                         }) {

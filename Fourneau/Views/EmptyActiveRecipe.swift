@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct EmptyActiveRecipe: View {
-    @ObservedObject var store: BakingStore
-    @Binding var tabSelection: Int
+    @EnvironmentObject var store: BakingStore
+    @EnvironmentObject var appState: AppState
     
     var body: some View {
         if let binding = Binding($store.storeData.activeRecipeTimer) {
-            BakingStepListView(recipeTimer: binding, store: store, tabSelection: $tabSelection)
+            BakingStepListView(recipeTimer: binding)
         } else {
             VStack{
                 Text("No Active Recipe...")
                 Button("Choose Recipe") {
-                    self.tabSelection = 1
+                    appState.tabSelection = 1
                 }.buttonStyle(.borderedProminent)
             }
         }
@@ -28,15 +28,17 @@ struct EmptyActiveRecipe: View {
 struct EmptyActiveRecipe_Previews: PreviewProvider {
     struct BindingTestHolder: View {
         @StateObject var store = BakingStore()
+        @StateObject var appState = AppState()
         
         var body: some View {
-            EmptyActiveRecipe(store: store, tabSelection: .constant(1))
+            EmptyActiveRecipe()
+                .environmentObject(store)
+                .environmentObject(appState)
         }
     }
     static var previews: some View {
         NavigationView{
             BindingTestHolder()
-                .environmentObject(LocalNotificationManager())
         }
     }
 }
