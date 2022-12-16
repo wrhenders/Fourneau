@@ -21,11 +21,14 @@ struct BakingSummaryView: View {
         case now, future
     }
     
+    
     var body: some View {
-        VStack(alignment: .center, spacing: 0) {
+        GeometryReader { proxy in
+            VStack(alignment: .center, spacing: 0) {
             Image("bread")
                 .resizable()
-                .scaledToFit()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: proxy.size.width, height: 350)
             List {
                 Section(header: Text("Recipe")) {
                     NavigationLink(destination: BreadRecipeListView(recipe: $store.storeData.chosenRecipe, recipeList: $store.storeData.recipeList)){
@@ -60,8 +63,11 @@ struct BakingSummaryView: View {
                     }
                 }
             }
+            }
+            .edgesIgnoringSafeArea(.top)
         }
         .navigationTitle("Baking Summary")
+        .navigationBarTitleTextColor(Color("Title"))
         .onDisappear(perform: {saveAction()})
         .onChange(of: scenePhase) { phase in
             if phase == .inactive {saveAction()}
@@ -82,3 +88,5 @@ struct BakingSummaryView_Previews: PreviewProvider {
         }
     }
 }
+
+

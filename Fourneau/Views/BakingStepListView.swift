@@ -84,6 +84,8 @@ struct BakingStepListView: View {
         }
         .navigationTitle("Recipe Steps")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbarBackground(Color.offGray, for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
         .alert(isPresented: $showingAlert){
             Alert(
                 title: Text("Save the method and times of this bake?"),

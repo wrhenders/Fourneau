@@ -33,6 +33,8 @@
 		676B40D42942714700E42FA0 /* BakingSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40D32942714700E42FA0 /* BakingSummaryView.swift */; };
 		676B40D629427E4F00E42FA0 /* BakingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40D529427E4F00E42FA0 /* BakingStore.swift */; };
 		676B40D829428C1A00E42FA0 /* CompletedRecipeTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B40D729428C1A00E42FA0 /* CompletedRecipeTimer.swift */; };
+		6793CAA8294CC19100CB395F /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793CAA7294CC19100CB395F /* Color.swift */; };
+		6793CAAA294CC58A00CB395F /* NavigationBarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793CAA9294CC58A00CB395F /* NavigationBarExtensions.swift */; };
 		67F32CFC294788090043A4FF /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F32CFB294788090043A4FF /* LocalNotificationManager.swift */; };
 		67F32CFE29478E680043A4FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F32CFD29478E680043A4FF /* AppDelegate.swift */; };
 		67F32D002948945E0043A4FF /* EmptyActiveRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F32CFF2948945E0043A4FF /* EmptyActiveRecipe.swift */; };
@@ -85,6 +87,8 @@
 		676B40D32942714700E42FA0 /* BakingSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakingSummaryView.swift; sourceTree = "<group>"; };
 		676B40D529427E4F00E42FA0 /* BakingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakingStore.swift; sourceTree = "<group>"; };
 		676B40D729428C1A00E42FA0 /* CompletedRecipeTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedRecipeTimer.swift; sourceTree = "<group>"; };
+		6793CAA7294CC19100CB395F /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		6793CAA9294CC58A00CB395F /* NavigationBarExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarExtensions.swift; sourceTree = "<group>"; };
 		67F32CFB294788090043A4FF /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		67F32CFD29478E680043A4FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		67F32CFF2948945E0043A4FF /* EmptyActiveRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyActiveRecipe.swift; sourceTree = "<group>"; };
@@ -186,6 +190,8 @@
 				676B40D729428C1A00E42FA0 /* CompletedRecipeTimer.swift */,
 				67F32CFB294788090043A4FF /* LocalNotificationManager.swift */,
 				67F32CFD29478E680043A4FF /* AppDelegate.swift */,
+				6793CAA7294CC19100CB395F /* Color.swift */,
+				6793CAA9294CC58A00CB395F /* NavigationBarExtensions.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -359,10 +365,12 @@
 				676B40B6293528AD00E42FA0 /* BreadRecipeMethod.swift in Sources */,
 				676B40BE293E8DFE00E42FA0 /* TimeCard.swift in Sources */,
 				67F32D002948945E0043A4FF /* EmptyActiveRecipe.swift in Sources */,
+				6793CAA8294CC19100CB395F /* Color.swift in Sources */,
 				676B40C82940E66F00E42FA0 /* BreadRecipeListView.swift in Sources */,
 				676B40C6293FBDE000E42FA0 /* EditStepView.swift in Sources */,
 				676B40B429351EBB00E42FA0 /* BakingStepListView.swift in Sources */,
 				676B40D02941119000E42FA0 /* BindingExtension.swift in Sources */,
+				6793CAAA294CC58A00CB395F /* NavigationBarExtensions.swift in Sources */,
 				676B40CA2940E71F00E42FA0 /* RecipeRow.swift in Sources */,
 				676B40CE294100C500E42FA0 /* RecipeDetailView.swift in Sources */,
 			);
