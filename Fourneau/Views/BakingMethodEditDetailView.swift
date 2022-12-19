@@ -13,12 +13,20 @@ struct BakingMethodEditDetailView: View {
     @State private var isPresentingEditView = false
     @State private var data = BakingStep.Data()
     @State private var updateId: UUID?
+    @FocusState private var focused: Bool
     
     var body: some View {
         List {
             Section(header: Text("Title")) {
-                TextField("Title", text: $breadMethodData.title)
-                    .font(.headline)
+                HStack {
+                    TextField("Title", text: $breadMethodData.title)
+                        .font(.headline)
+                        .focused($focused)
+                    if focused {
+                        Spacer()
+                        Button("Done") {focused = false}
+                    }
+                }
             }
             Section(header: Text("Baking Steps")){
                 ForEach(breadMethodData.steps, id: \.self.id) { step in
@@ -54,6 +62,7 @@ struct BakingMethodEditDetailView: View {
                     Label("Add Step", systemImage: "plus.circle.fill")
                 }
             }
+            .disabled(focused)
         }
         .sheet(isPresented: $isPresentingEditView) {
             NavigationView {
