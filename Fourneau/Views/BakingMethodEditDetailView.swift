@@ -30,7 +30,9 @@ struct BakingMethodEditDetailView: View {
             }
             Section(header: Text("Baking Steps")){
                 ForEach(breadMethodData.steps, id: \.self.id) { step in
-                    VStack {
+                    HStack {
+                        Image(systemName: "line.3.horizontal")
+                        VStack {
                             Button(action:{
                                 data = step.data
                                 updateId = step.id
@@ -40,11 +42,12 @@ struct BakingMethodEditDetailView: View {
                                     .font(.title3)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                             }
-
-                        HStack {
-                            Text("Minutes: \(Int(step.lengthInMinutes))")
-                            Spacer()
-                            Text("Type: \(step.type.title)")
+                            
+                            HStack {
+                                Text("Minutes: \(Int(step.lengthInMinutes))")
+                                Spacer()
+                                Text("Type: \(step.type.title)")
+                            }
                         }
                     }
                 }

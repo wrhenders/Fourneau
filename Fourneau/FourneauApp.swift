@@ -45,6 +45,7 @@ struct FourneauApp: App {
                 }.tag(2)
                 
                 NavigationView{
+                    RecipeCalculatorView()
                 }
                 .tabItem {
                     Image(systemName: "mountain.2")

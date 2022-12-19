@@ -38,6 +38,7 @@
 		6793CAAC294CE63700CB395F /* BakingMethodHostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793CAAB294CE63700CB395F /* BakingMethodHostView.swift */; };
 		6793CAAE294CFFB600CB395F /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793CAAD294CFFB600CB395F /* AppState.swift */; };
 		6793CAB0294D0CFF00CB395F /* MinToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793CAAF294D0CFF00CB395F /* MinToString.swift */; };
+		6793CAB22950F6A400CB395F /* RecipeCalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793CAB12950F6A400CB395F /* RecipeCalculatorView.swift */; };
 		67F32CFC294788090043A4FF /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F32CFB294788090043A4FF /* LocalNotificationManager.swift */; };
 		67F32CFE29478E680043A4FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F32CFD29478E680043A4FF /* AppDelegate.swift */; };
 		67F32D002948945E0043A4FF /* EmptyActiveRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F32CFF2948945E0043A4FF /* EmptyActiveRecipe.swift */; };
@@ -95,6 +96,7 @@
 		6793CAAB294CE63700CB395F /* BakingMethodHostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakingMethodHostView.swift; sourceTree = "<group>"; };
 		6793CAAD294CFFB600CB395F /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		6793CAAF294D0CFF00CB395F /* MinToString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinToString.swift; sourceTree = "<group>"; };
+		6793CAB12950F6A400CB395F /* RecipeCalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCalculatorView.swift; sourceTree = "<group>"; };
 		67F32CFB294788090043A4FF /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		67F32CFD29478E680043A4FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		67F32CFF2948945E0043A4FF /* EmptyActiveRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyActiveRecipe.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				676B40D32942714700E42FA0 /* BakingSummaryView.swift */,
 				67F32CFF2948945E0043A4FF /* EmptyActiveRecipe.swift */,
 				6793CAAB294CE63700CB395F /* BakingMethodHostView.swift */,
+				6793CAB12950F6A400CB395F /* RecipeCalculatorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				6793CAA8294CC19100CB395F /* Color.swift in Sources */,
 				6793CAAC294CE63700CB395F /* BakingMethodHostView.swift in Sources */,
 				676B40C82940E66F00E42FA0 /* BreadRecipeListView.swift in Sources */,
+				6793CAB22950F6A400CB395F /* RecipeCalculatorView.swift in Sources */,
 				676B40C6293FBDE000E42FA0 /* EditStepView.swift in Sources */,
 				676B40B429351EBB00E42FA0 /* BakingStepListView.swift in Sources */,
 				6793CAAE294CFFB600CB395F /* AppState.swift in Sources */,
