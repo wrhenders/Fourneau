@@ -21,7 +21,7 @@ struct BakingMethodListView: View {
                     Text(row.title)
                         .font(.title2)
                 }
-                .listRowBackground(chosenMethod == row ? Color(red: 237/255, green: 213/255, blue: 140/255) : Color.white)
+                .listRowBackground(chosenMethod == row ? Color.listSelection : Color.white)
             }
             .onDelete { indicies in
                 bakingMethodList.remove(atOffsets: indicies)
