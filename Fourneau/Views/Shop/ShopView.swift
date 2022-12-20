@@ -8,13 +8,23 @@
 import SwiftUI
 
 struct ShopView: View {
+    @State private var shopItem: [ShopItem] = ShopItem.shopItems
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            ForEach(shopItem) { item in
+                ShopCard(shopItem: item)
+                    .padding()
+            }
+        }
+        .navigationTitle("Fourneau Shop")
     }
 }
 
 struct ShopView_Previews: PreviewProvider {
     static var previews: some View {
-        ShopView()
+        NavigationStack {
+            ShopView()
+        }
     }
 }

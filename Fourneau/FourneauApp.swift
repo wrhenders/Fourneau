@@ -53,8 +53,7 @@ struct FourneauApp: App {
                 }.tag(3)
                 
                 NavigationView{
-                    Link("Shop Forneau", destination: URL(string:"https://www.fourneauoven.com/")!)
-                        .font(.title)
+                    ShopView()
                 }.tabItem {
                     Image(systemName: "frying.pan")
                     Text("Shop")
