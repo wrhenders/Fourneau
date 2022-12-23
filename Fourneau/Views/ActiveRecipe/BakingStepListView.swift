@@ -22,6 +22,22 @@ struct BakingStepListView: View {
     @EnvironmentObject var notificationManager: LocalNotificationManager
     @Environment(\.dismiss) var dismiss
     
+    func getCardState(currentIndex index: Int) -> CardState {
+        if index == recipeTimer.steps.count - 1 {
+            if index == recipeTimer.currentStep {
+                return .lastActive
+            }
+            return .last
+        }
+        else if index == recipeTimer.currentStep {
+            return .current
+        }
+        else if recipeTimer.stepCompleted[index] == true {
+            return .completed
+        }
+        return .incomplete
+    }
+    
     func nextStep(currentIndex index: Int) {
         if index + 1 < recipeTimer.steps.count {
             visibleIndex = index + 1
@@ -58,7 +74,7 @@ struct BakingStepListView: View {
             
             SnapCarousel(index: $visibleIndex, length: recipeTimer.steps.count) {
                     ForEach(recipeTimer.steps.indices, id: \.self) { index in
-                        BakingStepCard(bakingStep: $recipeTimer.steps[index], completed: recipeTimer.stepCompleted[index], current: index == recipeTimer.currentStep, last: index == recipeTimer.steps.count - 1, startTime: recipeTimer.startArray[index]) {self.nextStep(currentIndex: index)}
+                        BakingStepCard(bakingStep: $recipeTimer.steps[index], cardState: getCardState(currentIndex: index), startTime: recipeTimer.startArray[index]) {self.nextStep(currentIndex: index)}
                     }
                 }
             

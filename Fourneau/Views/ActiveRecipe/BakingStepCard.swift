@@ -9,21 +9,11 @@ import SwiftUI
 
 struct BakingStepCard: View {
     @Binding var bakingStep: BakingStep
-    let completed: Bool
-    let current: Bool
-    let last: Bool
+    
+    let cardState: CardState
+    
     let startTime: Date
     let nextAction: () -> Void
-    
-    func getShadowColor() -> Color {
-        if current {
-            return Color.red
-        } else if completed {
-            return Color.green
-        } else {
-            return Color.black
-        }
-    }
     
     var body: some View {
         VStack {
@@ -64,13 +54,13 @@ struct BakingStepCard: View {
                     Button(action: {
                         nextAction()
                     }) {
-                        self.last ?
+                        cardState == .last || cardState == .lastActive ?
                             Text("Done") :
                             Text("Next")
                         Image(systemName: "chevron.right")
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
-                    .disabled(!current)
+                    .disabled(cardState != .current && cardState != .lastActive)
                 }
                 .padding(.bottom)
             }
@@ -78,12 +68,13 @@ struct BakingStepCard: View {
         }
         .background(Color.white)
         .clipShape(RoundedRectangle(cornerRadius: 24))
-        .shadow(color: getShadowColor(), radius: 8)
+        .shadow(color: cardState.color, radius: 8)
     }
+    
 }
 
 struct BakingStepCard_Previews: PreviewProvider {
     static var previews: some View {
-        BakingStepCard(bakingStep: .constant(BreadRecipeMethod().steps[0]),completed: false, current: true, last: true, startTime: Date(), nextAction: {})
+        BakingStepCard(bakingStep: .constant(BreadRecipeMethod().steps[0]), cardState: .lastActive, startTime: Date(), nextAction: {})
     }
 }
