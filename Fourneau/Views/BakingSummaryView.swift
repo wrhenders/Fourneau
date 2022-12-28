@@ -30,7 +30,7 @@ struct BakingSummaryView: View {
                 .aspectRatio(contentMode: .fill)
                 .frame(width: proxy.size.width, height: 350)
             List {
-                Section(header: Text("Recipe")) {
+                Section(header: Text("Recipe Ingredients")) {
                     NavigationLink(destination: BreadRecipeListView(recipe: $store.storeData.chosenRecipe, recipeList: $store.storeData.recipeList)){
                         Text(store.storeData.chosenRecipe.title)
                     }
@@ -63,6 +63,7 @@ struct BakingSummaryView: View {
                     }
                 }
             }
+            .listStyle(.insetGrouped)
             }
             .edgesIgnoringSafeArea(.top)
         }

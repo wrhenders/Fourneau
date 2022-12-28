@@ -14,16 +14,34 @@ struct IngredientWeight {
 }
 
 struct RecipeCalculatorView: View {
+    @EnvironmentObject var store: BakingStore
+    @EnvironmentObject var appState: AppState
+    
     @State private var flourWeight: [IngredientWeight] = [IngredientWeight(name: "Ap", amount: 450)]
     @State private var waterWeight: Int = 340
     @State private var leavenWeight: Int = 120
     @State private var saltWeight: Int = 11
+    
+    @State var recipeData = BreadRecipe.Data()
+    @State var isPresentingRecipeView = false
+    
     
     private var totalFlour: Int {
         return flourWeight.map{$0.amount}.reduce(0, +) + (leavenWeight / 2)
     }
     private var totalWater: Int {
         return waterWeight + (leavenWeight / 2)
+    }
+    
+    private func ingredientList() -> [String] {
+        var ingredients: [String] = []
+        for flour in flourWeight  {
+            ingredients.append("\(flour.amount) g \(flour.name)")
+        }
+        ingredients.append("\(waterWeight) g Water")
+        ingredients.append("\(leavenWeight) g Starter")
+        ingredients.append("\(saltWeight) g Salt")
+        return ingredients
     }
     
     var body: some View {
@@ -97,11 +115,32 @@ struct RecipeCalculatorView: View {
             
             HStack {
                 Button("Save") {
-                    
+                    recipeData.ingredients = ingredientList()
+                    isPresentingRecipeView = true
                 }
             }
         }
         .navigationTitle("Recipe Calculator")
+        .sheet(isPresented: $isPresentingRecipeView) {
+            NavigationView {
+                EditRecipeView(recipe: $recipeData)
+                    .toolbar {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Cancel") {
+                                isPresentingRecipeView = false
+                            }
+                        }
+                        ToolbarItem(placement: .confirmationAction) {
+                            Button("Done") {
+                                let newRecipe = BreadRecipe(data: recipeData)
+                                store.storeData.recipeList.append(newRecipe)
+                                isPresentingRecipeView = false
+                                appState.tabSelection = 1
+                            }
+                        }
+                    }
+            }
+        }
     }
 }
 
