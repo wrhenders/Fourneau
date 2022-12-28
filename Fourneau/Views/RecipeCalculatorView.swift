@@ -121,6 +121,7 @@ struct RecipeCalculatorView: View {
             }
         }
         .navigationTitle("Recipe Calculator")
+        .defaultNavigation
         .sheet(isPresented: $isPresentingRecipeView) {
             NavigationView {
                 EditRecipeView(recipe: $recipeData)
