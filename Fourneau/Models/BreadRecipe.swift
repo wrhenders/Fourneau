@@ -12,28 +12,30 @@ struct BreadRecipe: Codable, Identifiable, Equatable {
     var title: String
     var bakeTempF: Int
     var bakeTimeInMinutes: Int
-    var method: [String]
+    var ingredients: [String]
     var description: String
+    let locked: Bool
     
-    init(id: UUID = UUID(), title: String, bakeTempF: Int, bakeTimeInMinutes: Int, method: [String], description: String){
+    init(id: UUID = UUID(), title: String, bakeTempF: Int, bakeTimeInMinutes: Int, ingredients: [String], description: String, locked: Bool = false){
         self.id = id
         self.title = title
         self.bakeTempF = bakeTempF
         self.bakeTimeInMinutes = bakeTimeInMinutes
-        self.method = method
+        self.ingredients = ingredients
         self.description = description
+        self.locked = locked
     }
     
     struct Data {
         var title: String = ""
         var bakeTempF: Int = 350
         var bakeTimeInMinutes: Int = 0
-        var method: [String] = []
+        var ingredients: [String] = []
         var description: String = ""
     }
     
     var data: Data {
-        Data(title: title, bakeTempF: bakeTempF, bakeTimeInMinutes: bakeTimeInMinutes, method: method, description: description)
+        Data(title: title, bakeTempF: bakeTempF, bakeTimeInMinutes: bakeTimeInMinutes, ingredients: ingredients, description: description)
     }
     
     init(data: Data) {
@@ -41,8 +43,9 @@ struct BreadRecipe: Codable, Identifiable, Equatable {
         title = data.title
         bakeTempF = data.bakeTempF
         bakeTimeInMinutes = data.bakeTimeInMinutes
-        method = data.method
+        ingredients = data.ingredients
         description = data.description
+        locked = false
     }
     
     mutating func update(from data: Data) {
@@ -50,12 +53,12 @@ struct BreadRecipe: Codable, Identifiable, Equatable {
         title = data.title
         bakeTempF = data.bakeTempF
         bakeTimeInMinutes = data.bakeTimeInMinutes
-        method = data.method
+        ingredients = data.ingredients
         description = data.description
     }
 }
 
 extension BreadRecipe {
-    static let sampleRecipe = BreadRecipe(title: "White Sourdough", bakeTempF: 500, bakeTimeInMinutes: 50, method: ["Combine:","340 g Water","120 g Satrter", "450 g Bread Flour", "Let sit 15 minutes", "Add 11 g Salt", "Mix until homogeneous"], description: "A simple white sourdough to begin")
-    static let sampleRecipeList = [sampleRecipe, BreadRecipe(title: "Whole Wheat", bakeTempF: 500, bakeTimeInMinutes: 50, method: ["Combine:","340 g Water","120 g Satrter", "450 g Bread Flour", "Let sit 15 minutes", "Add 11 g Salt", "Mix until homogeneous"], description: "A whole wheat for the next step")]
+    static let sampleRecipe = BreadRecipe(title: "White Sourdough", bakeTempF: 500, bakeTimeInMinutes: 50, ingredients: ["340 g Water","120 g Starter", "450 g Bread Flour","11 g Salt"], description: "A simple white sourdough to begin", locked: true)
+    static let sampleRecipeList = [sampleRecipe, BreadRecipe(title: "Whole Wheat", bakeTempF: 500, bakeTimeInMinutes: 50, ingredients: ["340 g Water","120 g Starter", "450 g Bread Flour", "11 g Salt"], description: "A whole wheat for the next step")]
 }

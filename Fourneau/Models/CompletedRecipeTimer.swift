@@ -45,7 +45,7 @@ struct CompletedRecipeTimer: Codable, Identifiable {
         if steps.count > 0 {
             if let makeOffset = steps.firstIndex(where: {$0.type == .makedough}) {
                 var data = steps[makeOffset].data
-                data.description = recipe.method
+                data.description = recipe.ingredients
                 steps[makeOffset] = BakingStep(data: data)
             }
             if let bakeOffset = steps.firstIndex(where: {$0.type == .bake}) {

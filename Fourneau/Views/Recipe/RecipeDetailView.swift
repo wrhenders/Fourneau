@@ -15,6 +15,9 @@ struct RecipeDetailView: View {
     
     @State private var isRecipeEditViewShown = false
     @State private var data = BreadRecipe.Data()
+    @State private var showingAlert = false
+    @Environment(\.dismiss) var dismiss
+    
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
@@ -30,10 +33,10 @@ struct RecipeDetailView: View {
                         Text("Time: \(Int(recipe.bakeTimeInMinutes)) Min")
                             .font(.headline)
                     }
-                    Text("Method:")
+                    Text("Ingredients:")
                         .font(.headline)
                     VStack(alignment: .leading, spacing:5) {
-                        ForEach(recipe.method, id: \.self) {line in
+                        ForEach(recipe.ingredients, id: \.self) {line in
                             Text(line)
                         }
                     }
@@ -54,9 +57,26 @@ struct RecipeDetailView: View {
         .navigationTitle(recipe.title)
         .toolbar{
             Button("Edit") {
-                isRecipeEditViewShown = true
-                data = recipe.data
+                if recipe.locked {
+                    showingAlert = true
+                } else {
+                    data = recipe.data
+                    isRecipeEditViewShown = true
+                }
             }
+        }
+        .alert(isPresented: $showingAlert){
+            Alert(
+                title: Text("This is a Fourneau Recipe"),
+                message: Text("If you would like to make edits, you can make a copy"),
+                primaryButton: .destructive(Text("No Thanks")) {
+                    showingAlert = false
+                },
+                secondaryButton: .default(Text("Copy")) {
+                    data = recipe.data
+                    isRecipeEditViewShown = true
+                }
+            )
         }
         .sheet(isPresented: $isRecipeEditViewShown) {
             NavigationView {
@@ -69,8 +89,14 @@ struct RecipeDetailView: View {
                         }
                         ToolbarItem(placement: .bottomBar) {
                             Button("Done") {
-                                isRecipeEditViewShown = false
-                                recipe.update(from: data)
+                                if recipe.locked {
+                                    store.storeData.recipeList.append(BreadRecipe(data: data))
+                                    isRecipeEditViewShown = false
+                                    dismiss()
+                                } else {
+                                    isRecipeEditViewShown = false
+                                    recipe.update(from: data)
+                                }
                             }
                         }
                 }

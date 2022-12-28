@@ -33,14 +33,14 @@ struct EditRecipeView: View {
                     .font(.title3)
             }
             Section(header: Text("Method")) {
-                ForEach(0..<recipe.method.count, id: \.self) { index in
-                    TextField("Description", text: $recipe.method[index, default: ""])
+                ForEach(0..<recipe.ingredients.count, id: \.self) { index in
+                    TextField("Description", text: $recipe.ingredients[index, default: ""])
                 }
                 .onDelete { indicies in
-                    recipe.method.remove(atOffsets: indicies)
+                    recipe.ingredients.remove(atOffsets: indicies)
                 }
                 Button(action: {
-                    recipe.method.append("")
+                    recipe.ingredients.append("")
                 }) {
                     Label("Add Method line", systemImage: "plus.circle.fill")
                 }

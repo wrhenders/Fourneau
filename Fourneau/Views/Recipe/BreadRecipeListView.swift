@@ -36,7 +36,7 @@ struct BreadRecipeListView: View {
                 }
             }
         }
-        .navigationTitle("Recipe List")
+        .navigationTitle("Recipe Ingredients")
         .sheet(isPresented: $addingRecipe) {
             NavigationView {
                 EditRecipeView(recipe: $data)
