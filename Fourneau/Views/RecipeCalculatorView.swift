@@ -17,7 +17,7 @@ struct RecipeCalculatorView: View {
     @EnvironmentObject var store: BakingStore
     @EnvironmentObject var appState: AppState
     
-    @State private var flourWeight: [IngredientWeight] = [IngredientWeight(name: "Ap", amount: 450)]
+    @State private var flourWeight: [IngredientWeight] = [IngredientWeight(name: "AP", amount: 450)]
     @State private var waterWeight: Int = 340
     @State private var leavenWeight: Int = 120
     @State private var saltWeight: Int = 11

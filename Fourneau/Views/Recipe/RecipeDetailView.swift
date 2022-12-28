@@ -55,6 +55,7 @@ struct RecipeDetailView: View {
         }
         //.edgesIgnoringSafeArea(.top)
         .navigationTitle(recipe.title)
+        .defaultNavigation
         .toolbar{
             Button("Edit") {
                 if recipe.locked {
