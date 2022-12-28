@@ -34,6 +34,7 @@ struct BakingMethodListView: View {
             }
         }
         .navigationTitle("Method List")
+        .defaultNavigation
         .sheet(isPresented: $addingMethod) {
             NavigationView {
                 BakingMethodEditDetailView(breadMethodData: $data)

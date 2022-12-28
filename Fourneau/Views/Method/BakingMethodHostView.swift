@@ -46,6 +46,7 @@ struct BakingMethodHostView: View {
             }
         }
         .navigationTitle(method.title)
+        .defaultNavigation
         .toolbar{
             Button("Edit") {
                 isPresentingEditVeiw = true
