@@ -18,6 +18,7 @@ struct ShopView: View {
             }
         }
         .navigationTitle("Fourneau Shop")
+        .defaultNavigation
     }
 }
 

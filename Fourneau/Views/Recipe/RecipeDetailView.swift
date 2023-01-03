@@ -53,7 +53,6 @@ struct RecipeDetailView: View {
                 .frame(maxWidth: 640, alignment: .center)
             }
         }
-        //.edgesIgnoringSafeArea(.top)
         .navigationTitle(recipe.title)
         .defaultNavigation
         .toolbar{

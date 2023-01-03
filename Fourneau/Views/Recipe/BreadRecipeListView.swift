@@ -24,6 +24,7 @@ struct BreadRecipeListView: View {
                         }
                     }
                     .listRowBackground(recipe == recipeRow ? Color.listSelection : Color.white)
+                    .deleteDisabled(recipeRow.locked)
                 }
                 .onDelete { indicies in
                     recipeList.remove(atOffsets: indicies)
@@ -36,6 +37,7 @@ struct BreadRecipeListView: View {
                 }
             }
         }
+        .listStyle(.grouped)
         .navigationTitle("Recipe Ingredients")
         .defaultNavigation
         .sheet(isPresented: $addingRecipe) {

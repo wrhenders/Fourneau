@@ -13,8 +13,10 @@ struct BakingMethodHostView: View {
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var store: BakingStore
     
+    @State private var showingAlert = false
     @State private var isPresentingEditVeiw = false
     @State private var data = BreadRecipeMethod.Data()
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         VStack {
@@ -49,9 +51,26 @@ struct BakingMethodHostView: View {
         .defaultNavigation
         .toolbar{
             Button("Edit") {
-                isPresentingEditVeiw = true
-                data = method.data
+                if method.locked {
+                    showingAlert = true
+                } else {
+                    isPresentingEditVeiw = true
+                    data = method.data
+                }
             }
+        }
+        .alert(isPresented: $showingAlert){
+            Alert(
+                title: Text("This is a Fourneau Method"),
+                message: Text("If you would like to make edits, you can make a copy"),
+                primaryButton: .destructive(Text("No Thanks")) {
+                    showingAlert = false
+                },
+                secondaryButton: .default(Text("Copy")) {
+                    data = method.data
+                    isPresentingEditVeiw = true
+                }
+            )
         }
         .sheet(isPresented: $isPresentingEditVeiw) {
             NavigationView {
@@ -60,15 +79,19 @@ struct BakingMethodHostView: View {
                         ToolbarItem(placement: .cancellationAction) {
                             Button("Cancel") {
                                 isPresentingEditVeiw = false
-                                data = BreadRecipeMethod.Data()
                             }
                         }
                         ToolbarItem(placement: .confirmationAction) {
                             Button("Done") {
                                 let newMethod = BreadRecipeMethod(data: data)
-                                method = newMethod
-                                isPresentingEditVeiw = false
-                                data = BreadRecipeMethod.Data()
+                                if method.locked {
+                                    store.storeData.methodList.append(newMethod)
+                                    isPresentingEditVeiw = false
+                                    dismiss()
+                                } else {
+                                    method = newMethod
+                                    isPresentingEditVeiw = false
+                                }
                             }
                         }
                     }

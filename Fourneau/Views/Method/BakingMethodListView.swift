@@ -16,23 +16,33 @@ struct BakingMethodListView: View {
     
     var body: some View {
         List {
-            ForEach($bakingMethodList, id:\.self.id) { $row in
-                NavigationLink(destination: BakingMethodHostView(method: $row)) {
-                    Text(row.title)
-                        .font(.title2)
+            Section {
+                ForEach($bakingMethodList, id:\.self.id) { $row in
+                    NavigationLink(destination: BakingMethodHostView(method: $row)) {
+                        HStack{
+                            Text(row.title)
+                                .font(.title2)
+                            Spacer()
+                            if row.locked {
+                                Image(systemName: "lock.fill")
+                            }
+                        }
+                    }
+                    .listRowBackground(chosenMethod == row ? Color.listSelection : Color.white)
+                    .deleteDisabled(row.locked)
                 }
-                .listRowBackground(chosenMethod == row ? Color.listSelection : Color.white)
-            }
-            .onDelete { indicies in
-                bakingMethodList.remove(atOffsets: indicies)
-            }
-            Button(action: {
-                addingMethod = true
-            }) {
-                Label("Add New Method", systemImage: "plus.circle.fill")
-                    .foregroundColor(.gray)
+                .onDelete { indicies in
+                    bakingMethodList.remove(atOffsets: indicies)
+                }
+                Button(action: {
+                    addingMethod = true
+                }) {
+                    Label("Add New Method", systemImage: "plus.circle.fill")
+                        .foregroundColor(.gray)
+                }
             }
         }
+        .listStyle(.grouped)
         .navigationTitle("Method List")
         .defaultNavigation
         .sheet(isPresented: $addingMethod) {

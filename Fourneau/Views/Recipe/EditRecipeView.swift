@@ -32,7 +32,7 @@ struct EditRecipeView: View {
                 TextField("Description", text: $recipe.description, axis: .vertical)
                     .font(.title3)
             }
-            Section(header: Text("Method")) {
+            Section(header: Text("Ingredients")) {
                 ForEach(0..<recipe.ingredients.count, id: \.self) { index in
                     TextField("Description", text: $recipe.ingredients[index, default: ""])
                 }

@@ -26,6 +26,10 @@ struct RecipeRow: View {
                     .font(.caption)
                     .foregroundColor(.gray)
             }
+            Spacer()
+            if recipe.locked {
+                Image(systemName: "lock.fill")
+            }
         }
     }
 }

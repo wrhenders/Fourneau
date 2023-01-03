@@ -11,8 +11,9 @@ struct BreadRecipeMethod: Codable, Identifiable, Equatable, Hashable {
     let id: UUID
     var title: String
     var steps: [BakingStep] = []
+    var locked: Bool = false
     
-    init(title: String, steps: [BakingStep]) {
+    init(title: String, steps: [BakingStep], locked: Bool = false) {
         self.id = UUID()
         self.title = title
         self.steps = steps
@@ -52,5 +53,6 @@ extension BreadRecipeMethod {
             BakingStep(title: "Bake", lengthInMinutes: 50, description: ["With oven at temp, slide tray into oven.","Pour 50g water into trough, close Forneau and oven.","Once half the time has passed, remove door and continue baking"], type: .bake),
             BakingStep(title: "Cool", lengthInMinutes: 20, type: .cool)
         ]
+        self.locked = true
     }
 }
