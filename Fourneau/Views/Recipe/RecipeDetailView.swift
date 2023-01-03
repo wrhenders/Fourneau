@@ -20,37 +20,34 @@ struct RecipeDetailView: View {
     
     
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            VStack(alignment: .center, spacing: 20) {
-                Image("bread")
-                    .resizable()
-                    .scaledToFit()
-                VStack(alignment: .leading, spacing: 20) {
-                    HStack{
-                        Text("Bake at: \(recipe.bakeTempF) F")
-                            .font(.headline)
-                        Spacer()
-                        Text("Time: \(Int(recipe.bakeTimeInMinutes)) Min")
-                            .font(.headline)
-                    }
-                    Text("Ingredients:")
+        VStack(spacing:0) {
+            Image("bread")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+            List {
+                HStack{
+                    Text("Bake at: \(recipe.bakeTempF) F")
                         .font(.headline)
-                    VStack(alignment: .leading, spacing:5) {
+                    Spacer()
+                    Text("Time: \(Int(recipe.bakeTimeInMinutes)) Min")
+                        .font(.headline)
+                }
+                Section(header:Text("Ingredients:")) {
+                    VStack(alignment: .leading) {
                         ForEach(recipe.ingredients, id: \.self) {line in
                             Text(line)
                         }
                     }
-                    HStack{
-                        Button("Choose") {
-                            store.storeData.chosenRecipe = recipe
-                            appState.rootViewId = UUID()
-                        }
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                    }
                 }
-                .padding(.horizontal, 20)
-                .frame(maxWidth: 640, alignment: .center)
+                Button("Choose") {
+                    store.storeData.chosenRecipe = recipe
+                    appState.rootViewId = UUID()
+                }
+                .font(.title2)
+                .foregroundColor(Color.white)
+                .frame(maxWidth: .infinity)
+                .buttonStyle(.plain)
+                .listRowBackground(Color.darkOrange)
             }
         }
         .navigationTitle(recipe.title)
@@ -82,12 +79,12 @@ struct RecipeDetailView: View {
             NavigationView {
                 EditRecipeView(recipe: $data)
                     .toolbar {
-                        ToolbarItem(placement: .bottomBar) {
+                        ToolbarItem(placement: .cancellationAction) {
                             Button("Cancel") {
                                 isRecipeEditViewShown = false
                             }
                         }
-                        ToolbarItem(placement: .bottomBar) {
+                        ToolbarItem(placement: .confirmationAction) {
                             Button("Done") {
                                 if recipe.locked {
                                     store.storeData.recipeList.append(BreadRecipe(data: data))

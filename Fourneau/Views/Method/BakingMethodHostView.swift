@@ -37,14 +37,16 @@ struct BakingMethodHostView: View {
                         Text(method.totalTime.minToString())
                     }
                 }
-                HStack{
-                    Button("Choose") {
-                        store.storeData.chosenMethod = method
-                        appState.rootViewId = UUID()
-                    }
-                    Spacer()
-                    Image(systemName: "chevron.right")
+                Button("Choose") {
+                    store.storeData.chosenMethod = method
+                    appState.rootViewId = UUID()
                 }
+                .font(.title2)
+                .foregroundColor(Color.white)
+                .frame(maxWidth: .infinity)
+                .buttonStyle(.plain)
+                .listRowBackground(Color.darkOrange)
+                
             }
         }
         .navigationTitle(method.title)

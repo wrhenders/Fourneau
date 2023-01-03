@@ -114,12 +114,17 @@ struct RecipeCalculatorView: View {
             }
             
             HStack {
-                Button("Save") {
+                Button (action: {
                     recipeData.ingredients = ingredientList()
                     isPresentingRecipeView = true
+                }) {
+                    Text("Save")
+                        .font(.title2)
+                        .frame(maxWidth: .infinity, alignment: .center)
                 }
             }
         }
+        .listStyle(.insetGrouped)
         .navigationTitle("Recipe Calculator")
         .defaultNavigation
         .sheet(isPresented: $isPresentingRecipeView) {

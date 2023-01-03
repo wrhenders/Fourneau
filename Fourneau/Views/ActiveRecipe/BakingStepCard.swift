@@ -24,7 +24,7 @@ struct BakingStepCard: View {
                 Text(bakingStep.title)
                     .font(.title)
                     .fontWeight(.bold)
-                    .foregroundColor(.white)
+                    .foregroundColor(.title)
                     .padding(16)
             }
             VStack(spacing: 8) {
@@ -55,8 +55,8 @@ struct BakingStepCard: View {
                         nextAction()
                     }) {
                         cardState == .last || cardState == .lastActive ?
-                            Text("Done") :
-                            Text("Next")
+                        Text("Done") :
+                        Text("Next")
                         Image(systemName: "chevron.right")
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)

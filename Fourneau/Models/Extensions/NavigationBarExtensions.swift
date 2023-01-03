@@ -24,6 +24,7 @@ struct NavigationBarModifier: ViewModifier {
     UINavigationBar.appearance().compactAppearance = coloredAppearance
     UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
     UINavigationBar.appearance().tintColor = textColor
+    UINavigationBar.appearance().isOpaque = true
   }
 
   func body(content: Content) -> some View {
@@ -64,6 +65,6 @@ extension View {
     }
     
     var defaultNavigation: some View {
-        self.navigationBarColor(UIColor(Color.darkOrange), textColor: UIColor.white)
+        self.navigationBarColor(UIColor(Color.darkOrange), textColor: UIColor(Color.title))
     }
 }

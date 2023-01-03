@@ -70,7 +70,6 @@ struct BakingStepListView: View {
         VStack {
             TimeCard(text: "Next Action:", time: "\(recipeTimer.nextAction?.formatted(date: .omitted, time: .shortened) ?? "TBD")", color: .cyan)
                 .frame(maxWidth: .infinity, alignment: .trailing)
-                .padding(.trailing)
             
             SnapCarousel(index: $visibleIndex, length: recipeTimer.steps.count) {
                     ForEach(recipeTimer.steps.indices, id: \.self) { index in
@@ -80,7 +79,6 @@ struct BakingStepListView: View {
             
             TimeCard(text: "Out of the Oven:", time: "\(recipeTimer.endTime.formatted(date: .omitted, time: .shortened))", color: .red)
             .frame(maxWidth: .infinity, alignment: .trailing)
-            .padding(.trailing)
             
             HStack(spacing: 8) {
                 ForEach(recipeTimer.steps.indices, id: \.self) { index in

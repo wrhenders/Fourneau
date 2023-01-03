@@ -15,7 +15,6 @@ struct FourneauApp: App {
     @StateObject private var store = BakingStore()
     @StateObject var appState = AppState()
     
-    
     var body: some Scene {
         WindowGroup {
             TabView(selection: $appState.tabSelection) {
@@ -32,8 +31,7 @@ struct FourneauApp: App {
                 .tabItem {
                     Image(systemName: "list.bullet")
                     Text("Bread Recipes")
-                }
-                .tag(1)
+                }.tag(1)
                 
                 NavigationView{
                     EmptyActiveRecipe()
@@ -59,6 +57,7 @@ struct FourneauApp: App {
                     Text("Shop")
                 }.tag(4)
             }
+            .tint(.darkOrange)
             .environmentObject(appState)
             .environmentObject(store)
             .id(appState.tabSelection)

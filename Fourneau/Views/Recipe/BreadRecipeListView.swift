@@ -44,12 +44,12 @@ struct BreadRecipeListView: View {
             NavigationView {
                 EditRecipeView(recipe: $data)
                     .toolbar {
-                        ToolbarItem(placement: .bottomBar) {
+                        ToolbarItem(placement: .cancellationAction) {
                             Button("Cancel") {
                                 addingRecipe = false
                             }
                         }
-                        ToolbarItem(placement: .bottomBar) {
+                        ToolbarItem(placement: .confirmationAction) {
                             Button("Done") {
                                 addingRecipe = false
                                 recipeList.append(BreadRecipe(data: data))

@@ -11,4 +11,5 @@ extension Color {
     static let darkOrange = Color("DarkOrange")
     static let darkGray = Color("DarkGray")
     static let listSelection = Color("ListSelection")
+    static let title = Color("Title")
 }

@@ -49,12 +49,12 @@ struct BakingMethodListView: View {
             NavigationView {
                 BakingMethodEditDetailView(breadMethodData: $data)
                     .toolbar {
-                        ToolbarItem(placement: .bottomBar) {
+                        ToolbarItem(placement: .cancellationAction) {
                             Button("Cancel") {
                                 addingMethod = false
                             }
                         }
-                        ToolbarItem(placement: .bottomBar) {
+                        ToolbarItem(placement: .confirmationAction) {
                             Button("Done") {
                                 addingMethod = false
                                 bakingMethodList.append(BreadRecipeMethod(data: data))

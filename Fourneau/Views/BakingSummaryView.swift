@@ -59,7 +59,6 @@ struct BakingSummaryView: View {
                     }) {
                         Text("Bake")
                             .font(.title2)
-                            .foregroundColor(Color.blue)
                     }
                 }
             }
@@ -68,7 +67,7 @@ struct BakingSummaryView: View {
             .edgesIgnoringSafeArea(.top)
         }
         .navigationTitle("Baking Summary")
-        .navigationBarTitleTextColor(Color.white)
+        .navigationBarTitleTextColor(.title)
         .onDisappear(perform: {saveAction()})
         .onChange(of: scenePhase) { phase in
             if phase == .inactive {saveAction()}
