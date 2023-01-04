@@ -18,7 +18,7 @@ struct EmptyActiveRecipe: View {
             VStack{
                 Text("No Active Recipe...")
                 Button("Choose Recipe") {
-                    appState.tabSelection = 1
+                    appState.tabSelection = Tab.summary
                 }.buttonStyle(.borderedProminent)
             }
         }

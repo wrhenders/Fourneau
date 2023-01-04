@@ -141,7 +141,7 @@ struct RecipeCalculatorView: View {
                                 let newRecipe = BreadRecipe(data: recipeData)
                                 store.storeData.recipeList.append(newRecipe)
                                 isPresentingRecipeView = false
-                                appState.tabSelection = 1
+                                appState.tabSelection = Tab.summary
                             }
                         }
                     }

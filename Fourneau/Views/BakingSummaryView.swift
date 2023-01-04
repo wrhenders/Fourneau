@@ -55,7 +55,7 @@ struct BakingSummaryView: View {
                     Button(action: {
                         startNow == .future ? store.futureRecipeTimer(finishTime: finishBread) :
                         store.newRecipeTimer()
-                        appState.tabSelection = 2
+                        appState.tabSelection = Tab.active
                     }) {
                         Text("Bake")
                             .font(.title2)

@@ -18,7 +18,7 @@ struct FourneauApp: App {
     var body: some Scene {
         WindowGroup {
             TabView(selection: $appState.tabSelection) {
-                NavigationView{
+                NavigationStack{
                     BakingSummaryView() {
                         Task {
                             do {
@@ -31,31 +31,39 @@ struct FourneauApp: App {
                 .tabItem {
                     Image(systemName: "list.bullet")
                     Text("Bread Recipes")
-                }.tag(1)
+                }.tag(Tab.summary)
                 
-                NavigationView{
+                NavigationStack{
                     EmptyActiveRecipe()
                 }
                 .environmentObject(localNotificationCenter)
                 .tabItem {
                     Image(systemName: "stove")
                     Text("Active Recipe")
-                }.tag(2)
+                }.tag(Tab.active)
                 
-                NavigationView{
+                NavigationStack{
+                    HistoricalBakeList()
+                }
+                .tabItem {
+                    Image(systemName: "archivebox")
+                    Text("Bake History")
+                }.tag(Tab.history)
+                
+                NavigationStack{
                     RecipeCalculatorView()
                 }
                 .tabItem {
                     Image(systemName: "mountain.2")
                     Text("Recipe Calculator")
-                }.tag(3)
+                }.tag(Tab.calculator)
                 
-                NavigationView{
+                NavigationStack{
                     ShopView()
                 }.tabItem {
                     Image(systemName: "frying.pan")
                     Text("Shop")
-                }.tag(4)
+                }.tag(Tab.shop)
             }
             .tint(.darkOrange)
             .environmentObject(appState)
