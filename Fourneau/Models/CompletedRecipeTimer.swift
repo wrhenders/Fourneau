@@ -10,8 +10,9 @@ import Foundation
 struct CompletedRecipeTimer: Codable, Identifiable {
     let id: UUID
     var startTime: Date = Date()
+    let title: String
     var steps: [BakingStep]
-    var recipe: BreadRecipe
+    let recipe: BreadRecipe
     
     var stepCompleted: [Bool] = []
     var startArray: [Date] = []
@@ -25,16 +26,18 @@ struct CompletedRecipeTimer: Codable, Identifiable {
             0
     }
     
-    init(steps: [BakingStep], recipe: BreadRecipe) {
+    init(title: String, steps: [BakingStep], recipe: BreadRecipe) {
         self.id = UUID()
+        self.title = title
         self.steps = steps
         self.recipe = recipe
         self.endTime = Date(timeInterval: (Double(self.totalMinutes) * 60), since: self.startTime)
         self.setupMethod(futureTime: nil)
     }
     
-    init(steps: [BakingStep], recipe: BreadRecipe, finishTime: Date) {
+    init(title: String, steps: [BakingStep], recipe: BreadRecipe, finishTime: Date) {
         self.id = UUID()
+        self.title = title
         self.steps = steps
         self.recipe = recipe
         self.endTime = finishTime
@@ -117,5 +120,10 @@ struct CompletedRecipeTimer: Codable, Identifiable {
         }
         
         return cleanSteps
+    }
+    
+    func makeHistoricalBake() -> HistoricalBake {
+        let activeMethod = BreadRecipeMethod(title: title, steps: getStepArray())
+        return HistoricalBake(method: activeMethod, recipe: recipe)
     }
 }

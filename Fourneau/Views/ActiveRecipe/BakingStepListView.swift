@@ -14,11 +14,6 @@ struct BakingStepListView: View {
     
     @State var visibleIndex: Int = 0
     
-    @State private var showingAlert = false
-    
-    @State private var isPresentingDetailView = false
-    @State private var data = BreadRecipeMethod.Data()
-    
     @EnvironmentObject var notificationManager: LocalNotificationManager
     @Environment(\.dismiss) var dismiss
     
@@ -45,14 +40,15 @@ struct BakingStepListView: View {
             addNotification(fromStepIndex: visibleIndex)
         }
         if index + 1 == recipeTimer.steps.count {
-            showingAlert = true
+            store.storeData.historicalBakeList.append(recipeTimer.makeHistoricalBake())
+            done()
         }
     }
     
     func done() {
         notificationManager.removeNotifications()
         recipeTimer.recipeCompleted = true
-        appState.tabSelection = 1
+        appState.tabSelection = Tab.summary
         dismiss()
     }
     
@@ -99,46 +95,12 @@ struct BakingStepListView: View {
         .navigationTitle("Recipe Steps")
         .navigationBarTitleDisplayMode(.inline)
         .defaultNavigation
-        .alert(isPresented: $showingAlert){
-            Alert(
-                title: Text("Save the method and times of this bake?"),
-                message: Text("Wouldja?"),
-                primaryButton: .destructive(Text("Nah")) {
-                    done()
-                },
-                secondaryButton: .default(Text("Yes!")) {
-                    data = BreadRecipeMethod(title: "", steps: recipeTimer.getStepArray()).data
-                    isPresentingDetailView = true
-                }
-            )
-        }
-        .sheet(isPresented: $isPresentingDetailView) {
-            NavigationView {
-                BakingMethodEditDetailView(breadMethodData: $data)
-                    .toolbar {
-                        ToolbarItem(placement: .cancellationAction) {
-                            Button("Cancel") {
-                                isPresentingDetailView = false
-                                done()
-                            }
-                        }
-                        ToolbarItem(placement: .confirmationAction) {
-                            Button("Done") {
-                                let newMethod = BreadRecipeMethod(data: data)
-                                store.storeData.methodList.append(newMethod)
-                                isPresentingDetailView = false
-                                done()
-                            }
-                        }
-                    }
-            }
-        }
     }
 }
 
 struct BakingStepList_Previews: PreviewProvider {
     struct BindingTestHolder: View {
-        @State var completeMethod = CompletedRecipeTimer(steps: BreadRecipeMethod().steps, recipe: BreadRecipe.sampleRecipe)
+        @State var completeMethod = CompletedRecipeTimer(title: "Standard", steps: BreadRecipeMethod().steps, recipe: BreadRecipe.sampleRecipe)
 
         var body: some View {
             BakingStepListView(recipeTimer: $completeMethod)

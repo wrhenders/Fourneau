@@ -9,15 +9,16 @@ import SwiftUI
 
 struct HistoricalBakeList: View {
     @EnvironmentObject var store: BakingStore
+
     
     @State private var showingAlert = false
     
     var body: some View {
         List {
             Section{
-                ForEach($store.storeData.historicalBakeList) { $history in
+                ForEach(store.storeData.historicalBakeList) { history in
                     ZStack(alignment: .leading) {
-                        NavigationLink(destination: EmptyView()) {
+                        NavigationLink(destination: HistoricalBakeHostView(history: history)) {
                             HistoricalRow(history: history)
                         }
                     }

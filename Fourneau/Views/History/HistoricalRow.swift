@@ -20,7 +20,7 @@ struct HistoricalRow: View {
             }
             HStack {
                 Text("Total Time:").bold()
-                Text(history.totalMinutes.minToString())
+                Text(history.method.totalTime.minToString())
             }
             HStack {
                 Text("Recipe:").bold()

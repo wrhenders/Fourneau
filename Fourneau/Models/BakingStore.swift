@@ -27,11 +27,11 @@ class BakingStore: ObservableObject {
 
     
     func newRecipeTimer() {
-        storeData.activeRecipeTimer = CompletedRecipeTimer(steps: storeData.chosenMethod.steps, recipe: storeData.chosenRecipe)
+        storeData.activeRecipeTimer = CompletedRecipeTimer(title: storeData.chosenMethod.title, steps: storeData.chosenMethod.steps, recipe: storeData.chosenRecipe)
     }
     
     func futureRecipeTimer(finishTime: Date) {
-        storeData.activeRecipeTimer = CompletedRecipeTimer(steps: storeData.chosenMethod.steps, recipe: storeData.chosenRecipe, finishTime: finishTime)
+        storeData.activeRecipeTimer = CompletedRecipeTimer(title: storeData.chosenMethod.title, steps: storeData.chosenMethod.steps, recipe: storeData.chosenRecipe, finishTime: finishTime)
     }
     
     private static func fileURL() throws -> URL {

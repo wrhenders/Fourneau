@@ -13,11 +13,6 @@ struct HistoricalBake: Codable, Identifiable {
     let recipe: BreadRecipe
     let dateCompleted: Date
     
-    var totalMinutes: Int {
-        method.steps.count > 0 ?
-        method.steps.map({$0.lengthInMinutes}).reduce(0, +) :
-        0
-    }
     
     init(method: BreadRecipeMethod, recipe: BreadRecipe) {
         self.id = UUID()
