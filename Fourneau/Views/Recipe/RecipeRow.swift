@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RecipeRow: View {
-    var recipe: BreadRecipe
+    let recipe: BreadRecipe
     
     var body: some View {
         HStack {

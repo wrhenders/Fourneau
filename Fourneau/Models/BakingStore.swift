@@ -16,7 +16,10 @@ struct LocalStore: Identifiable, Codable {
     var methodList: [BreadRecipeMethod] = [BreadRecipeMethod()]
     var chosenMethod: BreadRecipeMethod = BreadRecipeMethod()
     
+    var historicalBakeList: [HistoricalBake] = []
+    
     var activeRecipeTimer: CompletedRecipeTimer?
+    
 }
 
 class BakingStore: ObservableObject {

@@ -43,6 +43,9 @@
 		6793CABA29522ECB00CB395F /* ShopCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793CAB929522ECB00CB395F /* ShopCard.swift */; };
 		6793CABC2952304700CB395F /* ShopItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793CABB2952304700CB395F /* ShopItem.swift */; };
 		6793CABF2953571D00CB395F /* StepCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793CABE2953571D00CB395F /* StepCardState.swift */; };
+		6793CAC72965DFBB00CB395F /* HistoricalBake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793CAC62965DFBB00CB395F /* HistoricalBake.swift */; };
+		6793CACA2965E0C600CB395F /* HistoricalBakeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793CAC92965E0C600CB395F /* HistoricalBakeList.swift */; };
+		6793CACC2965E50100CB395F /* HistoricalRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793CACB2965E50100CB395F /* HistoricalRow.swift */; };
 		67F32CFC294788090043A4FF /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F32CFB294788090043A4FF /* LocalNotificationManager.swift */; };
 		67F32CFE29478E680043A4FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F32CFD29478E680043A4FF /* AppDelegate.swift */; };
 		67F32D002948945E0043A4FF /* EmptyActiveRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F32CFF2948945E0043A4FF /* EmptyActiveRecipe.swift */; };
@@ -105,6 +108,9 @@
 		6793CAB929522ECB00CB395F /* ShopCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCard.swift; sourceTree = "<group>"; };
 		6793CABB2952304700CB395F /* ShopItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopItem.swift; sourceTree = "<group>"; };
 		6793CABE2953571D00CB395F /* StepCardState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepCardState.swift; sourceTree = "<group>"; };
+		6793CAC62965DFBB00CB395F /* HistoricalBake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalBake.swift; sourceTree = "<group>"; };
+		6793CAC92965E0C600CB395F /* HistoricalBakeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalBakeList.swift; sourceTree = "<group>"; };
+		6793CACB2965E50100CB395F /* HistoricalRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalRow.swift; sourceTree = "<group>"; };
 		67F32CFB294788090043A4FF /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		67F32CFD29478E680043A4FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		67F32CFF2948945E0043A4FF /* EmptyActiveRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyActiveRecipe.swift; sourceTree = "<group>"; };
@@ -207,6 +213,7 @@
 				67F32CFB294788090043A4FF /* LocalNotificationManager.swift */,
 				6793CAAD294CFFB600CB395F /* AppState.swift */,
 				6793CABB2952304700CB395F /* ShopItem.swift */,
+				6793CAC62965DFBB00CB395F /* HistoricalBake.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -214,6 +221,7 @@
 		676B40AC293510D200E42FA0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6793CAC82965E0B100CB395F /* History */,
 				6793CAB829522EB800CB395F /* Shop */,
 				6793CAB729522E7700CB395F /* ActiveRecipe */,
 				6793CAB629522E1A00CB395F /* Method */,
@@ -279,6 +287,15 @@
 				6793CABE2953571D00CB395F /* StepCardState.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		6793CAC82965E0B100CB395F /* History */ = {
+			isa = PBXGroup;
+			children = (
+				6793CAC92965E0C600CB395F /* HistoricalBakeList.swift */,
+				6793CACB2965E50100CB395F /* HistoricalRow.swift */,
+			);
+			path = History;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -418,6 +435,7 @@
 				676B40C0293F9B6F00E42FA0 /* BakingMethodEditDetailView.swift in Sources */,
 				676B40AE2935115500E42FA0 /* BakingStepCard.swift in Sources */,
 				676B40B229351BD500E42FA0 /* BakingStepType.swift in Sources */,
+				6793CAC72965DFBB00CB395F /* HistoricalBake.swift in Sources */,
 				676B40D629427E4F00E42FA0 /* BakingStore.swift in Sources */,
 				676B408229350FBE00E42FA0 /* FourneauApp.swift in Sources */,
 				6793CABF2953571D00CB395F /* StepCardState.swift in Sources */,
@@ -434,10 +452,12 @@
 				6793CAA8294CC19100CB395F /* Color.swift in Sources */,
 				6793CAAC294CE63700CB395F /* BakingMethodHostView.swift in Sources */,
 				676B40C82940E66F00E42FA0 /* BreadRecipeListView.swift in Sources */,
+				6793CACC2965E50100CB395F /* HistoricalRow.swift in Sources */,
 				6793CAB22950F6A400CB395F /* RecipeCalculatorView.swift in Sources */,
 				676B40C6293FBDE000E42FA0 /* EditStepView.swift in Sources */,
 				676B40B429351EBB00E42FA0 /* BakingStepListView.swift in Sources */,
 				6793CAB429522D9200CB395F /* ShopView.swift in Sources */,
+				6793CACA2965E0C600CB395F /* HistoricalBakeList.swift in Sources */,
 				6793CAAE294CFFB600CB395F /* AppState.swift in Sources */,
 				676B40D02941119000E42FA0 /* BindingExtension.swift in Sources */,
 				6793CAAA294CC58A00CB395F /* NavigationBarExtensions.swift in Sources */,
