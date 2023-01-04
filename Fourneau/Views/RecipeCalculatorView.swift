@@ -45,106 +45,108 @@ struct RecipeCalculatorView: View {
     }
     
     var body: some View {
-        List{
-            Section(header: HStack{ Text("Flour");Spacer(); Text("Amount")}) {
-                ForEach($flourWeight, id: \.self.id) { $flour in
+        NavigationView {
+            List{
+                Section(header: HStack{ Text("Flour");Spacer(); Text("Amount")}) {
+                    ForEach($flourWeight, id: \.self.id) { $flour in
+                        HStack {
+                            TextField("Flour", text: $flour.name)
+                                .multilineTextAlignment(.leading)
+                            TextField("Amount", value: $flour.amount, format: .number)
+                                .multilineTextAlignment(.trailing)
+                            Text("g")
+                        }
+                    }
+                    .onDelete { indicies in
+                        flourWeight.remove(atOffsets: indicies)
+                    }
+                    Button(action: {
+                        let newFlour = IngredientWeight(name: "", amount: 0)
+                        flourWeight.append(newFlour)
+                        
+                    }) {
+                        Label("Add Flour", systemImage: "plus.circle.fill")
+                    }
+                }
+                Section(header: Text("Water")) {
                     HStack {
-                        TextField("Flour", text: $flour.name)
-                            .multilineTextAlignment(.leading)
-                        TextField("Amount", value: $flour.amount, format: .number)
+                        Text("Water")
+                        TextField("Amount", value: $waterWeight, format: .number)
                             .multilineTextAlignment(.trailing)
                         Text("g")
                     }
                 }
-                .onDelete { indicies in
-                    flourWeight.remove(atOffsets: indicies)
-                }
-                Button(action: {
-                    let newFlour = IngredientWeight(name: "", amount: 0)
-                    flourWeight.append(newFlour)
-                    
-                }) {
-                    Label("Add Flour", systemImage: "plus.circle.fill")
-                }
-            }
-            Section(header: Text("Water")) {
-                HStack {
-                    Text("Water")
-                    TextField("Amount", value: $waterWeight, format: .number)
-                        .multilineTextAlignment(.trailing)
-                    Text("g")
-                }
-            }
-            Section(header: Text("Leaven (100% Hydration assumed)")) {
-                HStack {
-                    Text("Starter")
-                    TextField("Amount", value: $leavenWeight, format: .number)
-                        .multilineTextAlignment(.trailing)
-                    Text("g")
-                }
-            }
-            Section(header: Text("Salt")) {
-                HStack {
-                    Text("Salt")
-                    TextField("Amount", value: $saltWeight, format: .number)
-                        .multilineTextAlignment(.trailing)
-                    Text("g")
-                }
-            }
-            Section(header:Text("Recipe Summary")) {
-                HStack{
-                    Text("Weights:").bold()
-                }
-                .listRowBackground(Color.listSelection)
-                HStack {
-                    Text("Total Flour: \(totalFlour) g")
-                    Spacer()
-                    Text("100 %")
-                }
-                HStack {
-                    Text("Total Water: \(totalWater) g")
-                    Spacer()
-                    Text("\(String(format: "%.2f", Double(totalWater) / Double(totalFlour) * 100)) %")
-                }
-                HStack {
-                    Text("Total Salt: \(saltWeight) g")
-                    Spacer()
-                    Text("\(String(format: "%.2f", Double(saltWeight) / Double(totalFlour) * 100)) %")
-                }
-            }
-            
-            HStack {
-                Button (action: {
-                    recipeData.ingredients = ingredientList()
-                    isPresentingRecipeView = true
-                }) {
-                    Text("Save")
-                        .font(.title2)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                }
-            }
-        }
-        .listStyle(.insetGrouped)
-        .navigationTitle("Recipe Calculator")
-        .defaultNavigation
-        .sheet(isPresented: $isPresentingRecipeView) {
-            NavigationView {
-                EditRecipeView(recipe: $recipeData)
-                    .toolbar {
-                        ToolbarItem(placement: .cancellationAction) {
-                            Button("Cancel") {
-                                isPresentingRecipeView = false
-                            }
-                        }
-                        ToolbarItem(placement: .confirmationAction) {
-                            Button("Done") {
-                                let newRecipe = BreadRecipe(data: recipeData)
-                                store.storeData.recipeList.append(newRecipe)
-                                isPresentingRecipeView = false
-                                appState.tabSelection = Tab.summary
-                            }
-                        }
+                Section(header: Text("Leaven (100% Hydration assumed)")) {
+                    HStack {
+                        Text("Starter")
+                        TextField("Amount", value: $leavenWeight, format: .number)
+                            .multilineTextAlignment(.trailing)
+                        Text("g")
                     }
+                }
+                Section(header: Text("Salt")) {
+                    HStack {
+                        Text("Salt")
+                        TextField("Amount", value: $saltWeight, format: .number)
+                            .multilineTextAlignment(.trailing)
+                        Text("g")
+                    }
+                }
+                Section(header:Text("Recipe Summary")) {
+                    HStack{
+                        Text("Weights:").bold()
+                    }
+                    .listRowBackground(Color.listSelection)
+                    HStack {
+                        Text("Total Flour: \(totalFlour) g")
+                        Spacer()
+                        Text("100 %")
+                    }
+                    HStack {
+                        Text("Total Water: \(totalWater) g")
+                        Spacer()
+                        Text("\(String(format: "%.2f", Double(totalWater) / Double(totalFlour) * 100)) %")
+                    }
+                    HStack {
+                        Text("Total Salt: \(saltWeight) g")
+                        Spacer()
+                        Text("\(String(format: "%.2f", Double(saltWeight) / Double(totalFlour) * 100)) %")
+                    }
+                }
+                
+                HStack {
+                    Button (action: {
+                        recipeData.ingredients = ingredientList()
+                        isPresentingRecipeView = true
+                    }) {
+                        Text("Save")
+                            .font(.title2)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                    }
+                }
+            }
+            .listStyle(.insetGrouped)
+            .navigationTitle("Recipe Calculator")
+            .defaultNavigation
+            .sheet(isPresented: $isPresentingRecipeView) {
+                NavigationView {
+                    EditRecipeView(recipe: $recipeData)
+                        .toolbar {
+                            ToolbarItem(placement: .cancellationAction) {
+                                Button("Cancel") {
+                                    isPresentingRecipeView = false
+                                }
+                            }
+                            ToolbarItem(placement: .confirmationAction) {
+                                Button("Done") {
+                                    let newRecipe = BreadRecipe(data: recipeData)
+                                    store.storeData.recipeList.append(newRecipe)
+                                    isPresentingRecipeView = false
+                                    appState.tabSelection = Tab.summary
+                                }
+                            }
+                        }
+                }
             }
         }
     }
@@ -152,8 +154,6 @@ struct RecipeCalculatorView: View {
 
 struct RecipeCalculatorView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationStack {
             RecipeCalculatorView()
-        }
     }
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum Tab {
+enum Tab: Hashable {
     case summary
     case active
     case history
@@ -18,4 +18,18 @@ enum Tab {
 final class AppState: ObservableObject {
     @Published var rootViewId = UUID()
     @Published var tabSelection = Tab.summary
+}
+
+final class Router<T:Hashable>: ObservableObject {
+    @Published var paths: [T] = []
+    
+    func push (_ path: T) {
+        paths.append(path)
+    }
+    func pop() {
+        paths.removeLast(1)
+    }
+    func popToRoot() {
+        paths.removeAll()
+    }
 }

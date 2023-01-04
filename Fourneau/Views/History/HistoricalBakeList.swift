@@ -14,37 +14,39 @@ struct HistoricalBakeList: View {
     @State private var showingAlert = false
     
     var body: some View {
-        List {
-            Section{
-                ForEach(store.storeData.historicalBakeList) { history in
-                    ZStack(alignment: .leading) {
-                        NavigationLink(destination: HistoricalBakeHostView(history: history)) {
-                            HistoricalRow(history: history)
+        NavigationView {
+            List {
+                Section{
+                    ForEach(store.storeData.historicalBakeList) { history in
+                        ZStack(alignment: .leading) {
+                            NavigationLink(destination: HistoricalBakeHostView(history: history)) {
+                                HistoricalRow(history: history)
+                            }
                         }
                     }
                 }
             }
-        }
-        .listStyle(.grouped)
-        .navigationTitle("Bake History")
-        .defaultNavigation
-        .toolbar{
-            Button("Clear") {
-                showingAlert = true
-            }
-        }
-        .alert(isPresented: $showingAlert){
-            Alert(
-                title: Text("Would you like to clear your history?"),
-                message: Text("Cleared history cannot be recovered"),
-                primaryButton: .destructive(Text("No Thanks")) {
-                    showingAlert = false
-                },
-                secondaryButton: .default(Text("Clear")) {
-                    store.storeData.historicalBakeList = []
-                    showingAlert = false
+            .listStyle(.grouped)
+            .navigationTitle("Bake History")
+            .defaultNavigation
+            .toolbar{
+                Button("Clear") {
+                    showingAlert = true
                 }
-            )
+            }
+            .alert(isPresented: $showingAlert){
+                Alert(
+                    title: Text("Would you like to clear your history?"),
+                    message: Text("Cleared history cannot be recovered"),
+                    primaryButton: .destructive(Text("No Thanks")) {
+                        showingAlert = false
+                    },
+                    secondaryButton: .default(Text("Clear")) {
+                        store.storeData.historicalBakeList = []
+                        showingAlert = false
+                    }
+                )
+            }
         }
     }
 }
@@ -62,8 +64,6 @@ struct HistoricalBakeList_Previews: PreviewProvider {
         }
     }
     static var previews: some View {
-        NavigationStack {
             BindingTestHolder()
-        }
     }
 }

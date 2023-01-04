@@ -18,64 +18,46 @@ struct FourneauApp: App {
     var body: some Scene {
         WindowGroup {
             TabView(selection: $appState.tabSelection) {
-                NavigationStack{
-                    BakingSummaryView() {
+                BakingSummaryView() {
                         Task {
                             do {
                                 try await BakingStore.save(store: store.storeData)
                             } catch {}
                         }
                     }
-                    .id(appState.rootViewId)
-                }
-                .tabItem {
-                    Image(systemName: "list.bullet")
-                    Text("Bread Recipes")
-                }.tag(Tab.summary)
+                    .tabItem {
+                        Image(systemName: "house")
+                        Text("Home")
+                    }.tag(Tab.summary)
                 
-                NavigationStack{
-                    EmptyActiveRecipe()
-                }
-                .environmentObject(localNotificationCenter)
-                .tabItem {
-                    Image(systemName: "stove")
-                    Text("Active Recipe")
-                }.tag(Tab.active)
+                EmptyActiveRecipe()
+                    .environmentObject(localNotificationCenter)
+                    .tabItem {
+                        Image(systemName: "stove")
+                        Text("Active Bake")
+                    }.tag(Tab.active)
                 
-                NavigationStack{
-                    HistoricalBakeList()
-                }
-                .tabItem {
-                    Image(systemName: "archivebox")
-                    Text("Bake History")
-                }.tag(Tab.history)
+                HistoricalBakeList()
+                    .tabItem {
+                        Image(systemName: "archivebox")
+                        Text("History")
+                    }.tag(Tab.history)
                 
-                NavigationStack{
-                    RecipeCalculatorView()
-                }
-                .tabItem {
-                    Image(systemName: "mountain.2")
-                    Text("Recipe Calculator")
-                }.tag(Tab.calculator)
-                
-                NavigationStack{
-                    ShopView()
-                }.tabItem {
-                    Image(systemName: "frying.pan")
-                    Text("Shop")
-                }.tag(Tab.shop)
+                RecipeCalculatorView()
+                    .tabItem {
+                        Image(systemName: "candybarphone")
+                        Text("Recipe Calculator")
+                    }.tag(Tab.calculator)
+                ShopView()
+                    .tabItem {
+                        Image(systemName: "frying.pan")
+                        Text("Shop")
+                    }.tag(Tab.shop)
             }
+            .id(appState.tabSelection)
             .tint(.darkOrange)
             .environmentObject(appState)
             .environmentObject(store)
-            .id(appState.tabSelection)
-            .onChange(of: appState.tabSelection) { _ in
-                if store.storeData.activeRecipeTimer != nil {
-                    if store.storeData.activeRecipeTimer?.recipeCompleted == true {
-                        store.storeData.activeRecipeTimer = nil
-                    }
-                }
-            }
             .task {
                 do {
                     store.storeData = try await BakingStore.load()

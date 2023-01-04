@@ -23,54 +23,57 @@ struct BakingSummaryView: View {
     
     
     var body: some View {
-        GeometryReader { proxy in
-            VStack(alignment: .center, spacing: 0) {
-            Image("bread")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: proxy.size.width, height: 350)
-            List {
-                Section(header: Text("Recipe Ingredients")) {
-                    NavigationLink(destination: BreadRecipeListView(recipe: $store.storeData.chosenRecipe, recipeList: $store.storeData.recipeList)){
-                        Text(store.storeData.chosenRecipe.title)
+        NavigationView {
+            GeometryReader { proxy in
+                VStack(alignment: .center, spacing: 0) {
+                    Image("bread")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: proxy.size.width, height: 350)
+                    List {
+                        Section(header: Text("Recipe Ingredients")) {
+                            NavigationLink(destination: BreadRecipeListView(recipe: $store.storeData.chosenRecipe, recipeList: $store.storeData.recipeList)){
+                                Text(store.storeData.chosenRecipe.title)
+                            }
+                        }
+                        Section(header: Text("Method")) {
+                            NavigationLink(destination: BakingMethodListView(chosenMethod: $store.storeData.chosenMethod, bakingMethodList: $store.storeData.methodList)) {
+                                Text(store.storeData.chosenMethod.title)
+                            }
+                        }
+                        Section(header: Text("Start Time")) {
+                            Picker("Bake Time", selection: $startNow) {
+                                Text("Now").tag(BakeTime.now as BakeTime?)
+                                Text("Future").tag(BakeTime.future as BakeTime?)
+                            }
+                            .pickerStyle(SegmentedPickerStyle())
+                            
+                            if startNow == .future {
+                                DatePicker("Finish:", selection: $finishBread, in:Date.now...)
+                            }
+                        }
+                        if startNow != nil {
+                            Button(action: {
+                                startNow == .future ? store.futureRecipeTimer(finishTime: finishBread) :
+                                store.newRecipeTimer()
+                                appState.tabSelection = Tab.active
+                            }) {
+                                Text("Bake")
+                                    .font(.title2)
+                            }
+                        }
                     }
+                    .listStyle(.insetGrouped)
                 }
-                Section(header: Text("Method")) {
-                    NavigationLink(destination: BakingMethodListView(chosenMethod: $store.storeData.chosenMethod, bakingMethodList: $store.storeData.methodList)) {
-                        Text(store.storeData.chosenMethod.title)
-                    }
-                }
-                Section(header: Text("Start Time")) {
-                    Picker("Bake Time", selection: $startNow) {
-                        Text("Now").tag(BakeTime.now as BakeTime?)
-                        Text("Future").tag(BakeTime.future as BakeTime?)
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
-                    
-                    if startNow == .future {
-                        DatePicker("Finish:", selection: $finishBread, in:Date.now...)
-                    }
-                }
-                if startNow != nil {
-                    Button(action: {
-                        startNow == .future ? store.futureRecipeTimer(finishTime: finishBread) :
-                        store.newRecipeTimer()
-                        appState.tabSelection = Tab.active
-                    }) {
-                        Text("Bake")
-                            .font(.title2)
-                    }
-                }
+                .edgesIgnoringSafeArea(.top)
             }
-            .listStyle(.insetGrouped)
+            .id(appState.rootViewId)
+            .navigationTitle("Baking Summary")
+            .navigationBarTitleTextColor(.title)
+            .onDisappear(perform: {saveAction()})
+            .onChange(of: scenePhase) { phase in
+                if phase == .inactive {saveAction()}
             }
-            .edgesIgnoringSafeArea(.top)
-        }
-        .navigationTitle("Baking Summary")
-        .navigationBarTitleTextColor(.title)
-        .onDisappear(perform: {saveAction()})
-        .onChange(of: scenePhase) { phase in
-            if phase == .inactive {saveAction()}
         }
     }
 }
@@ -87,9 +90,7 @@ struct BakingSummaryView_Previews: PreviewProvider {
         }
     }
     static var previews: some View {
-        NavigationStack {
             BindingTestHolder()
-        }
     }
 }
 

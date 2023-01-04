@@ -47,8 +47,8 @@ struct BakingStepListView: View {
     
     func done() {
         notificationManager.removeNotifications()
-        recipeTimer.recipeCompleted = true
         appState.tabSelection = Tab.summary
+        recipeTimer.recipeCompleted = true
         dismiss()
     }
     
@@ -63,38 +63,47 @@ struct BakingStepListView: View {
     }
     
     var body: some View {
-        VStack {
-            TimeCard(text: "Next Action:", time: "\(recipeTimer.nextAction?.formatted(date: .omitted, time: .shortened) ?? "TBD")", color: .cyan)
-                .frame(maxWidth: .infinity, alignment: .trailing)
-            
-            SnapCarousel(index: $visibleIndex, length: recipeTimer.steps.count) {
+        NavigationView {
+            VStack {
+                TimeCard(text: "Next Action:", time: "\(recipeTimer.nextAction?.formatted(date: .omitted, time: .shortened) ?? "TBD")", color: .cyan)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                
+                SnapCarousel(index: $visibleIndex, length: recipeTimer.steps.count) {
                     ForEach(recipeTimer.steps.indices, id: \.self) { index in
                         BakingStepCard(bakingStep: $recipeTimer.steps[index], cardState: getCardState(currentIndex: index), startTime: recipeTimer.startArray[index]) {self.nextStep(currentIndex: index)}
                     }
                 }
-            
-            TimeCard(text: "Out of the Oven:", time: "\(recipeTimer.endTime.formatted(date: .omitted, time: .shortened))", color: .red)
-            .frame(maxWidth: .infinity, alignment: .trailing)
-            
-            HStack(spacing: 8) {
-                ForEach(recipeTimer.steps.indices, id: \.self) { index in
-                    Circle()
-                        .fill(Color.black.opacity(visibleIndex == index ? 1 : 0.1))
-                        .frame(width: 8, height: 8)
-                        .scaleEffect(visibleIndex == index ? 1.4 : 1)
-                        .animation(.spring(), value: visibleIndex == index)
+                
+                TimeCard(text: "Out of the Oven:", time: "\(recipeTimer.endTime.formatted(date: .omitted, time: .shortened))", color: .red)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                
+                HStack(spacing: 8) {
+                    ForEach(recipeTimer.steps.indices, id: \.self) { index in
+                        Circle()
+                            .fill(Color.black.opacity(visibleIndex == index ? 1 : 0.1))
+                            .frame(width: 8, height: 8)
+                            .scaleEffect(visibleIndex == index ? 1.4 : 1)
+                            .animation(.spring(), value: visibleIndex == index)
+                    }
                 }
             }
-        }
-        .onAppear {
-            visibleIndex = recipeTimer.currentStep
-            if notificationManager.notifications.isEmpty && recipeTimer.currentStep != recipeTimer.steps.count - 1 {
-                addNotification(fromStepIndex: visibleIndex)
+            .onAppear {
+                visibleIndex = recipeTimer.currentStep
+                if notificationManager.notifications.isEmpty && recipeTimer.currentStep == 0 {
+                    addNotification(fromStepIndex: visibleIndex)
+                }
             }
+            .onDisappear {
+                if store.storeData.activeRecipeTimer != nil {
+                    if store.storeData.activeRecipeTimer?.recipeCompleted == true {
+                        store.storeData.activeRecipeTimer = nil
+                    }
+                }
+            }
+            .navigationTitle("Recipe Steps")
+            .navigationBarTitleDisplayMode(.inline)
+            .defaultNavigation
         }
-        .navigationTitle("Recipe Steps")
-        .navigationBarTitleDisplayMode(.inline)
-        .defaultNavigation
     }
 }
 
@@ -107,9 +116,7 @@ struct BakingStepList_Previews: PreviewProvider {
         }
     }
     static var previews: some View {
-        NavigationView{
-            BindingTestHolder()
-                .environmentObject(LocalNotificationManager())
-        }
+        BindingTestHolder()
+            .environmentObject(LocalNotificationManager())
     }
 }

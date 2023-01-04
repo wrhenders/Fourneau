@@ -11,21 +11,21 @@ struct ShopView: View {
     @State private var shopItem: [ShopItem] = ShopItem.shopItems
     
     var body: some View {
-        ScrollView {
-            ForEach(shopItem) { item in
-                ShopCard(shopItem: item)
-                    .padding()
+        NavigationView {
+            ScrollView {
+                ForEach(shopItem) { item in
+                    ShopCard(shopItem: item)
+                        .padding()
+                }
             }
+            .navigationTitle("Fourneau Shop")
+            .defaultNavigation
         }
-        .navigationTitle("Fourneau Shop")
-        .defaultNavigation
     }
 }
 
 struct ShopView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationStack {
             ShopView()
-        }
     }
 }
