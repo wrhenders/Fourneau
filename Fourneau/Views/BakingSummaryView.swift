@@ -70,7 +70,10 @@ struct BakingSummaryView: View {
             .id(appState.rootViewId)
             .navigationTitle("Baking Summary")
             .navigationBarTitleTextColor(.title)
-            .onDisappear(perform: {saveAction()})
+            .onDisappear{
+                startNow = nil
+                saveAction()
+            }
             .onChange(of: scenePhase) { phase in
                 if phase == .inactive {saveAction()}
             }

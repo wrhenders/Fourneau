@@ -54,7 +54,6 @@ struct FourneauApp: App {
                         Text("Shop")
                     }.tag(Tab.shop)
             }
-            .id(appState.tabSelection)
             .tint(.darkOrange)
             .environmentObject(appState)
             .environmentObject(store)

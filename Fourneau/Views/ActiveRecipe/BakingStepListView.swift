@@ -9,6 +9,8 @@ import SwiftUI
 
 struct BakingStepListView: View {
     @Binding var recipeTimer: CompletedRecipeTimer
+    @Binding var showingSteps: Bool
+    
     @EnvironmentObject var store: BakingStore
     @EnvironmentObject var appState: AppState
     
@@ -49,6 +51,7 @@ struct BakingStepListView: View {
         notificationManager.removeNotifications()
         appState.tabSelection = Tab.summary
         recipeTimer.recipeCompleted = true
+        showingSteps = false
         dismiss()
     }
     
@@ -63,7 +66,6 @@ struct BakingStepListView: View {
     }
     
     var body: some View {
-        NavigationView {
             VStack {
                 TimeCard(text: "Next Action:", time: "\(recipeTimer.nextAction?.formatted(date: .omitted, time: .shortened) ?? "TBD")", color: .cyan)
                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -103,7 +105,6 @@ struct BakingStepListView: View {
             .navigationTitle("Recipe Steps")
             .navigationBarTitleDisplayMode(.inline)
             .defaultNavigation
-        }
     }
 }
 
@@ -112,11 +113,13 @@ struct BakingStepList_Previews: PreviewProvider {
         @State var completeMethod = CompletedRecipeTimer(title: "Standard", steps: BreadRecipeMethod().steps, recipe: BreadRecipe.sampleRecipe)
 
         var body: some View {
-            BakingStepListView(recipeTimer: $completeMethod)
+            BakingStepListView(recipeTimer: $completeMethod, showingSteps: .constant(true))
         }
     }
     static var previews: some View {
-        BindingTestHolder()
-            .environmentObject(LocalNotificationManager())
+        NavigationView{
+            BindingTestHolder()
+                .environmentObject(LocalNotificationManager())
+        }
     }
 }

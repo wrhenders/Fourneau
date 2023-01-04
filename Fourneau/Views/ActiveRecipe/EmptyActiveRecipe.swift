@@ -11,16 +11,24 @@ struct EmptyActiveRecipe: View {
     @EnvironmentObject var store: BakingStore
     @EnvironmentObject var appState: AppState
     
+    @State var showingSteps = false
+    
     var body: some View {
-        if let binding = Binding($store.storeData.activeRecipeTimer) {
-            BakingStepListView(recipeTimer: binding)
-        } else {
-            VStack{
-                Text("No Active Recipe...")
-                Button("Choose Recipe") {
-                    appState.tabSelection = Tab.summary
-                }.buttonStyle(.borderedProminent)
+        NavigationView {
+            if showingSteps {
+                if let binding = Binding($store.storeData.activeRecipeTimer) {
+                    BakingStepListView(recipeTimer: binding, showingSteps: $showingSteps)
+                }
+            } else {
+                VStack{
+                    Text("No Active Recipe...")
+                    Button("Choose Recipe") {
+                        appState.tabSelection = Tab.summary
+                    }.buttonStyle(.borderedProminent)
+                }
             }
+        }.onAppear {
+            showingSteps = store.storeData.activeRecipeTimer != nil
         }
     }
 }
