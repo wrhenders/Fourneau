@@ -17,7 +17,6 @@ struct BakingStepListView: View {
     @State var visibleIndex: Int = 0
     
     @EnvironmentObject var notificationManager: LocalNotificationManager
-    @Environment(\.dismiss) var dismiss
     
     func getCardState(currentIndex index: Int) -> CardState {
         if index == recipeTimer.steps.count - 1 {
@@ -49,10 +48,10 @@ struct BakingStepListView: View {
     
     func done() {
         notificationManager.removeNotifications()
-        appState.tabSelection = Tab.summary
         recipeTimer.recipeCompleted = true
         showingSteps = false
-        dismiss()
+        appState.tabSelection = Tab.summary
+
     }
     
     func addNotification(fromStepIndex index: Int) {
