@@ -113,17 +113,15 @@ struct RecipeCalculatorView: View {
                         Text("\(String(format: "%.2f", Double(saltWeight) / Double(totalFlour) * 100)) %")
                     }
                 }
-                
-                HStack {
-                    Button (action: {
-                        recipeData.ingredients = ingredientList()
-                        isPresentingRecipeView = true
-                    }) {
-                        Text("Save")
-                            .font(.title2)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                    }
+                Button("Save") {
+                    recipeData.ingredients = ingredientList()
+                    isPresentingRecipeView = true
                 }
+                .font(.title2)
+                .foregroundColor(Color.white)
+                .frame(maxWidth: .infinity)
+                .buttonStyle(.plain)
+                .listRowBackground(Color.darkOrange)
             }
             .listStyle(.insetGrouped)
             .navigationTitle("Recipe Calculator")

@@ -53,14 +53,16 @@ struct BakingSummaryView: View {
                             }
                         }
                         if startNow != nil {
-                            Button(action: {
+                            Button("Bake") {
                                 startNow == .future ? store.futureRecipeTimer(finishTime: finishBread) :
                                 store.newRecipeTimer()
                                 appState.tabSelection = Tab.active
-                            }) {
-                                Text("Bake")
-                                    .font(.title2)
                             }
+                            .font(.title2)
+                            .foregroundColor(Color.white)
+                            .frame(maxWidth: .infinity)
+                            .buttonStyle(.plain)
+                            .listRowBackground(Color.darkOrange)
                         }
                     }
                     .listStyle(.insetGrouped)
