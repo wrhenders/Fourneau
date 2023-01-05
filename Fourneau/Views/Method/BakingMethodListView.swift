@@ -19,14 +19,7 @@ struct BakingMethodListView: View {
             Section {
                 ForEach($bakingMethodList, id:\.self.id) { $row in
                     NavigationLink(destination: BakingMethodHostView(method: $row)) {
-                        HStack{
-                            Text(row.title)
-                                .font(.title2)
-                            Spacer()
-                            if row.locked {
-                                Image(systemName: "lock.fill")
-                            }
-                        }
+                        MethodRow(method: row)
                     }
                     .listRowBackground(chosenMethod == row ? Color.listSelection : Color.white)
                     .deleteDisabled(row.locked)

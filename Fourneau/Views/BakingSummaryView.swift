@@ -33,12 +33,12 @@ struct BakingSummaryView: View {
                     List {
                         Section(header: Text("Recipe Ingredients")) {
                             NavigationLink(destination: BreadRecipeListView(recipe: $store.storeData.chosenRecipe, recipeList: $store.storeData.recipeList)){
-                                Text(store.storeData.chosenRecipe.title)
+                                RecipeRow(recipe: store.storeData.chosenRecipe)
                             }
                         }
                         Section(header: Text("Method")) {
                             NavigationLink(destination: BakingMethodListView(chosenMethod: $store.storeData.chosenMethod, bakingMethodList: $store.storeData.methodList)) {
-                                Text(store.storeData.chosenMethod.title)
+                                MethodRow(method: store.storeData.chosenMethod)
                             }
                         }
                         Section(header: Text("Start Time")) {
@@ -71,7 +71,6 @@ struct BakingSummaryView: View {
             }
             .id(appState.rootViewId)
             .navigationTitle("Baking Summary")
-            .navigationBarTitleTextColor(.title)
             .onDisappear{
                 startNow = nil
                 saveAction()
