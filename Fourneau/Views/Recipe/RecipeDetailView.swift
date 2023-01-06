@@ -25,12 +25,14 @@ struct RecipeDetailView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
             List {
-                HStack{
-                    Text("Bake at: \(recipe.bakeTempF) F")
-                        .font(.headline)
-                    Spacer()
-                    Text("Time: \(Int(recipe.bakeTimeInMinutes)) Min")
-                        .font(.headline)
+                Section(header: HStack{ Text("Temp");Spacer(); Text("Time")}) {
+                    HStack{
+                        Text("Bake at: \(recipe.bakeTempF) F")
+                            .font(.headline)
+                        Spacer()
+                        Text("Time: \(Int(recipe.bakeTimeInMinutes)) Min")
+                            .font(.headline)
+                    }
                 }
                 Section(header:Text("Ingredients:")) {
                     VStack(alignment: .leading) {

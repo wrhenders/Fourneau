@@ -28,6 +28,20 @@ struct HistoricalBakeHostView: View {
             List {
                 Section(header: Text("Recipe")){
                     Text(history.recipe.title).bold()
+                        .frame(maxWidth: .infinity)
+                    HStack{
+                        Text("Temp: \(history.recipe.bakeTempF) F").bold()
+                        Spacer()
+                        Text("Time: \(Int(history.recipe.bakeTimeInMinutes)) Min").bold()
+                    }
+                    
+                    VStack(alignment: .leading) {
+                        Text("Ingredients:").bold()
+                        ForEach(history.recipe.ingredients, id: \.self) {line in
+                            Text(line)
+                        }
+                    }
+                    
                 }
                 Section(header: Text("Steps")){
                     ForEach(history.method.steps) { step in
