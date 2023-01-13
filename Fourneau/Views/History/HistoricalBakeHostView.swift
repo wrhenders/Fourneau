@@ -37,7 +37,7 @@ struct HistoricalBakeHostView: View {
                     
                     VStack(alignment: .leading) {
                         Text("Ingredients:").bold()
-                        ForEach(history.recipe.ingredients, id: \.self) {line in
+                        ForEach(history.recipe.ingredients.ingredientList, id: \.self) {line in
                             Text(line)
                         }
                     }

@@ -36,11 +36,12 @@ struct RecipeDetailView: View {
                 }
                 Section(header:Text("Ingredients:")) {
                     VStack(alignment: .leading) {
-                        ForEach(recipe.ingredients, id: \.self) {line in
+                        ForEach(recipe.ingredients.ingredientList, id: \.self) {line in
                             Text(line)
                         }
                     }
                 }
+                RecipeSummary(recipe: recipe.ingredients)
                 Button("Choose") {
                     store.storeData.chosenRecipe = recipe
                     appState.rootViewId = UUID()

@@ -21,7 +21,7 @@ struct RecipeDescription: View {
             Divider()
 
             Text("Ingredients:").bold()
-            ForEach(recipe.ingredients, id: \.self) {line in
+            ForEach(recipe.ingredients.ingredientList, id: \.self) {line in
                 Text(line)
             }
             

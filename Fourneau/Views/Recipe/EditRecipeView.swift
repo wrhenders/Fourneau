@@ -32,19 +32,7 @@ struct EditRecipeView: View {
                 TextField("Description", text: $recipe.description, axis: .vertical)
                     .font(.title3)
             }
-            Section(header: Text("Ingredients")) {
-                ForEach(0..<recipe.ingredients.count, id: \.self) { index in
-                    TextField("Description", text: $recipe.ingredients[index, default: ""])
-                }
-                .onDelete { indicies in
-                    recipe.ingredients.remove(atOffsets: indicies)
-                }
-                Button(action: {
-                    recipe.ingredients.append("")
-                }) {
-                    Label("Add Method line", systemImage: "plus.circle.fill")
-                }
-            }
+            EditRecipeIngredients(recipe: $recipe.ingredients)
         }
     }
 }

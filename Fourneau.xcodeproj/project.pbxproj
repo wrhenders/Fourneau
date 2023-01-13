@@ -36,6 +36,8 @@
 		67704BD8296734000020783E /* TabViewHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67704BD7296734000020783E /* TabViewHost.swift */; };
 		67704BDA296737BF0020783E /* MethodRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67704BD9296737BF0020783E /* MethodRow.swift */; };
 		67704BDC2968A0DD0020783E /* RecipeDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67704BDB2968A0DD0020783E /* RecipeDescription.swift */; };
+		67704BDE2971BCCF0020783E /* EditRecipeIngredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67704BDD2971BCCF0020783E /* EditRecipeIngredients.swift */; };
+		67704BE02971BE690020783E /* RecipeSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67704BDF2971BE690020783E /* RecipeSummary.swift */; };
 		6793CAA8294CC19100CB395F /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793CAA7294CC19100CB395F /* Color.swift */; };
 		6793CAAA294CC58A00CB395F /* NavigationBarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793CAA9294CC58A00CB395F /* NavigationBarExtensions.swift */; };
 		6793CAAC294CE63700CB395F /* BakingMethodHostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793CAAB294CE63700CB395F /* BakingMethodHostView.swift */; };
@@ -105,6 +107,8 @@
 		67704BD7296734000020783E /* TabViewHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewHost.swift; sourceTree = "<group>"; };
 		67704BD9296737BF0020783E /* MethodRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodRow.swift; sourceTree = "<group>"; };
 		67704BDB2968A0DD0020783E /* RecipeDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDescription.swift; sourceTree = "<group>"; };
+		67704BDD2971BCCF0020783E /* EditRecipeIngredients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRecipeIngredients.swift; sourceTree = "<group>"; };
+		67704BDF2971BE690020783E /* RecipeSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSummary.swift; sourceTree = "<group>"; };
 		6793CAA7294CC19100CB395F /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		6793CAA9294CC58A00CB395F /* NavigationBarExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarExtensions.swift; sourceTree = "<group>"; };
 		6793CAAB294CE63700CB395F /* BakingMethodHostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakingMethodHostView.swift; sourceTree = "<group>"; };
@@ -249,6 +253,8 @@
 				676B40CD294100C500E42FA0 /* RecipeDetailView.swift */,
 				676B40CB2940F4ED00E42FA0 /* EditRecipeView.swift */,
 				67704BDB2968A0DD0020783E /* RecipeDescription.swift */,
+				67704BDD2971BCCF0020783E /* EditRecipeIngredients.swift */,
+				67704BDF2971BE690020783E /* RecipeSummary.swift */,
 			);
 			path = Recipe;
 			sourceTree = "<group>";
@@ -444,6 +450,7 @@
 				676B40BC2938FF7200E42FA0 /* SnapCarousel.swift in Sources */,
 				676B40D229423D8600E42FA0 /* BakingMethodListView.swift in Sources */,
 				67704BDA296737BF0020783E /* MethodRow.swift in Sources */,
+				67704BDE2971BCCF0020783E /* EditRecipeIngredients.swift in Sources */,
 				67F32CFC294788090043A4FF /* LocalNotificationManager.swift in Sources */,
 				676B40C0293F9B6F00E42FA0 /* BakingMethodEditDetailView.swift in Sources */,
 				676B40AE2935115500E42FA0 /* BakingStepCard.swift in Sources */,
@@ -461,6 +468,7 @@
 				676B40CC2940F4ED00E42FA0 /* EditRecipeView.swift in Sources */,
 				676B40B6293528AD00E42FA0 /* BreadRecipeMethod.swift in Sources */,
 				676B40BE293E8DFE00E42FA0 /* TimeCard.swift in Sources */,
+				67704BE02971BE690020783E /* RecipeSummary.swift in Sources */,
 				67F32D002948945E0043A4FF /* EmptyActiveRecipe.swift in Sources */,
 				6793CAA8294CC19100CB395F /* Color.swift in Sources */,
 				67704BDC2968A0DD0020783E /* RecipeDescription.swift in Sources */,
