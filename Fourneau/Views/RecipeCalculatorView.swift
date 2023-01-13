@@ -35,29 +35,30 @@ struct RecipeCalculatorView: View {
                     .listRowBackground(Color.darkOrange)
                 }
                 .padding(.top, 225)
+                .padding(.bottom, 1)
             }
-            .listStyle(.insetGrouped)
-            .navigationTitle("Recipe Calculator")
-            .defaultNavigation
-            .sheet(isPresented: $isPresentingRecipeView) {
-                NavigationView {
-                    EditRecipeView(recipe: $recipeData)
-                        .toolbar {
-                            ToolbarItem(placement: .cancellationAction) {
-                                Button("Cancel") {
-                                    isPresentingRecipeView = false
-                                }
-                            }
-                            ToolbarItem(placement: .confirmationAction) {
-                                Button("Done") {
-                                    let newRecipe = BreadRecipe(data: recipeData)
-                                    store.storeData.recipeList.append(newRecipe)
-                                    isPresentingRecipeView = false
-                                    appState.tabSelection = Tab.summary
-                                }
+        }
+        .listStyle(.insetGrouped)
+        .navigationTitle("Recipe Calculator")
+        .defaultNavigation
+        .sheet(isPresented: $isPresentingRecipeView) {
+            NavigationView {
+                EditRecipeView(recipe: $recipeData)
+                    .toolbar {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Cancel") {
+                                isPresentingRecipeView = false
                             }
                         }
-                }
+                        ToolbarItem(placement: .confirmationAction) {
+                            Button("Done") {
+                                let newRecipe = BreadRecipe(data: recipeData)
+                                store.storeData.recipeList.append(newRecipe)
+                                isPresentingRecipeView = false
+                                appState.tabSelection = Tab.summary
+                            }
+                        }
+                    }
             }
         }
     }

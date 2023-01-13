@@ -39,7 +39,9 @@ struct RecipeIngredients: Identifiable, Codable, Equatable {
             ingredients.append("\(flour.weight) g \(flour.name)")
         }
         ingredients.append("\(waterWeight) g Water")
-        ingredients.append("\(leavenWeight) g Starter")
+        sourdough ?
+            ingredients.append("\(leavenWeight) g Starter") :
+            ingredients.append("\(leavenWeight) g Yeast")
         ingredients.append("\(saltWeight) g Salt")
         for ing in additionalIngredients {
             ingredients.append("\(ing.weight) g \(ing.name)")
