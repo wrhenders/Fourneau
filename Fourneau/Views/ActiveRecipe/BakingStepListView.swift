@@ -66,9 +66,14 @@ struct BakingStepListView: View {
     
     var body: some View {
             VStack {
-                TimeCard(text: "Next Action:", time: "\(recipeTimer.nextAction?.formatted(date: .omitted, time: .shortened) ?? "TBD")", color: .cyan)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                
+                HStack {
+//                    TimeCard(text: "Next Action:", time: "\(recipeTimer.nextAction?.formatted(date: .omitted, time: .shortened) ?? "TBD")", color: .darkOrange)
+//                        .frame(maxWidth: .infinity, alignment: .trailing)
+                    Spacer()
+                    CountdownCard(length: recipeTimer.steps[recipeTimer.currentStep].lengthInMinutes)
+                        .id(recipeTimer.currentStep)
+                }
+                .padding(8)
                 SnapCarousel(index: $visibleIndex, length: recipeTimer.steps.count) {
                     ForEach(recipeTimer.steps.indices, id: \.self) { index in
                         BakingStepCard(bakingStep: $recipeTimer.steps[index], cardState: getCardState(currentIndex: index), startTime: recipeTimer.startArray[index]) {self.nextStep(currentIndex: index)}
@@ -77,6 +82,7 @@ struct BakingStepListView: View {
                 
                 TimeCard(text: "Out of the Oven:", time: "\(recipeTimer.endTime.formatted(date: .omitted, time: .shortened))", color: .red)
                     .frame(maxWidth: .infinity, alignment: .trailing)
+                    .padding(8)
                 
                 HStack(spacing: 8) {
                     ForEach(recipeTimer.steps.indices, id: \.self) { index in

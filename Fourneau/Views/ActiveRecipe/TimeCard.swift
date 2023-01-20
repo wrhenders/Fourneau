@@ -23,7 +23,6 @@ struct TimeCard: View {
                         .font(.title2)
                 }
         }
-        .padding(8)
     }
 }
 
