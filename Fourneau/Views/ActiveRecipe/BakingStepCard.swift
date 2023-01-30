@@ -59,6 +59,7 @@ struct BakingStepCard: View {
                         Text("Next")
                         Image(systemName: "chevron.right")
                     }
+                    .buttonStyle(.borderedProminent)
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .disabled(cardState != .current && cardState != .lastActive)
                 }
